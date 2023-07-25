@@ -1,0 +1,45 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'My New Hugo Site'
+
+theme = "PaperMod"
+
+[params]
+ShowShareButtons =true
+ShowCodeCopyButtons = true
+hideSummary = false
+
+# 首頁
+[params.homeInfoParams]
+title = "Hi there!"
+content = "I'm Enfu Liao from Taiwan, a computer science student at NYCU. I love weight training, reading, and watching movies. Join me on my blog to explore my interests and experiences!"
+
+[[params.socialIcons]]
+name = "Facebook"
+url = "https://www.facebook.com/ENFULIAO/"
+
+[[params.socialIcons]]
+name = "YouTube"
+url = "https://www.youtube.com/channel/UCJLfF3MfuuwJJd7ibudpX3w"
+
+# 搜尋
+[fuseOpts]
+isCaseSensitive = false
+shouldSort = true
+location = 0
+threshold = 0.4
+minMatchCharLength = 0
+keys = ["title", "permalink", "summary", "content"]
+
+# 導航欄
+[[menu.main]]
+identifier = "archives"
+name = "Archives"
+url = "/archives/"
+weight = 10
+
+[[menu.main]]
+identifier = "search"
+name = "Search"
+url = "/search/"
+weight = 20
