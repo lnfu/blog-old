@@ -7,7 +7,7 @@ theme = "PaperMod"
 [params]
 ShowShareButtons =true
 ShowCodeCopyButtons = true
-hideSummary = false
+hideSummary = true
 
 # 首頁
 [params.homeInfoParams]
