@@ -47,8 +47,58 @@ OSSEC 支援多種系統
 
 Wazuh 可以看成是 OSSEC + OpenSearch + OpenSCAP 的組合。
 
-> 2023-07-12 CC System 會議有提到看能不能和現有的 OpenSearch 集群做整合。
+OSSEC 前面已經講過了，省略。
 
-## Wazuh vs. OSSIM
+OpenSearch 主要負責 Wazuh 的搜尋和 Web UI 部份（Kibana）
 
+OpenSCAP 的 SCAP 是指 Security Content Automation Protocol，主要用來衡量系統有沒有漏洞。
+
+> Wazuh server = OSSEC + OpenSCAP
+> Wazuh indexer + Wazuh dashboard = OpenSearch + Kibana + ...
+
+> 2023-07-12 CC System Meeting：Wazuh 能不能和現有的 OpenSearch 集群做整合。
+
+> 選擇 Wazuh 最大的好處是社群好像是目前看起來最活躍的，所以有什麼問題比較容易解決。
+
+### 安裝 Wazuh
+我目前使用 source code 安裝 Wazuh manager（Wazuh indexer 和 Wazuh dashboard 先不安裝）。
+
+安裝方式參考官方網站的[說明文檔](https://documentation.wazuh.com/current/deployment-options/wazuh-from-sources/index.html)。
+
+**server 部份：**
+```
+yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel yum-utils
+yum-config-manager --enable powertools
+yum install libstdc++-static -y
+yum install epel-release yum-utils -y
+yum-builddep python34 -y
+```
+
+```
+curl -Ls https://github.com/wazuh/wazuh/archive/v4.4.5.tar.gz | tar zx
+cd wazuh-4.4.5
+./install.sh
+```
+
+接著依照提示完成安裝即可（選擇 manager），我所有選項都選預設值。
+
+```
+systemctl start wazuh-manager
+```
+
+**agent 部份：**
+```
+yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake
+yum-config-manager --enable powertools
+yum install libstdc++-static -y
+```
+
+接下來和 server 一樣把安裝檔案下載下來執行 `install.sh` 腳本（選擇 agent）依照提示安裝。
+
+
+不管是 server 或是 agent，設定檔（預設）會放在 `/var/ossec/etc/` 下。
+> 為什麼 server 和 agent 要分成兩個設定檔案？
+
+
+## OSSIM
 > 之後研究一下 OSSIM 是啥？
