@@ -1,5 +1,5 @@
 ---
-title: "2023 07 26 Wazuh Overview"
+title: "Wazuh 介紹"
 date: 2023-07-26T14:19:49+08:00
 draft: false
 author: "Enfu Liao"
