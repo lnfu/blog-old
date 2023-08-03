@@ -69,3 +69,10 @@ col-xs-4 => extra small e.g., mobile phone
 </div>
 ```
 
+## 表單
+
+文字輸入可以用 `form-control`（會是 100% width）。Submit 按鈕一樣使用 `btn` 就好。
+
+如果想讓輸入框和 Submit 在同一行，一樣就用格線系統去包就好（比例可以參考文字框 col-7 + Submit col-5）。
+
+

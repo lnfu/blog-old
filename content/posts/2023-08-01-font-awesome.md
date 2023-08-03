@@ -21,7 +21,7 @@ Font Awesome 提供很多好用的 icon。
 
 通常會使用在 `<i></i>` tag。例如 `<i class="fas fa-info-circle"></i>`。
 
-> `fas` 是 Font Awesome 的意思。
+> 可以到 https://fontawesome.com/icons 查詢要使用的 icon。
 
 ## 範例
 
