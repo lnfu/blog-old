@@ -1,7 +1,7 @@
 ---
 title: "React"
 date: 2023-08-01T14:44:45+08:00
-draft: true
+draft: false
 author: "Enfu Liao"
 # cover:
 #     image: "<image path/url>" # image path/url
@@ -84,6 +84,75 @@ const CurrentDate = (props) => <p>The current date is: {props.date}</p>
 MyComponenet.defaultProps = {name: "Enfu Liao"}
 ```
 
-## PropTypes
+### PropTypes
 
 https://legacy.reactjs.org/docs/typechecking-with-proptypes.html#proptypes
+
+
+
+
+```
+class MyCompo extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return <div>this.props.name</div>;
+  }
+}
+
+MyCompo.defaultProps = {
+  name: "Enfu Liao"
+}
+
+MyCompo.propTypes = {
+  name: PropTypes.string.isRequired
+}
+```
+
+
+## state（狀態）
+
+React 的 virtual DOM 會看 state 資料是否有更新，如果有就會重新渲染部份頁面（actual DOM）。
+
+```
+constructor(props) {
+  this.state = {
+    name: "Enfu Liao"
+  }
+}
+```
+
+```
+<div>this.state.name</div>
+```
+
+### `setState()`
+
+如果要更新 state 則必須使用 `setState()`：
+```
+this.setState({
+  name: "Enya Lial"
+})
+```
+
+> 要能夠使用到 `this.state`，class 的 method 比須加上 `this.methodName = this.methodName.bind(this);`和 class 綁定（詳細問題我目前不太清楚）
+
+> 另外可能也需要複習一下 Javascript `this` 的使用時機（雖然也可以自己亂試解決）
+
+有時候我們更新 state 會需要依賴原本 state 或是 props 的值，那麼就要採用以下寫法（因為更新是非同步（async），不能直接使用 `this.state` 或是 `this.props`）：
+
+```
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
+}));
+```
+
+```
+this.setState(state => ({
+  counter: state.counter + 1
+}));
+```
+
+
