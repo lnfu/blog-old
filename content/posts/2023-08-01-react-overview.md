@@ -64,7 +64,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 
-## Props
+## Props（參數）
 要如何在 component 之間傳遞參數呢（parent -> child）？答案是 Props（properties）。
 
 範例：
@@ -86,9 +86,9 @@ MyComponenet.defaultProps = {name: "Enfu Liao"}
 
 ### PropTypes
 
+我們可以強制規範 prop 的型別。
+
 https://legacy.reactjs.org/docs/typechecking-with-proptypes.html#proptypes
-
-
 
 
 ```
@@ -110,6 +110,8 @@ MyCompo.propTypes = {
   name: PropTypes.string.isRequired
 }
 ```
+
+> 除了常數以外，Props 還可以傳遞之後提到的 **state** 以及 **member function**（成員函數）
 
 
 ## state（狀態）
@@ -156,3 +158,24 @@ this.setState(state => ({
 ```
 
 
+## Lifecycle Method / Hook
+
+> 可以 attach event listener。`document.addEventListener('keydown', myFunc())`、`document.removeEventListener('keydown', myFunc())`。
+
+
+
+
+## 何時會重新算繪（re-render）？
+
+預設情況下，只要有 component 的 props 和 state 有更新，那麼這個 component 和其子代 component 都會重新算繪。
+
+### 利用 `shouldComponentUpdate()` 指定何時要重新算繪
+
+
+## 條件算繪（condition rendering）
+### 直接使用 if/else
+在 `render()` 函數使用 if/else 來回傳不同 JSX。
+### 三元運算子
+比較簡潔（推薦作法）
+### 使用 `condition && <...></...>` 
+比較簡潔（推薦作法）
