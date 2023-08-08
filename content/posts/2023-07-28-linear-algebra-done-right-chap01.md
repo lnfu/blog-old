@@ -1,5 +1,5 @@
 ---
-title: "Linear Algebra Done Right 第一章習題"
+title: "LADR 第一章習題"
 date: 2023-07-28T16:20:32+08:00
 draft: false
 author: "Enfu Liao"
@@ -11,6 +11,8 @@ math: true
 #     relative: false # when using page bundles set this to true
 #     hidden: true # only hide on current single page
 ---
+
+> LADR = Linear Algebra Done Right
 
 1. Suppose $a$ and $b$ are real numbers, not both 0. Find real numbers $c$ and $d$ such that
 $$

@@ -1,5 +1,5 @@
 ---
-title: "Font Awesome"
+title: "HTML 使用 Font Awesome 圖示"
 date: 2023-08-01T13:45:22+08:00
 draft: false
 author: "Enfu Liao"
@@ -11,7 +11,7 @@ author: "Enfu Liao"
 #     hidden: true # only hide on current single page
 ---
 
-Font Awesome 提供很多好用的 icon。
+Font Awesome 提供很多好用的圖示（icon）。
 
 ## 使用
 
