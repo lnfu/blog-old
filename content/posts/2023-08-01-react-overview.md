@@ -179,3 +179,9 @@ this.setState(state => ({
 比較簡潔（推薦作法）
 ### 使用 `condition && <...></...>` 
 比較簡潔（推薦作法）
+
+## Server Side Rendering
+這是比較進階的議題了，之後在研究。
+```
+ReactDOMServer.renderToString(<App />)
+```
