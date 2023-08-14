@@ -11,7 +11,7 @@ author: "Enfu Liao"
 #     hidden: true # only hide on current single page
 ---
 
-React 是 Facebook 開發和維護的 Javascript library。
+React 是 Facebook 開發和維護的（Javascript）view library。
 
 ## JSX
 
@@ -135,7 +135,7 @@ constructor(props) {
 如果要更新 state 則必須使用 `setState()`：
 ```
 this.setState({
-  name: "Enya Lial"
+  name: "Enya Liao"
 })
 ```
 
