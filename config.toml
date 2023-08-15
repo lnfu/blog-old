@@ -3,7 +3,7 @@ baseURL = 'https://lnfu.github.io/blog/'
 languageCode = 'en-us'
 title = 'LNF Needs some Freedom'
 
-theme = "PaperMod"
+theme = "hugo-PaperMod"
 
 [params]
 ShowShareButtons =true
