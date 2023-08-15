@@ -24,6 +24,9 @@ name = "YouTube"
 url = "https://www.youtube.com/channel/UCJLfF3MfuuwJJd7ibudpX3w"
 
 # 搜尋
+[outputs]
+home = [ "HTML", "RSS", "JSON" ]
+
 [fuseOpts]
 isCaseSensitive = false
 shouldSort = true
