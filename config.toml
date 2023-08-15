@@ -1,7 +1,7 @@
 # baseURL = 'http://example.org/'
 baseURL = 'https://lnfu.github.io/blog/'
 languageCode = 'en-us'
-title = 'LNF Needs some Freedom'
+title = 'LNF'
 
 theme = "hugo-PaperMod"
 
@@ -23,7 +23,7 @@ url = "https://www.facebook.com/ENFULIAO/"
 name = "YouTube"
 url = "https://www.youtube.com/channel/UCJLfF3MfuuwJJd7ibudpX3w"
 
-# 搜尋
+# 搜尋（output 一定要寫不然就沒辦法使用）
 [outputs]
 home = [ "HTML", "RSS", "JSON" ]
 

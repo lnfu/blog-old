@@ -1,5 +1,5 @@
 ---
-title: "React Hooks"
+title: "React Hooks useState() 筆記"
 date: 2023-08-14T22:35:08+08:00
 draft: false
 author: "Enfu Liao"
@@ -10,6 +10,8 @@ author: "Enfu Liao"
 #     relative: false # when using page bundles set this to true
 #     hidden: true # only hide on current single page
 ---
+
+## 從 class 到 arrow function
 
 之前在寫 React 時，我都使用 class extends React.Component 的寫法。
 
