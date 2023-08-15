@@ -15,9 +15,9 @@ author: "Enfu Liao"
 
 然而在有些時候，單純使用 arrow function 的寫法會更為簡潔。
 
-不過這時如果要使用到 state 的功能就沒辦法直接在 class 裡面寫。（已經沒有 class）
+不過如果一來要使用到 state 的功能就沒辦法直接在 class 裡面寫了。（已經沒有 class）
 
-這時候我們可以引入 React 提供的 Hooks 來使用 state。
+這時候我們可以引入 React Hooks 來使用 state。
 
 ## 使用範例
 
@@ -72,7 +72,7 @@ const App = (props) => {
 然後我們使用 `useState()` 來新增一個 state。
 > 記得要 import `useState()`。
 
-> `useState()` 裡面的參數是預設值。
+> `useState()` 裡面的參數是 state 的預設值。
 
 ```
 const [ message, setMessage ] = useState("")
@@ -103,7 +103,7 @@ const App = (props) => {
 }
 ```
 
-如此一來是不是變得超級簡潔！如果想要在更簡單，也可以把 `greet()` 寫成在 `onClick` 後面。
+這樣改完後是不是變得超級簡潔！如果想要再更精簡一點，我們也可以把 `greet()` 寫成在 `onClick` 後面。
 
 ```
 onClick={() => {setMessage("Hello, World")}}
@@ -111,5 +111,4 @@ onClick={() => {setMessage("Hello, World")}}
 
 ## 心得
 想當初看別人寫 React 也是都用 `useState()` 的方式，但是學習時卻發現有點卡卡的，所以還是建議一開始學 React 的朋友可以先從最初的 class 寫法下手。
-等到對整個架構稍微熟悉後再去改成使用 arrow function 和 React Hooks 的寫法就會非常簡潔！
-
+等到對整個架構稍微熟悉後再去改成使用 arrow function 和 React Hooks 的寫法就會非常簡潔。

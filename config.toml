@@ -1,6 +1,7 @@
-baseURL = 'http://example.org/'
+# baseURL = 'http://example.org/'
+baseURL = 'https://lnfu.github.io/blog/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'LNF Needs some Freedom'
 
 theme = "PaperMod"
 
