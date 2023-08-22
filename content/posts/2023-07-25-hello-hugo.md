@@ -1,5 +1,5 @@
 ---
-title: "Hello, Hugo"
+title: "Hello, Hugo 利用 Hugo 建立自己的部落格"
 date: 2023-07-25T22:24:39+08:00
 draft: false
 author: "Enfu Liao"
@@ -55,3 +55,6 @@ hugo new posts/[檔名]
 ```
 hugo server
 ```
+
+# Github Pages
+未完...

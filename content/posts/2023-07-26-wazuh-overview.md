@@ -1,7 +1,7 @@
 ---
 title: "Wazuh 介紹"
 date: 2023-07-26T14:19:49+08:00
-draft: false
+draft: true
 author: "Enfu Liao"
 # cover:
 #     image: "<image path/url>" # image path/url

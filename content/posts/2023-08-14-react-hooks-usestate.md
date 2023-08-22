@@ -1,5 +1,5 @@
 ---
-title: "React Hooks useState() 筆記"
+title: "關於 React Hooks 的 useState()"
 date: 2023-08-14T22:35:08+08:00
 draft: false
 author: "Enfu Liao"
