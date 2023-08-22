@@ -12,6 +12,7 @@ author: "Enfu Liao"
 ---
 
 K8S（Kubernetes）是 Google 開發出來用於調度容器（container）的系統。
+> container 和 VM 最大的差別在於沒有 Guest OS（軟體層級的虛擬化）
 
 K8S 的節點（node）分成兩種：control plane 和 worker node。
 
@@ -55,6 +56,13 @@ kubelet 透過 CRI 呼叫 container runtime
 可以透過 HAProxy + Keepalived 達到 control plane 的 HA
 
 > 目前理解 HAProxy 是 load balancer、Keepalived 會負責檢查機器並且決定主要伺服器。
+
+
+# Pod 
+K8S 基本單位。
+
+一個 pod 可以有多個 container（雖然常常只有一個）。
+這些 container 有獨立的 pid, mnt namespace，但是共用 net, uts, ipc namespace。（共享網路...）
 
 # Static Pod
 固定在節點上執行。
