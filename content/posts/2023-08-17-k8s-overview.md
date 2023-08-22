@@ -45,6 +45,10 @@ kubelet 透過 CRI 呼叫 container runtime
 - containerd
 - CRI-O
 
+> CRI 屬於 high level 的 container runtime 規範，OCI 屬於 low level（e.g., runC, Crun）
+
+> Crun 在效率上比 runC 高
+
 ## CNI
 負責 container 之間、跨節點的網路連接
 
@@ -68,3 +72,41 @@ K8S 基本單位。
 固定在節點上執行。
 kubelet 監控、管理。（刪除結束會重啟）
 
+
+
+
+
+
+## grafana
+```
+apiVersion: v1
+data:
+  grafana.ini: |
+    [analytics]
+    check_for_updates = true
+    [grafana_net]
+    url = https://grafana.net
+    [log]
+    mode = console
+    level = debug
+    [paths]
+    data = /var/lib/grafana/
+    logs = /var/log/grafana
+    plugins = /var/lib/grafana/plugins
+    provisioning = /etc/grafana/provisioning
+    [server]
+    domain = 'grafana.efliao.test.cc.cs.nctu.edu.tw'
+    root_url = 'http://grafana.efliao.test.cc.cs.nctu.edu.tw'
+    # http_port = 30678
+    [auth.generic_oauth]
+    email_attribute_name = uid
+    tls_skip_verify_insecure = true
+    enabled = true
+    client_id = 285
+    client_secret = ykweRHC0o4pEshJyOOGCPWC8JK3AnjGSIRXrczBY
+    scopes = openid email
+    auth_url = "http://oauth.alpha.test.cc.cs.nctu.edu.tw/oauth/authorize?"
+    token_url = "http://oauth.alpha.test.cc.cs.nctu.edu.tw/oauth/token"
+    api_url = "http://oauth.alpha.test.cc.cs.nctu.edu.tw/api/user"
+kind: ConfigMap
+```
