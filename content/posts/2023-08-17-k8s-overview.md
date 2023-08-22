@@ -1,5 +1,5 @@
 ---
-title: "2023 08 17 K8s Overview"
+title: "K8S 簡介"
 date: 2023-08-17T18:44:38+08:00
 draft: false
 author: "Enfu Liao"
@@ -11,22 +11,29 @@ author: "Enfu Liao"
 #     hidden: true # only hide on current single page
 ---
 
+K8S（Kubernetes）是 Google 開發出來用於調度容器（container）的系統。
 
 K8S 的節點（node）分成兩種：control plane 和 worker node。
+
+> 可以理解節點 = 機器（machine）
 
 # Control Plane
 負責管理整個集群（cluster）。
 > 以前叫做 master
 
 四大元件：
-- API Server：負責處理使用者和 K8S 交互的伺服器。
-- Etcd：資料庫
-- Scheduler：負責把 Pod 分配到 node 上面。
+- API Server：負責處理和使用者以及和 worker node 交互的伺服器
+    - 使用者可以透過 kubectl / RestfulAPI / Web UI 和 control plane 交互
+- Etcd：儲存各種 metadata 的資料庫
+    - 例如儲存各個 worker node 狀態
+- Scheduler：負責把 Pod 分配到 node 上面（調度）
 - Controller Manager：負責監控整個 cluster 狀態並做出反應。
 
 # Worker Node
+
+三個 process：
 - Kubelet：和 control plane 的 API server 溝通
-- Kube-proxy：負責網路（給 container）
+- Kube-proxy：負責虛擬網卡（給予 container 網路）
 - Container Runtime
 
 ## CRI
