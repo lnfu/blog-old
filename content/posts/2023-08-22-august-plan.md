@@ -23,7 +23,10 @@ author: "Enfu Liao"
     - 看完 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
     - 整理
 - axios
-- insomnia
+    - 簡介✅
+- Insomnia
+    - 就是一個好用的 API testing 桌面軟體✅
+    - 還有另一個比較多人使用的軟體是 Postman✅
 - react hooks
 - eslint, prettier
 - Material UI, Tailwindcss, DnD library
