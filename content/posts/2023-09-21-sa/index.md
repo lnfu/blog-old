@@ -11,7 +11,7 @@ author: "Enfu Liao"
 #     hidden: true # only hide on current single page
 ---
 
-
+課程網站：https://nasa.cs.nycu.edu.tw/sa/2023/
 
 ## FreeBSD 版本
 ```
@@ -51,30 +51,17 @@ magor # 五年（LTS）
 
 ## 安裝
 
+### ISO
+可以到 nctu mirror 去下載，只要 disk1 就夠了，不用下載 dvd。
+
+
+### 新增使用者
 [`adduser`](https://man.freebsd.org/cgi/man.cgi?adduser(8))
 
 
+### 磁碟分割
 ```
-fetch https://nasa.cs.nctu.edu.tw/sa/2023/nasakey.pub
-cat nasakey.pub >> /home/judge/.ssh/authorized_keys
-ssh-keygen -l -f nasakey.pub
-```
-
-
-### 補充
-- BIOS 在主機板上（firmware）
-- (1982, IBM PC) 一個 sector = 512 Bytes
-- 磁碟分割：MBR（4 partition）、GPT（128 partition）
-- 檔案系統：UFS（Unix File System）、ZFS（推薦使用）、ext4（Linux 使用）
-- partition = slice
-- 只有輪子群組可以下 `su -`
-- CST 是台灣時區
-- `visudo` = `sudo vi /usr/local/etc/sudoers` + apply
-
-
-
-```
-gpart show
+gpart show # 顯示 partition 資訊
 ```
 
 freebsd-boot：放 kernel
@@ -87,8 +74,34 @@ freebsd-swap：virtual memory
 `/dev/ada0p3` 磁碟 partition 1
 
 
-
 https://en.wikipedia.org/wiki/BSD_disklabel
+
+
+### 設定 judge 帳號免密碼登入
+```
+fetch https://nasa.cs.nctu.edu.tw/sa/2023/nasakey.pub
+cat nasakey.pub >> /home/judge/.ssh/authorized_keys
+ssh-keygen -l -f nasakey.pub
+```
+
+### 修改 sudo 權限
+
+```sh
+visudo # 等同 sudo vi /usr/local/etc/sudoers + 套用設定
+sudo update-alternatives --config editor # 更改 visudo editor
+```
+
+
+### 補充
+- BIOS 是在主機板上（firmware）
+- (1982, IBM PC 規格延續到現在) 一個 sector = 512 Bytes
+- 磁碟分割：MBR（4 partition）、GPT（128 partition）
+- 檔案系統：UFS（Unix File System）、ZFS（推薦使用）、ext4（Linux 使用）
+- partition = slice
+- 只有輪子群組可以下 `su -`
+- CST 指的是台灣時區
+- `visudo` = `sudo vi /usr/local/etc/sudoers` + apply
+
 
 
 ada: IDE, SATA
@@ -98,29 +111,28 @@ da: SCSI, usb stick
 > 從主開機紀錄的結構可以知道，它僅僅包含一個64個位元組的硬碟分割區表。由於每個分割區資訊需要16個位元組，所以對於採用MBR型分割區結構的硬碟，最多只能辨識4個主要分割區（Primary partition）。（[維基百科：MBR](https://zh.wikipedia.org/zh-tw/%E4%B8%BB%E5%BC%95%E5%AF%BC%E8%AE%B0%E5%BD%95)）
 
 
-只要 disk1 就夠了。
 
-
-```
-efliao@UX480FD:~$ sha
-sha1sum       sha256sum     sha512sum     shasum        
-sha224sum     sha384sum     shadowconfig  
-```
-
-
-
-
-
-
-## RAID = 磁碟陣列（多個硬碟）
+### RAID = 磁碟陣列（多個硬碟）
 
 Stripe：檔案分成多塊分別同時寫到多個硬碟
-
 
 ## 安裝軟體
 
 ### pkg（package）
 Pre-built binary programs（已編譯）
+
+```sh
+pkg search vim
+pkg install vim
+pkg upgrade vim
+pkg delete vim
+```
+
+```sh
+pkg update # 更新 database
+pkg info # 查看已安裝的軟體
+pkg version -v 
+```
 
 ### ports
 source code
@@ -130,6 +142,14 @@ source code
 ### 其他奇奇怪怪
 tarball：包起來的東西（副檔名 .tar.gz）
 
-tar = taps archive
+tar = tape archive
 
 vcs = version controll system e.g., git, svn
+
+
+
+### Ubuntu Issues
+[ZFS installer option](https://www.reddit.com/r/zfs/comments/gwk6dj/creating_ubuntu_server_with_zfs/)
+[刪除 Desktop 相關套件](https://askubuntu.com/questions/484095/how-do-i-remove-all-desktop-related-packages-leaving-server-only)
+
+`wget` instead of `fetche`
