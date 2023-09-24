@@ -3,6 +3,7 @@ title: "[課程筆記] 演算法概論"
 date: 2023-09-12T09:38:21+08:00
 draft: false
 author: "Enfu Liao"
+tags: ["課程筆記"]
 # cover:
 #     image: "<image path/url>" # image path/url
 #     alt: "<alt text>" # alt text

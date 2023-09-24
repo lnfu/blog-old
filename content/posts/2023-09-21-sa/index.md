@@ -3,6 +3,7 @@ title: "[課程筆記] 計算機系統管理（SA）"
 date: 2023-09-21T18:42:10+08:00
 draft: false
 author: "Enfu Liao"
+tags: ["課程筆記"]
 # cover:
 #     image: "<image path/url>" # image path/url
 #     alt: "<alt text>" # alt text

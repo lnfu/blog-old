@@ -37,6 +37,12 @@ keys = ["title", "permalink", "summary", "content"]
 
 # 導航欄
 [[menu.main]]
+identifier = "tags"
+name = "Tags"
+url = "/tags/"
+weight = 10
+
+[[menu.main]]
 identifier = "archives"
 name = "Archives"
 url = "/archives/"
@@ -47,3 +53,5 @@ identifier = "search"
 name = "Search"
 url = "/search/"
 weight = 20
+
+
