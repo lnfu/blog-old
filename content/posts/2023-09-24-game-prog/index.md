@@ -124,7 +124,51 @@ Debug.Log(vec.z);
 ### Unity C# 程式架構
 
 所有的 script 都是繼承自 MonoBehavior 類別。他有四個 method：
-1. `Awake()`：
-1. `Start()`：
-1. `Update()`：
-1. `FixedUpdate()`：
+1. `Awake()`：GameObject 初始化（不需要場景其他物件資訊）
+1. `Start()`：GameObject 初始化（需要場景其他物件資訊）
+1. `Update()`：每一個 frame 呼叫一次。
+1. `FixedUpdate()`：每一段時間（Fixed Timestep）呼叫一次。建議和物理運算相關的都放在這邊，精度才會好。
+
+> 修改 Fixed Timestep 數值（單位是秒）：**Edit** -> **Project Setting** -> **Time** -> **Fixed Timestep** 
+
+參考官網：https://docs.unity3d.com/Manual/ExecutionOrder.html
+
+
+### 使用者輸入
+
+> 建議將使用者輸入的判斷都放在 `Update()` 而不是 `FixedUpdate()`
+
+```c#
+public class Test : MonoBehavior
+{
+    void Update()
+    {
+        if (Input.anyKey) // 任何鍵盤/滑鼠按鍵按住
+            Debug.Log("Hello");
+
+        Debug.Log(Input.mousePosition); // 滑鼠目前的三維座標
+        Debug.Log(Input.mouseScrollDelta); // 滑鼠滑動值（二維座標，普通滑鼠數值就存在 Y 座標）
+
+        if (Input.GetMouseButton(0)) // 滑鼠左鍵按住
+            Debug.Log("Left");
+        if (Input.GetMouseButton(1)) // 滑鼠右鍵按住
+            Debug.Log("Right");
+        if (Input.GetMouseButton(2)) // 滑鼠中鍵按住
+            Debug.Log("Middle");
+
+        // 單次
+        if (Input.GetMouseButtonDown(0)) // 滑鼠左鍵按下（單次）
+            Debug.Log("Left");
+        if (Input.GetMouseButtonUp(1)) // 滑鼠右鍵放開（單次）
+            Debug.Log("Right");
+    
+
+        if (Input.GetKey(KeyCode.A)) 
+            Debug.Log("A/a");
+
+        if (Input.GetKey(KeyCode.UpArrow)) 
+            Debug.Log("Up");
+    }
+}
+```
+
