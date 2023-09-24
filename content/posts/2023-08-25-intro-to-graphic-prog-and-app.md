@@ -1,8 +1,9 @@
 ---
-title: "繪圖程式設計與應用 課程筆記"
+title: "[課程筆記] 繪圖程式設計與應用"
 date: 2023-09-12T00:20:21+08:00
 draft: false
 author: "Enfu Liao"
+tags: ["課程筆記"]
 # cover:
 #     image: "<image path/url>" # image path/url
 #     alt: "<alt text>" # alt text
@@ -57,3 +58,6 @@ https://youtu.be/zjMuIxRvygQ
 
 * 推導 orthographic 和 perspective projection 的矩陣
 * 推導 view matrix
+
+
+## 學分太多，決定不修這門課了
