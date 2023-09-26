@@ -12,6 +12,8 @@ math: true
 #     hidden: true # only hide on current single page
 ---
 
+> 這篇的數學式找個時間重打（用 shortcodes）
+
 > LADR = Linear Algebra Done Right
 
 1. Suppose $a$ and $b$ are real numbers, not both 0. Find real numbers $c$ and $d$ such that

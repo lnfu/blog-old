@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>課程筆記 on LNF</title>
+    <link>https://lnfu.github.io/blog/tags/%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/</link>
+    <description>Recent content in 課程筆記 on LNF</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 24 Sep 2023 22:19:02 +0800</lastBuildDate><atom:link href="https://lnfu.github.io/blog/tags/%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[課程筆記] 遊戲程式設計</title>
+      <link>https://lnfu.github.io/blog/posts/2023-09-24-game-prog/</link>
+      <pubDate>Sun, 24 Sep 2023 22:19:02 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-09-24-game-prog/</guid>
+      <description>一樣是隔壁朱宏國老師開的課。
+主要是教 Unity。
+Unity 基本操作  Q：View W：移動物體 E：旋轉物體 R：縮放物體  Inspector 窗格：顯示 GameObject 帶有的 Component  GameOjbect 可能是 Model、光源、Camera、粒子效果&amp;hellip;
+ Component 是 GameObject 的組成元素，用來控制 GameObject 的行為，可能是：
+ Transform：位置、旋轉、縮放 Mesh Filter Mesh Renderer Sphere Collider Material：材質（貼圖、反光&amp;hellip;）  Unity 遊戲設計架構 光源設定  光源越多運算成本越高
+  Type：種類（平行光、點光源、spotlight、區域光&amp;hellip;） Range：可照射的最遠距離 Angle：聚光燈展開角度 Color Mode：運算模式 Intensity：強度（亮度） Inderect Multiplier：環境光影響係數 Shadow Type：產生的影子類型 Flare：光源位置的圖像材質  Camera 可以用 Align With View 選項來套用成目前視角
+Asset Store 現在版本都只能在瀏覽器去新增
+C# Script 推薦使用 Visual Studio Code</description>
+    </item>
+    
+    <item>
+      <title>[課程筆記] 計算機系統管理（SA）</title>
+      <link>https://lnfu.github.io/blog/posts/2023-09-21-sa/</link>
+      <pubDate>Thu, 21 Sep 2023 18:42:10 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-09-21-sa/</guid>
+      <description>課程網站：https://nasa.cs.nycu.edu.tw/sa/2023/
+FreeBSD 版本 ---------------------- CURRENT (14.0 2022) ---------------------- STABLE | \---RELEASE FreeBSD-A.B.C-Type  A: major version # B: minor version # C: slight patch version # Type: PRERELEASE, BETA, RC | RELEASE | STABLE | CURRENT  uname -r # 查看版本 freebsd-version # 查看版本 (uname 和 freebsd-version 的差異)[https://forums.freebsd.org/threads/freebsd-version-1-and-uname-1-different.70294/]
+freebsd-update fetch install # 更新系統 EoL（End-of-Life） 沒人在維護
+RELEASE 三個月 magor # 五年（LTS）
+安裝 ISO 可以到 nctu mirror 去下載，只要 disk1 就夠了，不用下載 dvd。
+新增使用者 adduser</description>
+    </item>
+    
+    <item>
+      <title>[課程筆記] 作業系統概論</title>
+      <link>https://lnfu.github.io/blog/posts/2023-09-18-os/</link>
+      <pubDate>Mon, 18 Sep 2023 00:50:52 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-09-18-os/</guid>
+      <description>課程簡介：略
+電腦開機  PC = FFFF:0000 執行 BIOS（現在電腦通常改成 UEFI） 磁碟最開頭的 512 Bytes 叫做 MBR（負責尋找磁碟上的作業系統 e.g., Windows）  Interrupt handling（中斷處理） CPU 一次只能做一件事，如果有一個事情卡住，就可以透過中斷來去做別的事情。
+分成：
+ 硬體中斷：e.g., IO 軟體中斷：e.g., 除以 0  這兩種中斷基本上處理的流程一樣。
+範例流程  IO device 發出中斷訊號給 PIC PIC 發中斷給 CPU CPU 把目前在處理的東西（當前狀態 e.g., program counter, &amp;hellip;）先存起來 CPU 查詢 IVT（interrupt vector table） 後跳到對應的 ISR（interrupt service routine） 執行 ISR 最後一個指令會是 IRET（return 回原本 CPU 處理的東西）   IVT（中斷向量表）。位置固定（方便 CPU 查詢），通常放在記憶體位置為 0。
+  作業系統（or 驅動程式）要負責 ISR 的部份。</description>
+    </item>
+    
+    <item>
+      <title>[課程筆記] 演算法概論</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-25-algo/</link>
+      <pubDate>Tue, 12 Sep 2023 09:38:21 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-25-algo/</guid>
+      <description>RAM Random Access Machine
+ 記憶體存取都是花費一單位的時間 指令依序一個一個的被讀取  T(n) Running Time（步驟的總數量）
+n = input size
+Complexity of Recurrence Relation 可以參考：
+ https://mycollegenotebook.medium.com/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-%E9%81%9E%E8%BF%B4-%E4%B8%8A-f6d51a462394 https://mycollegenotebook.medium.com/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-%E9%81%9E%E8%BF%B4-%E4%B8%8B-master-th-307ad4608ab6  以 merge sort 舉例，每個 sorting problem 可以拆成兩個 sorting problem，其花費的時間是原本的一半，所以 a = 2、b = 2，另外拆開（divide）的時間只需要 O(1)，合併（combine）則需要迴圈跑過一次所以是 O(n)。
+要解出 recurrence 複雜度的一般式有兩個方法：
+ backward substitution Master Theorem  substitution method 用數學歸納法（strong induction）證明。
+ 可以先用 recursion-tree 去分析
+ -&amp;gt; 2023.08.25
+Master Theorem Divide and Conquer Merge Sort  分成一半來 sort（recursive） 用 T(n) = n 跑過一次比較誰先誰後  T(n) = 2 T(n/2) + O(n) Binary Search Find an element in a sorted array.</description>
+    </item>
+    
+    <item>
+      <title>[課程筆記] 繪圖程式設計與應用</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-25-intro-to-graphic-prog-and-app/</link>
+      <pubDate>Tue, 12 Sep 2023 00:20:21 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-25-intro-to-graphic-prog-and-app/</guid>
+      <description>這是隔壁的課，不知道可不可以承認&amp;hellip;
+2023-08-25 這門課主要是講解如何使用 OpenGL。（理論的東西好像是在另一門課）
+這禮拜先講了 Transformation 和座標系等簡單的數學。
+Transformation 我們這邊討論的 transformation 就是指在 3D 座標下的幾何轉換。
+我們會用 homogeneous coordinate 來表示點和向量（w = 1 是點；w = 0 是向量）。
+OpenGL 有三個重要的矩陣：MVP matrices（model, view, projection）。
+ OpenGL 的矩陣是 column major order。  常見的矩陣有：
+ identity（單位矩陣）：沒有任何作用 translation（位移） scaling（縮放）：對向量來說，如果不是等比例的縮放會改變方向（寫程式時要注意） rotation（旋轉）：剛體。對於尤拉角（Euler Angle）表示，可能會導致所謂的 gimbal lock，解決方式是引入 quaternion。（有點複雜，之後研究）  https://youtu.be/zjMuIxRvygQ
+Projection 這門課只介紹了兩種投影：orthographic 和 perspective。
+ perspective 的那個斷頭角錐稱作 frustum
+ 比較需要注意的是，不要因為方便就把 far plane 設定超級大，這樣會因為 near plane 和 far plane 距離過大導致壓縮後太靠近加上精度問題就會有 z fighting 的問題。
+在 OpenGL 中，projection 的階段還會把座標從右手座標（RHC）轉成左手座標（LHC），最終結果會是一個 [-1, 1][-1, 1][-1, 1] 的立方體。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+{
+	"Latex Inline": {
+		"scope": "markdown",
+		"prefix": "mi",
+		"body": [
+			"{{< math_inline >}}$1{{< /math_inline >}}$2",
+		],
+		"description": "Latex Inline"
+	},
+	"Latex Block": {
+		"scope": "markdown",
+		"prefix": "mb",
+		"body": [
+			"{{< math_block >}}$1{{< /math_block >}}",
+			"$2"
+		],
+		"description": "Latex Block"
+	}
+}

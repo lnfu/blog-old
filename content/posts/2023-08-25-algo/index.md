@@ -179,4 +179,61 @@ H Tree 是一種碎形。
 可以參考：https://en.wikipedia.org/wiki/H_tree
 
 
+
+### FFT
+請移駕[快速傅立葉變換](/blog/posts/2023-09-25-fft/)
+
 -> 2023.09.21
+
+
+
+## Sort
+
+### Heapsort
+
+Heapify 函數：
+```
+MAX-HEAPIFY(A, i)
+    l = LEFT(i) // i 左邊的 index
+    r = RIGHT(i)
+    largest = i
+    if l <= A.size and A[l] > A[i]
+        largest = l
+    if r <= A.size and A[r] > A[i]
+        largest = l
+    if i != largest
+        exchange A[i] with A[largest]
+        MAX-HEAPIFY(A, largest) // 繼續往下
+```
+
+複雜度：
+```
+T(n) <= T(2n/3) + Theta(1) // 最慘情況下，葉子和 internal node 數量相同，往下的那一棵 subtree 占總共的 2/3
+O(lg n)
+```
+
+建立 max heap：
+```
+BUILD-MAX-HEAP(A)
+    for i = A.length / 2 downto 1
+        MAX-HEAPIFY(A, i)
+```
+
+直覺上，這樣的複雜度是 O(n lg n)，不過因為越靠近葉子 Heapify 所要花的時間越小，其更緊的複雜度是 O(n)。
+> 每一層分開算加總
+> h = height = 0, 1, 2, ..., k
+> k = lg(n)
+![](./Screenshot%20from%202023-09-26%2010-53-41.png)
+
+Heapsort 演算法：
+> 重複把最大的（root）往最後丟，最後就會變成一個由小到大排序好的陣列
+```
+HEAPSORT(A)
+    BUILD-MAX-HEAP(A) // O(n)
+    for i = A.length down to 2
+        exchange A[1] with A[i]
+        A.size = A.size - 1
+        MAX-HEAPIFY(A, 1) // O(lg n)
+```
+
+複雜度：O(n lg(n))

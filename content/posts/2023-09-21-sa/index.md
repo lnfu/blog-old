@@ -102,7 +102,8 @@ sudo update-alternatives --config editor # 更改 visudo editor
 - 只有輪子群組可以下 `su -`
 - CST 指的是台灣時區
 - `visudo` = `sudo vi /usr/local/etc/sudoers` + apply
-
+- 如果 ping 的延遲很低，ssh 卻很慢可能是 DNS 反解問題。可以參考：https://www.ltsplus.com/linux/sshd-login-slow
+        - config 加入 `UseDNS no`
 
 
 ada: IDE, SATA

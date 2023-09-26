@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on LNF</title>
+    <link>https://lnfu.github.io/blog/posts/</link>
+    <description>Recent content in Posts on LNF</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 25 Sep 2023 23:52:07 +0800</lastBuildDate><atom:link href="https://lnfu.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>快速傅立葉變換</title>
+      <link>https://lnfu.github.io/blog/posts/2023-09-25-fft/</link>
+      <pubDate>Mon, 25 Sep 2023 23:52:07 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-09-25-fft/</guid>
+      <description>競程一有講過快速傅立葉變換（fast Fourier transform；FFT），只是那時候放棄理解。
+這次修演算法又提到所以終於打算把她看懂了。
+FFT 在解決什麼問題？ </description>
+    </item>
+    
+    <item>
+      <title>[課程筆記] 遊戲程式設計</title>
+      <link>https://lnfu.github.io/blog/posts/2023-09-24-game-prog/</link>
+      <pubDate>Sun, 24 Sep 2023 22:19:02 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-09-24-game-prog/</guid>
+      <description>一樣是隔壁朱宏國老師開的課。
+主要是教 Unity。
+Unity 基本操作  Q：View W：移動物體 E：旋轉物體 R：縮放物體  Inspector 窗格：顯示 GameObject 帶有的 Component  GameOjbect 可能是 Model、光源、Camera、粒子效果&amp;hellip;
+ Component 是 GameObject 的組成元素，用來控制 GameObject 的行為，可能是：
+ Transform：位置、旋轉、縮放 Mesh Filter Mesh Renderer Sphere Collider Material：材質（貼圖、反光&amp;hellip;）  Unity 遊戲設計架構 光源設定  光源越多運算成本越高
+  Type：種類（平行光、點光源、spotlight、區域光&amp;hellip;） Range：可照射的最遠距離 Angle：聚光燈展開角度 Color Mode：運算模式 Intensity：強度（亮度） Inderect Multiplier：環境光影響係數 Shadow Type：產生的影子類型 Flare：光源位置的圖像材質  Camera 可以用 Align With View 選項來套用成目前視角
+Asset Store 現在版本都只能在瀏覽器去新增
+C# Script 推薦使用 Visual Studio Code</description>
+    </item>
+    
+    <item>
+      <title>[課程筆記] 計算機系統管理（SA）</title>
+      <link>https://lnfu.github.io/blog/posts/2023-09-21-sa/</link>
+      <pubDate>Thu, 21 Sep 2023 18:42:10 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-09-21-sa/</guid>
+      <description>課程網站：https://nasa.cs.nycu.edu.tw/sa/2023/
+FreeBSD 版本 ---------------------- CURRENT (14.0 2022) ---------------------- STABLE | \---RELEASE FreeBSD-A.B.C-Type  A: major version # B: minor version # C: slight patch version # Type: PRERELEASE, BETA, RC | RELEASE | STABLE | CURRENT  uname -r # 查看版本 freebsd-version # 查看版本 (uname 和 freebsd-version 的差異)[https://forums.freebsd.org/threads/freebsd-version-1-and-uname-1-different.70294/]
+freebsd-update fetch install # 更新系統 EoL（End-of-Life） 沒人在維護
+RELEASE 三個月 magor # 五年（LTS）
+安裝 ISO 可以到 nctu mirror 去下載，只要 disk1 就夠了，不用下載 dvd。
+新增使用者 adduser</description>
+    </item>
+    
+    <item>
+      <title>[課程筆記] 作業系統概論</title>
+      <link>https://lnfu.github.io/blog/posts/2023-09-18-os/</link>
+      <pubDate>Mon, 18 Sep 2023 00:50:52 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-09-18-os/</guid>
+      <description>課程簡介：略
+電腦開機  PC = FFFF:0000 執行 BIOS（現在電腦通常改成 UEFI） 磁碟最開頭的 512 Bytes 叫做 MBR（負責尋找磁碟上的作業系統 e.g., Windows）  Interrupt handling（中斷處理） CPU 一次只能做一件事，如果有一個事情卡住，就可以透過中斷來去做別的事情。
+分成：
+ 硬體中斷：e.g., IO 軟體中斷：e.g., 除以 0  這兩種中斷基本上處理的流程一樣。
+範例流程  IO device 發出中斷訊號給 PIC PIC 發中斷給 CPU CPU 把目前在處理的東西（當前狀態 e.g., program counter, &amp;hellip;）先存起來 CPU 查詢 IVT（interrupt vector table） 後跳到對應的 ISR（interrupt service routine） 執行 ISR 最後一個指令會是 IRET（return 回原本 CPU 處理的東西）   IVT（中斷向量表）。位置固定（方便 CPU 查詢），通常放在記憶體位置為 0。
+  作業系統（or 驅動程式）要負責 ISR 的部份。</description>
+    </item>
+    
+    <item>
+      <title>Network</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-25-network/</link>
+      <pubDate>Tue, 12 Sep 2023 19:40:03 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-25-network/</guid>
+      <description>Barabasi 課本： http://networksciencebook.com/chapter/0</description>
+    </item>
+    
+    <item>
+      <title>[課程筆記] 演算法概論</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-25-algo/</link>
+      <pubDate>Tue, 12 Sep 2023 09:38:21 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-25-algo/</guid>
+      <description>RAM Random Access Machine
+ 記憶體存取都是花費一單位的時間 指令依序一個一個的被讀取  T(n) Running Time（步驟的總數量）
+n = input size
+Complexity of Recurrence Relation 可以參考：
+ https://mycollegenotebook.medium.com/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-%E9%81%9E%E8%BF%B4-%E4%B8%8A-f6d51a462394 https://mycollegenotebook.medium.com/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-%E9%81%9E%E8%BF%B4-%E4%B8%8B-master-th-307ad4608ab6  以 merge sort 舉例，每個 sorting problem 可以拆成兩個 sorting problem，其花費的時間是原本的一半，所以 a = 2、b = 2，另外拆開（divide）的時間只需要 O(1)，合併（combine）則需要迴圈跑過一次所以是 O(n)。
+要解出 recurrence 複雜度的一般式有兩個方法：
+ backward substitution Master Theorem  substitution method 用數學歸納法（strong induction）證明。
+ 可以先用 recursion-tree 去分析
+ -&amp;gt; 2023.08.25
+Master Theorem Divide and Conquer Merge Sort  分成一半來 sort（recursive） 用 T(n) = n 跑過一次比較誰先誰後  T(n) = 2 T(n/2) + O(n) Binary Search Find an element in a sorted array.</description>
+    </item>
+    
+    <item>
+      <title>[課程筆記] 繪圖程式設計與應用</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-25-intro-to-graphic-prog-and-app/</link>
+      <pubDate>Tue, 12 Sep 2023 00:20:21 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-25-intro-to-graphic-prog-and-app/</guid>
+      <description>這是隔壁的課，不知道可不可以承認&amp;hellip;
+2023-08-25 這門課主要是講解如何使用 OpenGL。（理論的東西好像是在另一門課）
+這禮拜先講了 Transformation 和座標系等簡單的數學。
+Transformation 我們這邊討論的 transformation 就是指在 3D 座標下的幾何轉換。
+我們會用 homogeneous coordinate 來表示點和向量（w = 1 是點；w = 0 是向量）。
+OpenGL 有三個重要的矩陣：MVP matrices（model, view, projection）。
+ OpenGL 的矩陣是 column major order。  常見的矩陣有：
+ identity（單位矩陣）：沒有任何作用 translation（位移） scaling（縮放）：對向量來說，如果不是等比例的縮放會改變方向（寫程式時要注意） rotation（旋轉）：剛體。對於尤拉角（Euler Angle）表示，可能會導致所謂的 gimbal lock，解決方式是引入 quaternion。（有點複雜，之後研究）  https://youtu.be/zjMuIxRvygQ
+Projection 這門課只介紹了兩種投影：orthographic 和 perspective。
+ perspective 的那個斷頭角錐稱作 frustum
+ 比較需要注意的是，不要因為方便就把 far plane 設定超級大，這樣會因為 near plane 和 far plane 距離過大導致壓縮後太靠近加上精度問題就會有 z fighting 的問題。
+在 OpenGL 中，projection 的階段還會把座標從右手座標（RHC）轉成左手座標（LHC），最終結果會是一個 [-1, 1][-1, 1][-1, 1] 的立方體。</description>
+    </item>
+    
+    <item>
+      <title>Node.js 和 PostgreSQL 的小技巧</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-25-backend-nodejs-postgresql/</link>
+      <pubDate>Fri, 25 Aug 2023 00:47:48 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-25-backend-nodejs-postgresql/</guid>
+      <description>平常在進行後端開發時，我們通常會在本地開一個資料庫（的容器）做測試，這篇主要是介紹一個可以比較快速且有邏輯建立好整個資料庫作為開發使用，並且透過所謂的 migration 以及腳本化達到重複使用（reuse）。
+正題 先到 https://dbdiagram.io/ 建立 Diagram，匯出 PDF 和 SQL 檔案。
+ 語法請參考 dbdiagram 官方說明文件。
+ 其中 PDF 檔案可以在和別人討論資料庫設計時使用（或是也可以匯出成圖片）；SQL 檔案在之後的 migration 會用到。
+使用 node-pg-migrate 輕鬆管理開發時本地資料庫的表格（migration）。
+yarn add pg yarn add node-pg-migrate yarn node-pg-migrate create init 這樣操作完後會建立一個 migrations/xxxxxxxxxxxxx_init.js 檔案。
+然後就可以把一開始匯出的 SQL 檔案內容貼到 migrate up 的部份，並且在 migrate down 撰寫好 drop table（記得順序要和 create table 顛倒以解決表格間衝突的問題）。
+記得設定 package.json 的 scirpt 簡化所有操作。
+ &amp;quot;scripts&amp;quot;: { &amp;quot;dev&amp;quot;: &amp;quot;node app.js&amp;quot;, &amp;quot;postgres&amp;quot;: &amp;quot;sudo docker run --name postgres15 -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:15-alpine&amp;quot;, &amp;quot;createdb&amp;quot;: &amp;quot;sudo docker exec postgres15 createdb --username=root --owner=root note&amp;quot;, &amp;quot;dropdb&amp;quot;: &amp;quot;sudo docker exec postgres15 dropdb note&amp;quot;, &amp;quot;migrate&amp;quot;: &amp;quot;DATABASE_URL=postgres://root:secret@localhost:5432/note node-pg-migrate&amp;quot; } 另外 SQL Client 推薦 open source 的軟體 DBeaver，雖然目前用下來好像 tableplus（非 open source）比較好用&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Javascript 陣列筆記</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-23-js-array/</link>
+      <pubDate>Wed, 23 Aug 2023 14:44:50 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-23-js-array/</guid>
+      <description>Javascript 的 Array（陣列）有幾個特點。
+ 元素可以是任意型別。例如 arr[0] = 0; arr[1] = &#39;hello&#39; 元素預設值是 undefined 陣列的長度是可變的  要知道哪些 index 有值（不是 undefined）：
+Object.keys(arr) Method Array.at(idx) 使用 .at() 而不是中括號的好處是允許負數（代表從後面數）
+Array.concat(value1, value2, &amp;hellip;) 參數可以是新增的元素也可以是陣列。（都會直接接在後面）。
+如果沒有給參數就是回傳一個 shallow copy。
+ For shallow copies, only the top-level properties are copied, not the values of nested objects. Therefore:
+   Re-assigning top-level properties of the copy does not affect the source object. Re-assigning nested object properties of the copy does affect the source object.</description>
+    </item>
+    
+    <item>
+      <title>Axios 介紹</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-23-axios/</link>
+      <pubDate>Wed, 23 Aug 2023 14:11:50 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-23-axios/</guid>
+      <description>官方 Github 上面寫 axios 是 promise based HTTP client。
+ 可以複習一下 javascript promise 語法
+  axios 是前端的技術。（透過 axois 獲取後端 api 提供的資料）
+ axios 和 fetch 都可以拿來進行 HTTP request（而且都是 async），主要差異如下：
+ axios 語法上稍微方便一些（只有一點點，可以自己去比較） fetch 在現在的瀏覽器基本上都是內建的，所以不用像 axios 還要引入第三方套件。   這樣看下來我先弄熟 fetch 就好了&amp;hellip;
+ 使用 @html
+&amp;lt;script src=&amp;quot;https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt; axios.get(&#39;https://randomuser.me/api/) .then(res =&amp;gt; { console.log(res.data.results) }) .catch(err =&amp;gt; { console.log(err.response) }) &amp;lt;/script&amp;gt; </description>
+    </item>
+    
+    <item>
+      <title>2023 08 22 Dom</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-22-dom/</link>
+      <pubDate>Tue, 22 Aug 2023 23:55:59 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-22-dom/</guid>
+      <description>DOM Manipulation document.getElementById() document.getElementByClassName() document.getElementByTagName() document.querySelector() document.getElementById() </description>
+    </item>
+    
+    <item>
+      <title>八月底計畫</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-22-august-plan/</link>
+      <pubDate>Tue, 22 Aug 2023 22:30:50 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-22-august-plan/</guid>
+      <description>這個暑假原本雄心壯志的規劃要學很多東西，無奈中間遇到車禍整個打亂，加上自己的惰性浪費了好多時間。
+這篇的目的是希望能在開學前至少做一些東西出來。
+網站程式學習  CORS  簡介✅ 實做   Javascript Array Method  看完 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array 整理   axios  簡介✅   Insomnia  就是一個好用的 API testing 桌面軟體✅ 還有另一個比較多人使用的軟體是 Postman✅   react hooks eslint, prettier Material UI, Tailwindcss, DnD library Redux, Zustand NextJS Authentication：oauth 2, jwt（可以參考 CSCC 文章）   其他  2023.08.31 雪山  影片 文字紀錄   2023.09.04 花蓮 2023.09.07 台南  </description>
+    </item>
+    
+    <item>
+      <title>CI/CD</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-22-cicd/</link>
+      <pubDate>Tue, 22 Aug 2023 14:27:17 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-22-cicd/</guid>
+      <description>CI/CD（持續整合 / 持續部屬）是 DevOps 的概念。
+所謂 DevOps 指的是把開發（development）和運維（operation）結合。也可以看成是自動化運維。
+一般來說流程如下：
+ 開發人員將撰寫好的程式碼 push 到 git repo git repo 透過 git hook 自動進行 build / test / deploy  目前最廣泛被使用的 CI/CD 工具是 Jenkins。
+ 其他還有 Travis-Ci、CircleCI
+ Jenkins 使用教學 未完&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>CORS</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-22-cors/</link>
+      <pubDate>Tue, 22 Aug 2023 13:48:50 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-22-cors/</guid>
+      <description>CORS（cross-origin resource sharing） = 跨來源資源共享。
+所謂同源（same origin）指的是符合三格條件：
+ same protocol same domain same port  例如我們在 google.com 要請求 facebook.com 的資源就是屬於 CORS，因此會被 CORS policy 阻止。
+ 可以在 google.com 開啟 F12 &amp;gt; console
+ fetch(&amp;quot;https://www.facebook.com&amp;quot;) 結果：
+Promise {&amp;lt;pending&amp;gt;} [[Prototype]]: Promise [[PromiseState]]: &amp;quot;rejected&amp;quot; [[PromiseResult]]: TypeError: Failed to fetch at &amp;lt;anonymous&amp;gt;:1:1 Access to fetch at &#39;https://www.facebook.com/&#39; from origin &#39;https://www.google.com&#39; has been blocked by CORS policy: No &#39;Access-Control-Allow-Origin&#39; header is present on the requested resource. If an opaque response serves your needs, set the request&#39;s mode to &#39;no-cors&#39; to fetch the resource with CORS disabled.</description>
+    </item>
+    
+    <item>
+      <title>K8S 簡介</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-17-k8s-overview/</link>
+      <pubDate>Thu, 17 Aug 2023 18:44:38 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-17-k8s-overview/</guid>
+      <description>K8S（Kubernetes）是 Google 開發出來用於調度容器（container）的系統。
+ container 和 VM 最大的差別在於沒有 Guest OS（軟體層級的虛擬化）
+ K8S 的節點（node）分成兩種：control plane 和 worker node。
+ 可以理解節點 = 機器（machine）
+ Control Plane 負責管理整個集群（cluster）。
+ 以前叫做 master
+ 四大元件：
+ API Server：負責處理和使用者以及和 worker node 交互的伺服器  使用者可以透過 kubectl / RestfulAPI / Web UI 和 control plane 交互   Etcd：儲存各種 metadata 的資料庫  例如儲存各個 worker node 狀態   Scheduler：負責把 Pod 分配到 node 上面（調度） Controller Manager：負責監控整個 cluster 狀態並做出反應。  Worker Node 三個 process：</description>
+    </item>
+    
+    <item>
+      <title>Tailwind CSS 基本使用</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-16-tailwindcss/</link>
+      <pubDate>Wed, 16 Aug 2023 13:12:15 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-16-tailwindcss/</guid>
+      <description>stack：Vite + React
+yarn add tailwindcss postcss autoprefixer --dev npx tailwindcss init -p 修改 tailwind.config.js（content 的值）。
+/** @type {import(&#39;tailwindcss&#39;).Config} */ export default { content: [ &amp;quot;./index.html&amp;quot;, &amp;quot;./src/**/*.{js,ts,jsx,tsx}&amp;quot;, ], theme: { extend: {}, }, plugins: [], } 修改 src/index.css（Vite 預設的內容都直接刪掉就好）。
+@tailwind base; @tailwind components; @tailwind utilities; </description>
+    </item>
+    
+    <item>
+      <title>2023 08 16 Tmux</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-16-tmux/</link>
+      <pubDate>Wed, 16 Aug 2023 13:01:12 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-16-tmux/</guid>
+      <description>tmux 是一個管理終端的工具。
+有了 tmux，我們可以很輕鬆的新增、切換終端，甚至是平鋪終端。
+名詞 session, window, pane
+基本使用  Ctrl + b + %：新增水平 pane Ctrl + b + &amp;quot;：新增垂直 pane  https://www.ruanyifeng.com/blog/2019/10/tmux.html</description>
+    </item>
+    
+    <item>
+      <title>關於 React Hooks 的 useState()</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-14-react-hooks-usestate/</link>
+      <pubDate>Mon, 14 Aug 2023 22:35:08 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-14-react-hooks-usestate/</guid>
+      <description>從 class 到 arrow function 之前在寫 React 時，我都使用 class extends React.Component 的寫法。
+然而在有些時候，單純使用 arrow function 的寫法會更為簡潔。
+不過如果一來要使用到 state 的功能就沒辦法直接在 class 裡面寫了。（已經沒有 class）
+這時候我們可以引入 React Hooks 來使用 state。
+使用範例 我們可以先練習從熟悉的 class 寫法來一步一步改成使用 arrow function + React Hooks 的寫法。
+假設有以下 component：
+class App extends React.Component { constructor(props) { super(props) this.state = { message: &amp;quot;&amp;quot; } this.greet = this.greet.bind(this) } greet() { this.setState({ message: &amp;quot;Hello, World&amp;quot; }) } render() { return &amp;lt;&amp;gt; &amp;lt;button onClick={this.</description>
+    </item>
+    
+    <item>
+      <title>Redux 筆記</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-09-redux-overview/</link>
+      <pubDate>Wed, 09 Aug 2023 00:48:21 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-09-redux-overview/</guid>
+      <description>之後重寫！ Redux 是一個管理整個網站應用程式 state 的框架。
+store 用來儲存管理應用程式的 state。</description>
+    </item>
+    
+    <item>
+      <title>車禍小記</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-07-car-accident/</link>
+      <pubDate>Mon, 07 Aug 2023 23:42:29 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-07-car-accident/</guid>
+      <description>七月二十九號早晨七點四十四分，我在往高鐵路上出了小車禍。
+我騎著摩托車直線行使，對方是汽車在路邊停車起步往左。
+由於當天出門時間很早，路上車流很少，我的車速也就沒有像是在光復路騎得如此慢了。
+所以當我看到對方車子時已經來不及煞停，雖有減速仍是撞下去了。
+神奇的是，根據照片我當時機車是往左倒，然而我的挫傷和擦傷卻都發生在右手腳。
+但那都不是重點，這篇文章主要是要紀錄在這次車禍中我學到的事情。
+移車 車禍發生時，只有在以下條件下才能夠（且應該）移動車輛：
+ 無人受傷、無人死亡 有人受傷但是當事人同意移動車輛  保險 發生車禍時，如果有保車險的話，就趕快聯絡保險公司辦理出險，這樣後續的所有事情都可以詢問保險以及交給他們處理。
+辦理出險時，需要攜帶：
+ 保險人印章 行照 駕駛人駕照  和解 一般小車禍通常會走和解，如果有保險處理會簡單很多。 至於調解或提告部份我不熟悉就不多嘴了。
+以我的例子來說，根據初判表（警方筆錄後初步判斷，車禍後一個月可以申請，不具實質法律效力）
+未完&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; 17 變化</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-03-cpp-17/</link>
+      <pubDate>Thu, 03 Aug 2023 22:51:01 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-03-cpp-17/</guid>
+      <description>https://www.youtube.com/watch?v=E_48TMCfBz8
+ C++ 的 Zero Overhead
+https://www.zhihu.com/question/384653836
+ 檔案系統、檔案處理的 library  原本是 boost 的，現在以今正式寫進 ISO 標準。
+可以把 boost 理解成 C++ 的 beta 版本
+ nodiscards [[nodiscards]] int f() { return 30; } int main() { f(); return 0; } 函式回傳值完全沒有被使用，在編譯時會有 Warning。
+Fold Expression 之後介紹
+&amp;lt;any&amp;gt; #include &amp;lt;iostream&amp;gt; #include &amp;lt;any&amp;gt; int main() { std::any a = 3; a = 3.2; a = std::string(&amp;quot;XD&amp;quot;); return 0; } &amp;lt;variant&amp;gt; 範圍 &amp;lt;string_view&amp;gt;
+ &amp;ldquo;無&amp;quot;的概念</description>
+    </item>
+    
+    <item>
+      <title>Linux 相關小知識</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-03-linux-trivials/</link>
+      <pubDate>Thu, 03 Aug 2023 15:55:52 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-03-linux-trivials/</guid>
+      <description>2023-08-03 tar 將多個文件打包（群組）成一個。
+沒有壓縮，所以通常會搭配 gzip 一起使用來壓縮檔案。
+打包並壓縮後的檔案副檔名會是 .tgz 或是 .tar.gz。
+流程如下：
+file --(tar)--&amp;gt; file.tar --(gzip)--&amp;gt; file.tar.gz 解壓縮：
+tar xvzf file.tgz xargs 有點難解釋，忘記就看這篇吧，寫得蠻清楚的。</description>
+    </item>
+    
+    <item>
+      <title>React 簡介</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-01-react-overview/</link>
+      <pubDate>Tue, 01 Aug 2023 14:44:45 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-01-react-overview/</guid>
+      <description>React 是 Facebook 開發和維護的（Javascript）view library。
+JSX React 使用 JSX 語法，可以看成是 Javascript 的擴展，讓我們能夠在 Javascript 中寫 HTML 並保有像是程式語言（Javascript）的可程式化性質。
+JSX 檔案最終會由 Babel transcompiler 成真正的 Javscript 程式碼。
+class 在 JSX 中由於是 Javascript 關鍵字所以變成 className。
+Component component 概念可以說是 React 的核心。
+ 個人觀點是這樣做使得 HTML 物件能夠輕鬆的被封裝、結構化、reuse&amp;hellip;
+ 作為 componenet 的 class/function 名稱開頭必須大寫。
+寫法一（原生 Javascript 函數） const MyComponent = function() { return &amp;lt;div&amp;gt;Hello, World&amp;lt;/div&amp;gt; } 寫法二（使用 ES6 class 語法） class MyComponent extends React.Component { constructor(props) { super(props); } render() { return &amp;lt;div&amp;gt;Hello, World&amp;lt;/div&amp;gt; } }; ReactDOM ReactDOM 是用來 render JSX 物件或是 component 到 HTML DOM 的 API。</description>
+    </item>
+    
+    <item>
+      <title>HTML 使用 Font Awesome 圖示</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-01-font-awesome/</link>
+      <pubDate>Tue, 01 Aug 2023 13:45:22 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-01-font-awesome/</guid>
+      <description>Font Awesome 提供很多好用的圖示（icon）。
+使用 &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;https://use.fontawesome.com/releases/v5.8.1/css/all.css&amp;#34; integrity=&amp;#34;sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf&amp;#34; crossorigin=&amp;#34;anonymous&amp;#34;&amp;gt; 通常會使用在 &amp;lt;i&amp;gt;&amp;lt;/i&amp;gt; tag。例如 &amp;lt;i class=&amp;quot;fas fa-info-circle&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;。
+ 可以到 https://fontawesome.com/icons 查詢要使用的 icon。
+ 範例 &amp;lt;div class=&amp;#34;row&amp;#34;&amp;gt; &amp;lt;div class=&amp;#34;col&amp;#34;&amp;gt; &amp;lt;button class=&amp;#34;btn btn-block btn-primary&amp;#34;&amp;gt;&amp;lt;i class=&amp;#34;fas fa-thumbs-up&amp;#34;&amp;gt;&amp;lt;/i&amp;gt; Like&amp;lt;/button&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;col&amp;#34;&amp;gt; &amp;lt;button class=&amp;#34;btn btn-block btn-info&amp;#34;&amp;gt;&amp;lt;i class=&amp;#34;fas fa-info-circle&amp;#34;&amp;gt;&amp;lt;/i&amp;gt; Info&amp;lt;/button&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;col&amp;#34;&amp;gt; &amp;lt;button class=&amp;#34;btn btn-block btn-danger&amp;#34;&amp;gt;&amp;lt;i class=&amp;#34;fas fa-trash&amp;#34;&amp;gt;&amp;lt;/i&amp;gt; Delete&amp;lt;/button&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt; </description>
+    </item>
+    
+    <item>
+      <title>Bootstrap 基本使用</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-01-bootstrap/</link>
+      <pubDate>Tue, 01 Aug 2023 12:01:48 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-01-bootstrap/</guid>
+      <description>Bootstrap 是目前最受歡迎的 CSS framework（雖然近年來前端領域好像都在用 tailwind CSS）。
+使用 加入這行到 HTML 即可使用 Bootstrap。
+&amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css&amp;#34; integrity=&amp;#34;sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u&amp;#34; crossorigin=&amp;#34;anonymous&amp;#34;/&amp;gt; 把所有元素放到 &amp;lt;div class=&amp;quot;container-fluid&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;。
+ 除了 container-fluid 以外還有像是 container、container-md、&amp;hellip;詳情請洽官方文檔說明
+ 照片自動調整成符合視窗大小 &amp;lt;img class=&amp;#34;img-responsive&amp;#34; src=&amp;#34;&amp;#34;&amp;gt; 文字樣式 &amp;lt;h2 class=&amp;#34;text-primary text-center&amp;#34;&amp;gt;your text&amp;lt;/h2&amp;gt; 如果要在內文強調可以用 &amp;lt;span class=&amp;quot;text-primary&amp;gt;&amp;lt;/span&amp;gt;。
+按鈕 &amp;lt;button class=&amp;#34;btn btn-default&amp;#34;&amp;gt;Like&amp;lt;/button&amp;gt; 所有按鈕都要有 btn attribute。btn-default 是按鈕的一種樣式（白底），也可使用 btn-primary（網站的主色彩）、btn-info、btn-danger（常用於 Delete）樣式。
+ btn-default 好像在 Bootstrap 5 被拿掉了。
+ 按鈕預設大小是包住按鈕中的文字，加上 btn-block attribute 就會變成 100% 的大小。
+格線系統 Bootstrap 的（響應式）格線系統有 12 欄。
+col-md-4 =&amp;gt; median e.g., laptop col-xs-4 =&amp;gt; extra small e.</description>
+    </item>
+    
+    <item>
+      <title>隨筆（2023-08-01）</title>
+      <link>https://lnfu.github.io/blog/posts/2023-08-01-jottings/</link>
+      <pubDate>Tue, 01 Aug 2023 10:44:39 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-08-01-jottings/</guid>
+      <description>今天是我生日（海綿寶寶梗圖）
+每年的生日好像都由方谷展叔叔送的卡片開始，他的小孩和我是同所國小。以前我的保險是向他購買，也是從那時開始每年都會收到他的手寫卡片，即便現在已經沒有購買保險。
+上禮拜和唯心以及唐禕、王俐雯去吃海底撈（算是慶祝唯心當天 TUM 的面試告一段落），結果沒想到唐禕竟然知道過幾天是我生日所以跟店員講要幫我慶生。老實說我蠻開心的，只是還是遵循著個人風格以及當前時代風氣。
+隔天就收到唯心跟我說他申請上 TUM management &amp;amp; technology 了。當下其實心情有點複雜，一方面身為朋友當然是希望她能夠申請上，尤其是她感覺沒有什麼退路了。另一方面卻又覺得自己的能力那麼好也懂得較多，為什麼好像別人可以到比較好的環境我卻還在這。我也知道這和性格有很大程度上的相關，並且直接放棄目前的學士學程客觀上不是太明智的選擇。目前只有希望過兩年能夠順利在台灣先取得不錯的工作存點錢和持續自學研究領域內容（maybe CS or Math），再去國外讀研究所。
+星期六原本要到台北參加 Coscup，結果一早出了小車禍。不只 Coscup 連星期天的舉重課都不能去了（已經三個禮拜沒上課了），今年生日也算是多災多難。
+上禮拜看了奧本海默，突然對於基礎科學又有點熱情跑出來（也可能是三分鐘熱度），加上前陣子看到 ChatGPT code interpreter 的功能如此強大，覺得純軟應用的技術難度好像越來越低了，所以也有點希望跑回去讀數學，不過也許只是我的胡思亂想罷了。
+總而言之，目前規劃雖稍有調整，大致還是維持不變：今年好好準備實習、明年好好準備研究（不過決定改去 CG 的實驗室）、兩年後在台灣找一個薪水不太低工時較晚的工作、之後在到國外讀研（以及可能的數學專業？）。</description>
+    </item>
+    
+    <item>
+      <title>LADR 第一章習題</title>
+      <link>https://lnfu.github.io/blog/posts/2023-07-28-linear-algebra-done-right-chap01/</link>
+      <pubDate>Fri, 28 Jul 2023 16:20:32 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-07-28-linear-algebra-done-right-chap01/</guid>
+      <description>LADR = Linear Algebra Done Right
+  Suppose $a$ and $b$ are real numbers, not both 0. Find real numbers $c$ and $d$ such that $$ \frac{1}{a+ib} = c + id $$.   這個高中數學，略。
+ Show that $$ \frac{-1 + i\sqrt{3}}{2} $$ is a cube root of 1.   這個也高中數學，略。
+ Prove that if $a\in F$, $v\in V$, and $av = 0$, then $a = 0$ or $v = 0$   拆成兩個 case（$a = 0$ 和 $a \neq 0$）</description>
+    </item>
+    
+    <item>
+      <title>Wazuh 介紹</title>
+      <link>https://lnfu.github.io/blog/posts/2023-07-26-wazuh-overview/</link>
+      <pubDate>Wed, 26 Jul 2023 14:19:49 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-07-26-wazuh-overview/</guid>
+      <description>最近我在 CC 分配到的工作是 survey EDR solution。
+在文章開始之前，我先講一下一些相關的專有名詞，假設我們維護多台主機。
+ HIDS（Host-Based Intrusion Detection System）：安裝在需要監控的主機上，當主機偵測到異常事件時，回傳資訊給管理者（預警）。 EDR（Endpoint Detection and Response）：除了回傳資訊以外更加積極，例如直接封鎖惡意軟體、用戶（active response） NTA（Network Traffic Analysis）：可以想成是在網路層面的 HIDS。 NDR（Network Detection and Response）：可以想成是在網路層面的 EDR。 XDR：同時監控檢測主機和網路，甚至進行比對。 SIEM：集中各種資安產品所收集到的資訊，透過預先設定好的規則來進行分析、預警甚至自動化腳本回應（active response）  學長說希望找到的產品符合以下條件：
+ open source 能夠偵測異常網路流量 能夠偵測重要檔案被改動 能夠主動封鎖用戶  OSSEC 一開始我找到 OSSEC 這套軟體。
+OSSEC 支援多種系統
+並且有以下功能：
+ file integrity 檢查 log 檢查 rootcheck（惡意軟體檢查）  除此之外還可以設定 active response 自動回應異常事件。
+Wazuh 不過後來我看到了 Wazuh 這個專案。
+Wazuh 可以看成是 OSSEC + OpenSearch + OpenSCAP 的組合。
+OSSEC 前面已經講過了，省略。</description>
+    </item>
+    
+    <item>
+      <title>Hello, Hugo 利用 Hugo 建立自己的部落格</title>
+      <link>https://lnfu.github.io/blog/posts/2023-07-25-hello-hugo/</link>
+      <pubDate>Tue, 25 Jul 2023 22:24:39 +0800</pubDate>
+      
+      <guid>https://lnfu.github.io/blog/posts/2023-07-25-hello-hugo/</guid>
+      <description>Hugo 是以 go 語言開發的靜態網頁生成器/框架，特色是速度非常快。
+安裝 Hugo 那至於要如何安裝 Hugo 呢，因為我的電腦是 Ubuntu 22.04，可以直接用 apt 來安裝。
+apt install hugo 建立網站 在 Hugo 建立網站的方式也很簡單。
+hugo new site [path] 由於我想使用 GitHub Pages 託管我的靜態網站，所以我會先建立一個 GitHub Repo，然後 clone 到本地在建立網站。
+cd [path] hugo new site . --force  使用 --force 的原因是因為目錄不是空的（有 README.md、LICENSE 文件）
+ 建立好後可以看到多出了許多目錄和檔案。我們可以先去下載自己喜歡的主題到 themes/ 中，然後在設定檔 config.toml 套用主題。
+# config.toml theme = &amp;#34;[主題名稱]&amp;#34; 撰寫文章 建立文章（網頁）的方式一樣是 hugo new。
+hugo new [檔名] 建立好的檔案會存放在 content/ 中，習慣上我們會把文章放在叫做 posts/（或是 blog/）的子目錄下方便管理。
+hugo new posts/[檔名] 我們會發現建立的檔案預設就有一些資訊，這是因為 Hugo 建立文章是把 archetypes/ 下的特定文件（e.</description>
+    </item>
+    
+  </channel>
+</rss>

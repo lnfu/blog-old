@@ -1,0 +1,13 @@
+{
+    "launch": {
+        "configurations": [],
+        "compounds": []
+    },
+    "[markdown]": {
+        "editor.quickSuggestions": {
+            "comments": "on",
+            "strings": "on",
+            "other": "on"
+        }
+    }
+}

@@ -28,7 +28,7 @@ tags: ["課程筆記"]
 
 > GameOjbect 可能是 Model、光源、Camera、粒子效果...
 
-component 是 GameObject 的組成元素，用來控制 GameObject 的行為，可能是：
+Component 是 GameObject 的組成元素，用來控制 GameObject 的行為，可能是：
 1. Transform：位置、旋轉、縮放
 2. Mesh Filter
 3. Mesh Renderer
@@ -172,3 +172,11 @@ public class Test : MonoBehavior
 }
 ```
 
+### GameObject
+兩種方式獲取：
+1. 宣告 `public` 然後透過圖形界面 asign
+2. 使用 `GameObject.Find("名稱")`（不太建議）
+
+method：
+- `void SetActive(bool value)`：開啟/關閉 GameObject（在遊戲中不顯示、Component 也不更新）
+- `T GetComponent<T>()`：獲取 Component。其中 Component 會有 proverty 叫做 `enabled`（開/關 Component）
