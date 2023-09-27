@@ -14,6 +14,10 @@ tags: ["課程筆記"]
 
 課程簡介：略
 
+第三章：process
+第四章：thread
+第五章：scheduling
+
 # 電腦開機
 1. PC = FFFF:0000 執行 BIOS（現在電腦通常改成 UEFI）
 2. 磁碟最開頭的 512 Bytes 叫做 MBR（負責尋找磁碟上的作業系統 e.g., Windows）
@@ -164,19 +168,68 @@ rmmod  ./hello.ko # 移除 module
 1. 更好 extend
 2. 更安全（kernel 更小、更不容易進到 kernel mode）
 3. 移植比較簡單
+4. robust
 
 缺點：
 1. performance 比較差。使用場景大多是嵌入式系統（效能相比安全性等非主要考量）
 
-
-
 參考：https://en.wikipedia.org/wiki/Tanenbaum%E2%80%93Torvalds_debate
-
 
 > INTEL ME（Intel Management Engine）有一個 MINIX（買 CPU 送你作業系統:D）
 
 
+Google Fuchsia 是 Microkernel，客群是 IoT devices。
+UI：Flutter (UI framework) + Dart (language) 
+system services and IPC：Fuchsia
+microkernel：Zircon
 
+
+## Mac OS X
+變形 Microkernel
+
+![](./Screenshot%20from%202023-09-27%2011-05-45.png)
+
+> Steve Jobs 在 NeXT 開發，之後帶回到 Apple。
+
+
+
+
+# 虛擬機
+虛擬機跑在 user mode（就是一個 process）
+![](./virtual-machine.jpg)
+
+system call（interrupt）：
+![interrupt](./virtual-machine-interrupt.jpg)
+
+
+## Java 虛擬機（JVM）
+> non-native execution
+
+> Android - ART vs Dalvik
+> Approach: ART uses AOT(Ahead Of Time) approach and compiles the whole code during the installation time but the Dalvik uses JIT(Just In Time) approach and complies only a part of the code during installation and rest of the code will be compiled dynamically.
+
+> https://en.wikipedia.org/wiki/Acquisition_of_Sun_Microsystems_by_Oracle_Corporation
+
+
+
+
+
+
+
+
+
+# Process（行程）
+process = job = task = a program **in execution**
+- text
+- stack：local variable
+- heap：全域變數
+- data
+- program counter, CPU registers
+
+![](./Screenshot%20from%202023-09-27%2011-57-56.png)
+
+
+--> 2023-09.27
 
 
 
