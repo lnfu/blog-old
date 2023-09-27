@@ -12,7 +12,7 @@ math: true
 #     hidden: true # only hide on current single page
 ---
 
-競程一有講過快速傅立葉變換（fast Fourier transform；FFT），只是那時候放棄理解。
+競程一有講過快速傅立葉變換（fast Fourier transform；FFT），只是那時候放棄理解><
 
 這次修演算法又提到所以終於打算把她看懂了。
 
@@ -39,7 +39,9 @@ g(x) = \sum_{i=0}^{n-1} b_{i} x^{i}
 其中，步驟一的複雜度是 `O(n lg(n))`，步驟二是 `O(n)`、步驟三是 `O(n lg(n))`，所以整個 FFT 的複雜度是 `O(n lg(n))`。
 
 ### 步驟一：將係數表示轉換成點值表示
-> 步驟二會說明為什麼要這樣做
+> n 個點可以唯一的決定一個 n - 1 次多項式
+
+> 步驟二會說明點值表示的好處
 
 這邊會需要引入幾個單位根（root of unity）的重要性質。
 
@@ -49,6 +51,31 @@ n 次單位根指的是所有 n 次冪為 1 的複數，其在複數平面的上
 \omega_{n}^{k} = \cos \frac{2 \pi k}{n} + i \sin \frac{2 \pi k}{n}, k = 0, 1, 2, ... n - 1
 {{< /math_block >}}
 
-> {{< math_inline >}}\omega_{n}^{0} = \omega_{n}^{n} = 1{{< /math_inline >}}
+> {{< math_inline >}}\omega_{n}^{0} = \omega_{n}^{n} = 1{{< /math_inline >}}（繞一圈）
 
-#### 性質一：
+#### 性質一：{{< math_inline >}}\omega_{rn}^{rk} = \omega_{n}^{k}{{< /math_inline >}}
+
+{{< math_block >}}
+\begin{align}
+\omega_{rn}^{rk} & = \cos \frac{2 \pi rk}{rn} + i \sin \frac{2 \pi rk}{rn} \nonumber \\
+&  = \cos \frac{2 \pi k}{n} + i \sin \frac{2 \pi n}{n} \nonumber \\
+&  = \omega_{n}^{k} \nonumber
+\end{align}
+{{< /math_block >}}
+
+
+#### 性質二：{{< math_inline >}}\omega_{n}^{k + \frac{n}{2}} = -\omega_{n}^{k}{{< /math_inline >}}
+
+{{< math_block >}}
+\begin{align}
+\omega_{n}^{k + \frac{n}{2}} & = \omega_{n}^{k} \left( \cos \frac{\pi n}{n} + i \sin \frac{\pi n}{n} \right) \nonumber \\
+& = \omega_{n}^{k} \left( \cos \pi + i \sin \pi \right) \nonumber \\
+& = \omega_{n}^{k} \left( -1 + i \cdot 0 \right) \nonumber \\
+&  = - \omega_{n}^{k} \nonumber
+\end{align}
+{{< /math_block >}}
+
+
+### 步驟二：相乘
+有了 2n 個點表示的 {{< math_inline >}}f(x){{< /math_inline >}} 和 {{< math_inline >}}g(x){{< /math_inline >}}，我們只需要把每個點的 Y 座標相乘就是 {{< math_inline >}}h(x) = f(x) \cdot g(x){{< /math_inline >}} 的點值表示了。
+> 雖然 n 個點就可以決定出次數是 n - 1 的 {{< math_inline >}}f(x){{< /math_inline >}} 和 {{< math_inline >}}g(x){{< /math_inline >}}，但是因為最後的 {{< math_inline >}}h(x){{< /math_inline >}}次數是 2n - 2，所以我們要 2n 個點。

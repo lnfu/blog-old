@@ -187,9 +187,7 @@ H Tree 是一種碎形。
 
 
 
-## Sort
-
-### Heapsort
+## Heap：Heapsort & Priority Queue
 
 Heapify 函數：
 ```
@@ -237,3 +235,18 @@ HEAPSORT(A)
 ```
 
 複雜度：O(n lg(n))
+
+Priority Queue：
+1. Insert(S, x) -> 插入時維護 heap 結構
+2. Maximum(S)
+3. Extract-Max(S)
+
+
+
+## Segment Tree（線段樹）
+
+課本沒教
+
+Array representation
+
+
