@@ -1,5 +1,5 @@
 ---
-title: "2023 09 30 Range Query Kth"
+title: "區間查詢第 K 小值"
 date: 2023-09-30T23:19:16+08:00
 draft: false
 author: "Enfu Liao"
