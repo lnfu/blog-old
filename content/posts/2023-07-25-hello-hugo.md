@@ -30,7 +30,7 @@ hugo new site [path]
 cd [path]
 hugo new site . --force
 ```
-> 使用 `--force` 的原因是因為目錄不是空的（有 README.md、LICENSE 文件）
+使用 `--force` 的原因是因為目錄不是空的（有 README.md、LICENSE 文件）
 
 建立好後可以看到多出了許多目錄和檔案。我們可以先去下載自己喜歡的主題到 `themes/` 中，然後在設定檔 `config.toml` 套用主題。
 ```toml
@@ -48,7 +48,12 @@ hugo new [檔名]
 hugo new posts/[檔名]
 ```
 我們會發現建立的檔案預設就有一些資訊，這是因為 Hugo 建立文章是把 `archetypes/` 下的特定文件（e.g., `default.md`）作為範本。
->我一般會讓檔名符合像是 **2023-07-25-my-post.md** 的格式。這樣在排序時就會依照日期，只使用 hyphen 和小寫字母比較不會出錯。
+
+一般來說我會讓檔名符合像是 **2023-07-25-my-post/index.md** 的格式。
+
+這樣在排序時就會依照日期，只使用 hyphen 和小寫字母比較不會出錯。
+
+另外會用成目錄是因為可以在裡面放圖片方便管理。
 
 # 執行
 在本地執行網站。

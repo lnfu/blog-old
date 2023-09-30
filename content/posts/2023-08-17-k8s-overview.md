@@ -1,7 +1,7 @@
 ---
 title: "K8S 簡介"
 date: 2023-08-17T18:44:38+08:00
-draft: false
+draft: true
 author: "Enfu Liao"
 # cover:
 #     image: "<image path/url>" # image path/url

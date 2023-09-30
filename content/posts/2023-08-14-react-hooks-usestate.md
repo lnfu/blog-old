@@ -11,7 +11,7 @@ author: "Enfu Liao"
 #     hidden: true # only hide on current single page
 ---
 
-## 從 class 到 arrow function
+# 從 class 到 arrow function
 
 之前在寫 React 時，我都使用 class extends React.Component 的寫法。
 
@@ -21,7 +21,7 @@ author: "Enfu Liao"
 
 這時候我們可以引入 React Hooks 來使用 state。
 
-## 使用範例
+# 使用範例
 
 我們可以先練習從熟悉的 class 寫法來一步一步改成使用 arrow function + React Hooks 的寫法。
 
@@ -111,6 +111,7 @@ const App = (props) => {
 onClick={() => {setMessage("Hello, World")}}
 ```
 
-## 心得
+# 心得
 想當初看別人寫 React 也是都用 `useState()` 的方式，但是學習時卻發現有點卡卡的，所以還是建議一開始學 React 的朋友可以先從最初的 class 寫法下手。
+
 等到對整個架構稍微熟悉後再去改成使用 arrow function 和 React Hooks 的寫法就會非常簡潔。

@@ -3,6 +3,8 @@ title: "Linux 相關小知識"
 date: 2023-08-03T15:55:52+08:00
 draft: true
 author: "Enfu Liao"
+tags: ["Linux"]
+
 # cover:
 #     image: "<image path/url>" # image path/url
 #     alt: "<alt text>" # alt text
@@ -11,8 +13,7 @@ author: "Enfu Liao"
 #     hidden: true # only hide on current single page
 ---
 
-# 2023-08-03
-## tar
+# tar
 將多個文件打包（群組）成一個。
 
 沒有壓縮，所以通常會搭配 gzip 一起使用來壓縮檔案。
@@ -30,5 +31,5 @@ file --(tar)--> file.tar --(gzip)--> file.tar.gz
 tar xvzf file.tgz
 ```
 
-## xargs
+# xargs
 有點難解釋，忘記就看[這篇](https://blog.gtwang.org/linux/xargs-command-examples-in-linux-unix/)吧，寫得蠻清楚的。

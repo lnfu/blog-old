@@ -14,12 +14,11 @@ tags: ["課程筆記"]
 
 這是隔壁的課，不知道可不可以承認...
 
-## 2023-08-25
-這門課主要是講解如何使用 OpenGL。（理論的東西好像是在另一門課）
+主要是講解如何使用 OpenGL。（理論的東西好像是在另一門課）
 
-這禮拜先講了 Transformation 和座標系等簡單的數學。
+第一週先講了 Transformation 和座標系等簡單的數學。
 
-## Transformation
+# Transformation
 我們這邊討論的 transformation 就是指在 3D 座標下的幾何轉換。
 
 我們會用 homogeneous coordinate 來表示點和向量（w = 1 是點；w = 0 是向量）。
@@ -29,6 +28,7 @@ OpenGL 有三個重要的矩陣：MVP matrices（model, view, projection）。
 ![](https://developer.download.nvidia.com/CgTutorial/elementLinks/fig4_1.jpg)
 
 > OpenGL 的矩陣是 column major order。
+
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Row_and_column_major_order.svg/1200px-Row_and_column_major_order.svg.png)
 
 常見的矩陣有：
@@ -39,8 +39,7 @@ OpenGL 有三個重要的矩陣：MVP matrices（model, view, projection）。
 
 https://youtu.be/zjMuIxRvygQ
 
-
-### Projection
+## Projection
 這門課只介紹了兩種投影：orthographic 和 perspective。
 
 > perspective 的那個斷頭角錐稱作 **frustum**
@@ -53,11 +52,11 @@ https://youtu.be/zjMuIxRvygQ
 
 在 OpenGL 中，projection 的階段還會把座標從右手座標（RHC）轉成左手座標（LHC），最終結果會是一個 [-1, 1][-1, 1][-1, 1] 的立方體。
 
-### 結論＆作業
+## 結論＆作業
 實際在撰寫程式時，我們會在主程式預先算好 MVP 矩陣，在 GLSL 對每個點去乘這個矩陣，結果放到 gl_Position 變數以描述所有點在 clip space 的位置。
 
 * 推導 orthographic 和 perspective projection 的矩陣
 * 推導 view matrix
 
 
-## 學分太多，決定不修這門課了
+# 學分太多，決定不修這門課了

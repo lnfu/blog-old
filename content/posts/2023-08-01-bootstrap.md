@@ -13,7 +13,7 @@ author: "Enfu Liao"
 
 Bootstrap 是目前最受歡迎的 CSS framework（雖然近年來前端領域好像都在用 tailwind CSS）。
 
-## 使用
+# 使用
 
 加入這行到 HTML 即可使用 Bootstrap。
 
@@ -23,15 +23,15 @@ Bootstrap 是目前最受歡迎的 CSS framework（雖然近年來前端領域�
 
 把所有元素放到 `<div class="container-fluid"></div>`。
 
-> 除了 `container-fluid` 以外還有像是 `container`、`container-md`、...詳情請洽官方文檔說明
+除了 `container-fluid` 以外還有像是 `container`、`container-md`、...詳情請洽官方文檔說明
 
-## 照片自動調整成符合視窗大小
+# 照片自動調整成符合視窗大小
 
 ```html
 <img class="img-responsive" src="">
 ```
 
-## 文字樣式
+# 文字樣式
 
 ```html
 <h2 class="text-primary text-center">your text</h2>
@@ -39,7 +39,7 @@ Bootstrap 是目前最受歡迎的 CSS framework（雖然近年來前端領域�
 
 如果要在內文強調可以用 `<span class="text-primary></span>`。
 
-## 按鈕
+# 按鈕
 
 ```html
 <button class="btn btn-default">Like</button>
@@ -51,7 +51,7 @@ Bootstrap 是目前最受歡迎的 CSS framework（雖然近年來前端領域�
 
 按鈕預設大小是包住按鈕中的文字，加上 `btn-block` attribute 就會變成 100% 的大小。
 
-## 格線系統
+# 格線系統
 Bootstrap 的（響應式）格線系統有 12 欄。
 
 ```
@@ -69,7 +69,7 @@ col-xs-4 => extra small e.g., mobile phone
 </div>
 ```
 
-## 表單
+# 表單
 
 文字輸入可以用 `form-control`（會是 100% width）。Submit 按鈕一樣使用 `btn` 就好。
 

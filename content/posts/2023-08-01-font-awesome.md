@@ -13,7 +13,7 @@ author: "Enfu Liao"
 
 Font Awesome 提供很多好用的圖示（icon）。
 
-## 使用
+# 使用
 
 ```html
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -21,9 +21,9 @@ Font Awesome 提供很多好用的圖示（icon）。
 
 通常會使用在 `<i></i>` tag。例如 `<i class="fas fa-info-circle"></i>`。
 
-> 可以到 https://fontawesome.com/icons 查詢要使用的 icon。
+我們可以到 https://fontawesome.com/icons 查詢要使用的 icon。
 
-## 範例
+# 範例
 
 ```html
 <div class="row">
@@ -38,3 +38,9 @@ Font Awesome 提供很多好用的圖示（icon）。
     </div>
 </div>
 ```
+
+# 後續
+
+由於官方最新版本（好像是 v6）開始變成是要建立帳號才能夠使用，所以建議直接下載下來或是使用 cdn。
+
+https://cdnjs.com/libraries/font-awesome
