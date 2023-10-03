@@ -1,7 +1,7 @@
 ---
-title: "[課程筆記] 機器學習概論"
+title: "[課程筆記] 機器學習概論（一）"
 date: 2023-10-03T13:29:39+08:00
-draft: true
+draft: false
 author: "Enfu Liao"
 tags: ["課程筆記"]
 # cover:
@@ -12,11 +12,19 @@ tags: ["課程筆記"]
 #     hidden: true # only hide on current single page
 ---
 
+[[課程筆記] 機器學習概論（一）](../2023-10-03-ml-1/)
+
+[[課程筆記] 機器學習概論（二）](../2023-10-03-ml-2/)
+
+[[課程筆記] 機器學習概論（三）](../2023-10-03-ml-3/)
+
+---
+
 放棄聽講，還是靠自己讀投影片好了...
 
+第一份投影片是 introduction。
 
-# Introduction
-機器學習（machine learning）：an automatic process that extracts patterns from data (or past experiences)
+**機器學習（Machine Learning）**：an automatic process that extracts patterns from data (or past experiences)
 
 Why？補足人腦的缺陷
 1. 專家不存在
@@ -44,8 +52,10 @@ model 只是 approximation
 
 ![underfitting & overfitting](./Screenshot%20from%202023-10-03%2014-45-24.png)
 
+# 有哪幾種學習？
+
 ## Association Finding
-correlation（相關性）
+這邊的 association 好像都等同 correlation（相關性）
 
 ## 監督式學習（Supervised Learning）
 資料會 label（也就是 target feature）。
