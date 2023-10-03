@@ -33,3 +33,13 @@ tar xvzf file.tgz
 
 # xargs
 有點難解釋，忘記就看[這篇](https://blog.gtwang.org/linux/xargs-command-examples-in-linux-unix/)吧，寫得蠻清楚的。
+
+# 更改預設 terminal
+
+```bash
+sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/local/bin/alacritty 200
+sudo update-alternatives --config x-terminal-emulator
+```
+
+https://unix.stackexchange.com/questions/726980/st-simple-terminal-doesnt-show-up-when-selecting-alternative-x-terminal-emula
+https://documentation.suse.com/zh-tw/sles/15-GA/html/SLES-all/cha-update-alternative.html

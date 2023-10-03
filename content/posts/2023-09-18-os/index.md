@@ -92,6 +92,23 @@ time slice = time quantum
 
 
 # OS 設計
+
+OS 提供的服務有兩種
+1. 從 shell 執行（system program）
+2. system call
+
+shell 有兩種
+1. CLI
+2. GUI
+
+`cd` 不是外部的程式（shell 內建）。
+
+WYSIWYG editors：what you see is what you get e.g., Word
+
+![](./Screenshot%20from%202023-10-02%2012-44-22.png)
+APIs: POSIX API for UNIX, Win32 API for Windows, Java API for JVM
+
+
 ## MS-DOS
 - 簡單、沒有結構
 - 沒有 protection（程式可以直接 access hardware）

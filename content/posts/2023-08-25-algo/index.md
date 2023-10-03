@@ -192,16 +192,16 @@ H Tree 是一種碎形。
 Heapify 函數：
 ```
 MAX-HEAPIFY(A, i)
-    l = LEFT(i) // i 左邊的 index
-    r = RIGHT(i)
-    largest = i
-    if l <= A.size and A[l] > A[i]
-        largest = l
-    if r <= A.size and A[r] > A[i]
-        largest = l
-    if i != largest
-        exchange A[i] with A[largest]
-        MAX-HEAPIFY(A, largest) // 繼續往下
+1   l = LEFT(i) // i 左邊的 index
+2   r = RIGHT(i)
+3   largest = i // 從 i, l, r 中選出最大的
+4   if l <= A.heap-size and A[l] > A[i]
+5       largest = l
+6   if r <= A.heap-size and A[r] > A[largest]
+7       largest = r
+8   if largest != i
+9       exchange A[i] with A[largest]
+10      MAX-HEAPIFY(A, largest) // 繼續往下
 ```
 
 複雜度：
@@ -212,9 +212,10 @@ O(lg n)
 
 建立 max heap：
 ```
-BUILD-MAX-HEAP(A)
-    for i = A.length / 2 downto 1
-        MAX-HEAPIFY(A, i)
+BUILD-MAX-HEAP(A, n)
+1   A.heap-size = n
+2   for i = ceil(n/2) downto 1
+3       MAX-HEAPIFY(A, i)
 ```
 
 直覺上，這樣的複雜度是 O(n lg n)，不過因為越靠近葉子 Heapify 所要花的時間越小，其更緊的複雜度是 O(n)。
@@ -245,8 +246,21 @@ Priority Queue：
 
 ## Segment Tree（線段樹）
 
-課本沒教
+課本沒教，之後單獨寫一篇
 
 Array representation
 
 
+
+
+## QuickSort
+
+Worse Case：選到的 pivot 很爛（e.g., 最大）
+
+機率證明 average case time complexity
+
+# Decision-Tree
+
+
+
+# Couting Sort & Radix Sort
