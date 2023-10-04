@@ -66,3 +66,10 @@ user-level thread 一對一 kernel-level thread
 ![](./Screenshot%20from%202023-10-04%2011-53-22.png)
 
 
+# 問題
+Consider a multithreaded process consisting of 2 IO-bound threads and 4 CPU-bound threads. Let the threading model be M:M. Let there be 5 kernel threads.
+
+At most how many CPU cores that the multithreaded process can fully utilize?
+
+3 個。
+因為兩個 IO-bound 用掉兩個 thread，剩下四個共用三個。
