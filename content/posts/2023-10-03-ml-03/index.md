@@ -3,6 +3,7 @@ title: "2023 10 03 Ml 3"
 date: 2023-10-03T15:39:50+08:00
 draft: true
 author: "Enfu Liao"
+tags: ["課程筆記"]
 # cover:
 #     image: "<image path/url>" # image path/url
 #     alt: "<alt text>" # alt text
@@ -11,11 +12,12 @@ author: "Enfu Liao"
 #     hidden: true # only hide on current single page
 ---
 
-[[課程筆記] 機器學習概論（一）](../2023-10-03-ml-1/)
+[[課程筆記] 機器學習概論（一）](../2023-10-03-ml-01/)
 
-[[課程筆記] 機器學習概論（二）](../2023-10-03-ml-2/)
+[[課程筆記] 機器學習概論（二）](../2023-10-03-ml-02/)
 
-[[課程筆記] 機器學習概論（三）](../2023-10-03-ml-3/)
+[[課程筆記] 機器學習概論（三）](../2023-10-03-ml-03/)
+
 
 ---
 

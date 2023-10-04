@@ -91,11 +91,71 @@ time slice = time quantum
 * timesharing：要有 periodic switch
 
 
+
+
+
+
+
+
+
+# Trap
+
+trap 就是軟體中斷（interrupt）
+
+![](./Screenshot%20from%202023-10-04%2014-14-16.png)
+
+例如，使用 `printf()`，因為要用到螢幕（硬體），所以一定是 kernel mode，所以會有 trap（user mode -> kernel mode）。
+
+不要忘記中斷的流程（IVT, ISR, IRET）
+
+
+
+# system call
+## process control
+- `fork()`
+- `exit()`
+- `wait()`
+
+## File Manipulation
+- `open()`
+- `close()`
+- `read()`
+- `write()`
+
+## Device Manipulation
+- `ioctl()`
+- `read()`
+- `write()`
+
+## Information Maintenance
+- `getpid()`：目前的 process id
+- `alarm()`
+- `sleep()`
+
+## Communication
+- `pipe()`
+- `shmget()`
+- `mmap()`
+
+## Protection
+- `chmod()`
+- `umask()`
+- `chown()`
+
+
+
+
+
+
+
+
 # OS 設計
 
-OS 提供的服務有兩種
-1. 從 shell 執行（system program）
-2. system call
+OS 提供的服務：
+1. system programs：e.g., ls, cp, rm
+2. interface（shell）
+3. system calls
+
 
 shell 有兩種
 1. CLI
@@ -247,7 +307,6 @@ process = job = task = a program **in execution**
 
 
 --> 2023-09.27
-
 
 
 
