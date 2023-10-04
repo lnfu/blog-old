@@ -18,6 +18,9 @@ author: "Enfu Liao"
 
 a process is a **container** of all its thread.
 
+CPU 在**排程（scheduling）**時是以 kernel thread 為單位。（資源分配以 process 為單位）
+
+同一個 process 的 thread 共用 code, data, files。但是會有自己的 registers ,stack。
 
 # Pthread = POSIX thread
 Pthread 指的是規格不是實做。（所以 Windows 也可以有）
@@ -41,4 +44,25 @@ int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
 
 int pthread_join(pthread_t thread, void **retval);
 ```
+
+
+
+
+# 三種 Model
+
+pthread 沒有規定是要哪種 model。（把那些 api 實做出來就算）
+
+## Many-to-One Model
+一次只有一個 thread 能 access kernel，所以即使你有很多 CPU 也沒辦法 multithread 平行。
+![](./Screenshot%20from%202023-10-04%2011-51-24.png)
+
+## One-to-One
+user-level thread 一對一 kernel-level thread
+![](./Screenshot%20from%202023-10-04%2011-52-46.png)
+
+## Many-to-Many
+如果像是下面有兩個 kernel thread 被用掉，那麼其餘 user thread 就會共用剩下的那一個。
+
+![](./Screenshot%20from%202023-10-04%2011-53-22.png)
+
 
