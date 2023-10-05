@@ -129,6 +129,10 @@ Debug.Log(vec.z);
 1. `Update()`：每一個 frame 呼叫一次。
 1. `FixedUpdate()`：每一段時間（Fixed Timestep）呼叫一次。建議和物理運算相關的都放在這邊，精度才會好。
 
+Time.deltaTime = 上次呼叫 Update() 經過的時間
+
+Time.fixedDeltaTime = 上次呼叫 FixedUpdate() 經過的時間
+
 > 修改 Fixed Timestep 數值（單位是秒）：**Edit** -> **Project Setting** -> **Time** -> **Fixed Timestep** 
 
 參考官網：https://docs.unity3d.com/Manual/ExecutionOrder.html

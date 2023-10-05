@@ -51,3 +51,8 @@ void OnCollisionExit(Collision collision)
 
 **Edit** -> **ProjectSetting** -> **Physics**
 
+# funtions
+```
+AddForce()
+AddTorque()
+```

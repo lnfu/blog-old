@@ -17,6 +17,13 @@ tags: ["課程筆記"]
 # 待補
 快去看影片！
 
+# Process State
+![](./Screenshot%20from%202023-10-05%2015-11-16.png)
+
+假設只有一個 CPU，running 只會有一個， ready 和 waiting（例如讀檔時等待 I/O）都可能有多個。
+
+之所以要分開 ready 和 waiting，是因為假設混在一起，CPU 就可能選到明明 I/O （假設是 waiting I/O）還沒用好的 process。
+
 # Interprocess Communication
 
 ![](./Screenshot%20from%202023-10-04%2010-23-26.png)
