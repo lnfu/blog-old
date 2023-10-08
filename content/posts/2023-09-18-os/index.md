@@ -292,6 +292,12 @@ system call（interrupt）：
 
 
 
+# Mechanism vs. Policy
+
+Mechanism 不做決策
+Policy 有決策
+
+
 
 
 
