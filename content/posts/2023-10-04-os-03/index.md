@@ -14,10 +14,7 @@ tags: ["課程筆記"]
 
 這章講 process。
 
-# 待補
-快去看影片！
-
-# Process State
+# Process 的狀態（State）：ready、running、waiting
 ![](./Screenshot%20from%202023-10-05%2015-11-16.png)
 
 假設只有一個 CPU，running 只會有一個， ready 和 waiting（例如讀檔時等待 I/O）都可能有多個。

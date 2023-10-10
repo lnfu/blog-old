@@ -12,7 +12,7 @@ tags: ["課程筆記"]
 #     hidden: true # only hide on current single page
 ---
 
-scheduling 
+（process）scheduling
 
 process（PCB）的 queue
 
@@ -41,4 +41,10 @@ long-term scheduler 可以去分配平衡 I/O-bound 和 CPU-bound process 提高
 但是基本上 time sharing 的系統（例如我們在用的桌上型電腦）都不會有 long-term scheduler。
 
 ## medium-term
+
+有些 server 的服務可能不是很常使用。
+
+medium-term scheduler 會讓這些服務長時間擱置時做 swap out（以 process 為單位做 swap out），等到之後服務要繼續使用時再 swap in。
+
+然而目前桌上型電腦也不會使用 medium-term scheduler（基本上像是虛擬機的技術都是改以記憶體 page 為單位去做）。
 
