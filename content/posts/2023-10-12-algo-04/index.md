@@ -18,8 +18,6 @@ tags: ["課程筆記"]
 
 最簡單的想法就是利用前一章的各種 sorting 演算法排序完然後找中間那個數字就是答案，不過是否有更快的解法？
 
-
-
 # 先從找最大值與最小值開始
 
 比起中位數，找出未排序的數列中最大值和最小值顯然比較容易一點。
@@ -34,21 +32,13 @@ tags: ["課程筆記"]
 
 我們也可以稍微優化一下達到 `3*n/2`，作法是這樣子：把所有數字兩兩一組，每一組先各自和對方比較，比較小的再和 `min` 比較，比較大的和 `max` 比較。
 
----
-
-
-
-
-
-
-
-
-
-在開始之前先引入一個隨機演算法：RANDOMIZED-SELECT
+接下來進入到我們的主題：給定一個序列，找出第 k 小的數字。
 
 # RANDOMIZED-SELECT 演算法
 
-**回去弄懂！**
+找出 A 序列中索引 p 和 r 之間第 i 小的數。
+
+和 QUICKSORT 演算法基本是一樣，差別只在 QUICKSORT 會遞迴左右兩邊的子序列，而 RANDOMIZED-SELECT 只會選擇要找的數字的那一邊去遞迴。
 
 ```
 p       q       r
@@ -57,25 +47,53 @@ p       q       r
 
 ```
 RANDOMIZED-SELECT(A, p, r, i)
-1.  if p == r
-2.      return A[p]
-3.  q = RANDOMIZED-PARTITION(A, p, r)
-4.  k = q - p + 1
-    if i == k
-        return A[q]
-    elseif i < k
-        return RANDOMIZED-SELECT(A, p, q - 1, i);
-    else
-        return RANDOMIZED-SELECT(A, q + 1, r, i - k);
+1   if p = r
+2   return A[p]
+3   q = RANDOMIZED-PARTITION(A, p, r)
+4   k = q - p + 1
+5   if i = k
+6       return A[q]
+7   elif i < k
+8       return RANDOMIZED-SELECT(A, p, q - 1, i)
+9   else
+10      return RANDOMIZED-SELECT(A, q + 1, r, i - k)
 ```
 
+> 1 index
+
+## RANDOMIZED-SELECT 時間複雜度分析
+
+最差情況下，我們每次分區都分成 1 和 n - 1 兩堆，每次所有數字都要和 pivot 比較。
+```
+T(n) = T(n - 1) + O(n)
+T(n) = T(n^2)
+```
+
+平均情況，之後再研究（有點複雜，要用到期望值的概念，請看投影片 p.8）。
 
 
-**分析還沒寫！**
+# 分堆作法 SELECT(A, k)
 
+假設 A 陣列總共有 n 個數，要找到第 k 小個數：
+1. 先分成 n / r 堆（r 是奇數）
+2. 每堆（r 個數字）先排序好，並且標出中位數（e.g., r = 5 每堆的第 3 個是中位數）
+3. 對於這些中位數（用 M 表示由他們組成的陣列）找出他們的中位數（用 SELECT(M, M/2) 下去遞迴），假設這個數字是 m
+4. 這樣就可以把所有數字分成小於、等於、大於 m 的三群
+5. 根據這樣的資料我們可以找到（介在等於那個區間）或是繼續遞迴（介在小於或是大於的區間）得到第 k 小的數字。
 
-# 分堆作法
+## 分堆算法的時間複雜度分析
 
-先分成五堆，找出每堆的中位數。
+每個子陣列有 r 個元素，總共有 n / r 個陣列，所以第 2 個步驟是 `O(r) * (n / r) = O(n)`（r 是常數）。
 
+總共有 n / r 個中位數，所以第 3 個步驟是 `T(n / r)`。
 
+第 4 個步驟是 `O(n)`。（所有數字掃過一遍）。
+
+第 5 個步驟是 `T(3n/4)`（每次可以踢掉超過 1/4 的數字，可以看圖知道）。
+
+```
+T(n) = O(n) + T(n / r) + O(n) + T(3n/4)
+T(n) = O(n)
+```
+
+> 通分 `T(n/r) + T(3n/4)` 在去求等比級數的極限就會得到 `O(n)`
