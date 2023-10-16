@@ -36,6 +36,8 @@ process 可以分成 I/O-bound 和 CPU-bound
 - I/O-bound：e.g., 文字編輯器（運算量不大，主要都是在做 I/O 處理）
 - CPU-bound：e.g., 遊戲、影片轉檔、圖像程式
 
+理論上，除了遊戲以外，大部分 interactive 的程式都是 I/O-bound process。
+
 long-term scheduler 可以去分配平衡 I/O-bound 和 CPU-bound process 提高效率。
 
 但是基本上 time sharing 的系統（例如我們在用的桌上型電腦）都不會有 long-term scheduler。

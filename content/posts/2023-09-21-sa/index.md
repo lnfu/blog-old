@@ -155,3 +155,50 @@ vcs = version controll system e.g., git, svn
 [刪除 Desktop 相關套件](https://askubuntu.com/questions/484095/how-do-i-remove-all-desktop-related-packages-leaving-server-only)
 
 `wget` instead of `fetche`
+
+
+
+
+
+
+
+# yq for yaml, jq for json
+
+
+
+
+# date -Iseconds -r 1696164685
+TZ=America/Los_Angeles date -Iseconds -r 1696164685
+
+
+# echo -n Hello
+不要有結尾空行
+
+# `` vs $()
+https://stackoverflow.com/questions/4708549/what-is-the-difference-between-command-and-command-in-shell-programming
+
+
+# pw groupadd [name]
+建立群組
+
+# pw groupmod [name] -m [user]
+使用者加入群組
+
+# sudo ntpdate tock.stdtime.gov.tw
+	tock.stdtime.gov.tw
+	watch.stdtime.gov.tw
+	time.stdtime.gov.tw
+	clock.stdtime.gov.tw	
+	tick.stdtime.gov.tw
+
+https://www.stdtime.gov.tw/chinese/bulletin/NTP%20promo.txt
+
+2023-10-13T14:03:33+08:00
+2023-10-01T20:51:25:+0800
+
+
+
+# date -Iseconds -j -f "%s" 1664447738
+unix time to TA's format
+
+
