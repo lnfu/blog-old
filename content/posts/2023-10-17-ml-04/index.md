@@ -64,23 +64,24 @@ Main loop:
 
 補充：在同一個 branch 上面使用同一個 descriptive features 多次是沒有意義的（可以做只是沒有任何幫助）。可以參考：https://stackoverflow.com/questions/19993139/can-splitting-attribute-appear-many-times-in-decision-tree
 
+> 注意，以下的 {{< math_inline >}}c{{< /math_inline >}} 都代表 classification 的數量
 
 # ID3
 IG 越大越好。
 
 {{< math_block >}}
-IG(D_{p}, f) = I(D_{p}) - \sum_{j=1}^{m} \frac{N_{j}}{N_{p}} I(D_{j}) 
+IG(D_{p}, A) = Entropy(D_{p}) - \sum_{j=1}^{m} \frac{N_{j}}{N_{p}} Entropy(D_{j}) 
 {{< /math_block >}}
 
-- {{< math_inline >}}IG(D_{p}, f){{< /math_inline >}}：資訊增益
-- {{< math_inline >}}I(D_{p}){{< /math_inline >}}：原本的資訊量
-- {{< math_inline >}}\sum_{j=1}^{m} \frac{N_{j}}{N_{p}} I(D_{j}){{< /math_inline >}}：切割後所有資訊量的加權總和
-
-透過計算 Entropy（熵）表示資訊量上。
+- {{< math_inline >}}IG(D_{p}, A){{< /math_inline >}}：資訊增益
+- {{< math_inline >}}Entropy(D_{p}){{< /math_inline >}}：原本的資訊量（透過計算 Entropy（熵）表示）
+- {{< math_inline >}}\sum_{j=1}^{m} \frac{N_{j}}{N_{p}} Entropy(D_{j}){{< /math_inline >}}：切割後所有資訊量的加權總和
 
 ## Entropy
 
-{{< math_block >}}I_{H} = - \sum_{i=1}^{c} p(i|t) \log_{2} p(i|t){{< /math_block >}}
+{{< math_block >}}
+Entropy(D) = - \sum_{i=1}^{c} p(i|t) \log_{2} p(i|t)
+{{< /math_block >}}
 
 Why 如此定義？
 
@@ -88,13 +89,19 @@ https://hackmd.io/@8dSak6oVTweMeAe9fXWCPA/ryoegPgw_
 
 ## 缺點
 
-IG 會傾向使用有很多 value 的 descriptive features，例如使用者 ID，然而我們都知道用使用者 ID 去分類是毫無意義的。
+這樣算出的 IG 會傾向使用有很多 value 的 descriptive features，例如使用者 ID，然而我們都知道用使用者 ID 去分類是毫無意義的。
 
 # CART
 
 {{< math_block >}}
-Gini(D) = 1 - \sigma_{i=1}^{c} p_{i}^{2}
+IG(D_{p}, A) = Gini(D_{p}) - \sum_{j=1}^{m} \frac{N_{j}}{N_{p}} Gini(D_{j}) 
 {{< /math_block >}}
+
+{{< math_block >}}
+Gini(D) = \sum_{i=1}^{c} p(i|t) (1 - p(i|t)) = 1 - \sum_{i=1}^{c} (p(i|t))^{2}
+{{< /math_block >}}
+
+> 關於上式的化簡，別忘記全部機率相加會是 1
 
 # C4.5
 
@@ -139,6 +146,7 @@ Prefers features that produce uneven splits, e.g.,{{< math_inline >}}\frac{|S_{1
 
 # 參考
 - [資料分析系列-探討決策樹(1)](https://medium.com/%E4%BC%81%E9%B5%9D%E4%B9%9F%E6%87%82%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88/%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E7%B3%BB%E5%88%97-%E6%8E%A2%E8%A8%8E%E6%B1%BA%E7%AD%96%E6%A8%B9-1-1cc354484559)
+- [聯合大學 slide](http://debussy.im.nuu.edu.tw/sjchen/MachineLearning/final/CLS_DT.pdf)
 
 
 
@@ -146,6 +154,3 @@ Prefers features that produce uneven splits, e.g.,{{< math_inline >}}\frac{|S_{1
 
 ---
 
-{{< math_block >}}I_{G} = \sum_{i=1}^{c} p(i|t) (1 - p(i|t)) = 1 - \sum_{i=1}^{c} (p(i|t))^{2}{{< /math_block >}}
-
-> 關於上式的化簡，別忘記全部機率相加會是 1
