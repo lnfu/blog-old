@@ -1,5 +1,5 @@
 ---
-title: "[課程筆記] 演算法概論（四）"
+title: "[課程筆記] 演算法概論（四） - Median Finding"
 date: 2023-10-12T15:58:08+08:00
 draft: false
 author: "Enfu Liao"
