@@ -26,6 +26,21 @@ tags: ["課程筆記"]
 
 IUH = independently uniform hashing
 
+# hash function
+
+一種作法：
+- w 是系統的位元
+- A 是 (0, 1) 之間的某個數（Knuth 建議選擇黃金分割數）
+- k 是 key
+
+![](./Screenshot%20from%202023-10-17%2011-22-40.png)
+
+# universal hashing
+
+定義？
+
+https://www.zhihu.com/question/50108837
+
 # 處理 collision 問題
 
 ## Chaining

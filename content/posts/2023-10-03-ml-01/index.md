@@ -18,6 +18,8 @@ tags: ["課程筆記"]
 
 [[課程筆記] 機器學習概論（三）](../2023-10-03-ml-03/)
 
+[[課程筆記] 機器學習概論（四）](../2023-10-17-ml-04/)
+
 ---
 
 放棄聽講，還是靠自己讀投影片好了...
@@ -64,6 +66,8 @@ model 只是 approximation
 
 input：a set of **descriptive features**
 output：**target feature**
+
+> 注意這邊的用語（descriptive features & target feature）
 
 階段一：利用機器學習相關的演算法從 dataset 訓練出模型（model）
 階段二：根據 query instance 放到模型中得到預測結果
