@@ -263,4 +263,57 @@ Worse Case：選到的 pivot 很爛（e.g., 最大）
 
 
 
-# Couting Sort & Radix Sort
+# Couting Sort
+
+```
+COUNTING-SORT(A, n, k)
+1   let B[1:n] and C[0:k] be new arrays
+2   for i = 0 to k
+3       C[i] = 0
+4   for j = 1 to n
+5       C[A[j]] = C[A[j]] + 1
+6   // C[i] now contains the number of elements equal to i.
+7   for i = 1 to k
+8   C[i] = C[i] + C[i-1]
+9   // C[i] now contains the number of elements less than or equal to i. (Prefix Sum)
+10  // Copy A to B, starting from the end of A.
+11  for j = n downto 1
+12      B[C[A[j]]] = A[j]
+13      C[A[j]] = C[A[j]] - 1 // to handle duplicate values
+14  return B
+```
+
+計算每個 key 的次數，然後根據 key 放到對應的位置。
+
+範例（假設 key 就等於 value）：
+```python
+A = [5, 4, 4, 3, 2, 4, 2, 1] # n = 8
+
+# k = 0  1  2  3  4  5
+C1 = [0, 1, 2, 1, 3, 1]
+C2 = [0, 1, 3, 4, 7, 8] # <-
+
+B = [-1, -1, -1, -1, -1, -1, -1, -1]
+B = [ 1, -1, -1, -1, -1, -1, -1, -1] # C = [0, 0, 3, 4, 7, 8]
+B = [ 1, -1,  2, -1, -1, -1, -1, -1] # C = [0, 0, 2, 4, 7, 8]
+B = [ 1, -1,  2, -1, -1, -1,  4, -1] # C = [0, 0, 2, 4, 6, 8]
+B = [ 1,  2,  2, -1, -1, -1,  4, -1] # C = [0, 0, 1, 4, 6, 8]
+B = [ 1,  2,  2,  3, -1, -1,  4, -1] # C = [0, 0, 1, 3, 6, 8]
+B = [ 1,  2,  2,  3, -1,  4,  4, -1] # C = [0, 0, 1, 3, 5, 8]
+B = [ 1,  2,  2,  3,  4,  4,  4, -1] # C = [0, 0, 1, 3, 4, 8]
+B = [ 1,  2,  2,  3,  4,  4,  4,  5] # C = [0, 0, 1, 3, 4, 7]
+```
+
+# Radix Sort
+
+```
+RADIX-SORT(A, n, d)
+1   for i = 1 to d
+2       use a stable sort to sort array A[1:n] on digit i
+```
+
+以十進位為例就是先比個位數、再比十位數、百位數...
+
+# Conclusion
+
+![](./Screenshot%20from%202023-10-17%2010-17-06.png)
