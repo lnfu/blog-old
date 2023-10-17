@@ -30,7 +30,7 @@ author: "Enfu Liao"
 
 太簡單，略。
 
-# Selection Sort
+# Insertion Sort
 
 太簡單，略。
 

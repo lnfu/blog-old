@@ -23,3 +23,12 @@ tags: ["課程筆記"]
 [[課程筆記] 演算法概論（五） - Hash Table](../2023-10-17-algo-05/)
 
 ---
+
+IUH = independently uniform hashing
+
+# 處理 collision 問題
+
+## Chaining
+
+補機率分析
+
