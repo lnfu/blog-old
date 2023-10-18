@@ -83,13 +83,30 @@ if (safe == TRUE)
 
 ## 解決
 
-hardware-based approaches（底層實做）
+### hardware-based approaches
 
-### disable/enable interrupt
+這邊先講一下 hardware-based approaches（硬體底層實做）是如何解決 race condition。
+
+架構：
+```c
+do {
+    // entry section
+        critical section
+    // exit section
+        remainder section // 之後我會用 ... 表示
+}
+```
+
+其中，critical section 要滿足三個條件：
+1. *Mutual Exclusion（互斥）*：當有一個 process 佔住 critical-section 時，其他 process 不能進入 critical section，不會有兩個 process 同時間在 critical-section 中工作。
+2. *Progress*：當沒有 process 要在 critical-section 中執行時，不能阻擋其他想要進入 critical section 工作的 process 進入 critical-section，要選擇其中一個候選 process 進入 critical-section，不能空在那邊。
+3. *Bounded Waiting*：等待 critical-section 的時間，不能是無窮大的時間，是有個界線。也就是說，不能佔住了critical-section 就不出來了。
+
+#### disable/enable interrupt
 
 在要進行 critical section（會發生 race condition 的部份），之前先 disable interrupt，等到執行完在 enable interrupt（在 kernel mode 開啟/關閉 interrupt）。
 
-```
+```c
 do {
     disable interrupt; // entry section
     // critical section
@@ -102,11 +119,11 @@ do {
 
 不過這方法在多處理器（multiprocessor）的環境下是沒有用的（因為你還是沒辦法阻止其他 CPU 去動到資料）。
 
-### 包裝成 atomic instruction
+#### 包裝成 atomic instruction
 
 使用 TAS 指令：
 
-```
+```c
 // TAS（在這邊的程式碼只是表示，在硬體已經實做出來，並非是一個 C 語言函數）
 boolean TestAndSet(boolean *target)
 {
@@ -129,7 +146,7 @@ do {
 
 使用 Swap 指令：
 
-```
+```c
 // Swap（在這邊的程式碼只是表示，在硬體已經實做出來，並非是一個 C 語言函數）
 void Swap(boolean *a, boolean *b)
 {
@@ -188,3 +205,79 @@ spin_unlock:
 
      ret                     ; The lock has been released.
 ```
+
+### pure-software approaches
+
+軟體解決
+
+#### Peterson's solution
+
+醜醜 der。
+
+#### Semaphores
+
+好像又是 dijkstra 想出來的 Orz。
+
+兩個 operation：
+- signal() 或是叫做 V（荷蘭語 increase）：
+- wait() aka P（荷蘭語 test, try, pass, grab）：
+
+```c
+wait(S) {
+    S--;
+    if (S < 0) {
+        // add this process to waiting queue（變成 waiting 狀態）
+        block();
+    }
+}
+
+signal(S) {
+    S++;
+    if (S <= 0) {
+        // remove a process P from the waiting queue（變成 ready 狀態）
+        wakeup(P);
+    }
+}
+```
+
+
+# 問題
+
+The TAS/SWAP instruction as a solution of the critical section problem guarantees which one(s) of the
+following properties?
+- Mutual exclusive
+- Progressive
+- Bounded waiting
+
+答案：Mutual exclusive、Progressive
+
+所以有 based on TAS/SWAP 且滿足 bounded waiting 解法：
+```c
+do {
+    waiting[i] = TRUE;
+    key = TRUE;
+    while (waiting[i] && key)
+        key = TestAndSet(&lock);
+    
+    waiting[i] = FALSE;
+
+    // critical section
+
+    j = (i + 1) % n;
+    while ((j != i) && !waiting[j])
+        j = (j + 1) % n;
+
+    if (j == i)
+        lock = FALSE;
+    else
+        waiting[j] = FALSE;
+    
+    ...
+} while(TRUE);
+```
+
+
+# 參考
+- [自旋鎖](https://zh.wikipedia.org/zh-tw/%E8%87%AA%E6%97%8B%E9%94%81)
+- [Semaphore (programming)](https://en.wikipedia.org/wiki/Semaphore_(programming))
+- [06. 同步 (Synchronization)](https://sls.weco.net/node/21326)
