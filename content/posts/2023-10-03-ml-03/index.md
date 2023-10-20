@@ -1,5 +1,5 @@
 ---
-title: "2023 10 03 Ml 3"
+title: "[課程筆記] 機器學習概論（三） - 資料的品質"
 date: 2023-10-03T15:39:50+08:00
 draft: false
 author: "Enfu Liao"
