@@ -4,7 +4,7 @@ date: 2023-10-17T13:28:00+08:00
 draft: false
 author: "Enfu Liao"
 math: true
-
+tags: ["課程筆記", "機器學習"]
 # cover:
 #     image: "<image path/url>" # image path/url
 #     alt: "<alt text>" # alt text

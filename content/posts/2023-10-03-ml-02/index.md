@@ -1,9 +1,9 @@
 ---
-title: "[課程筆記] 機器學習概論（二）"
+title: "[課程筆記] 機器學習概論（二） - 資料種類"
 date: 2023-10-03T14:53:16+08:00
 draft: false
 author: "Enfu Liao"
-tags: ["課程筆記"]
+tags: ["課程筆記", "機器學習"]
 # cover:
 #     image: "<image path/url>" # image path/url
 #     alt: "<alt text>" # alt text
