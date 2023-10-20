@@ -202,3 +202,89 @@ https://www.stdtime.gov.tw/chinese/bulletin/NTP%20promo.txt
 unix time to TA's format
 
 
+---
+
+2023.10.19
+
+
+port vs. pkg
+
+pkg -> binary
+
+port -> source code
+
+ports tree 位置：`/usr/ports`
+
+```
+/usr/ports/<category>/<name>
+/usr/ports/editors/vim
+```
+
+fetch, extract, update, cron
+
+corn 有點像是行事曆（定期做事）
+
+`portsnap`: 更新 ports tree
+
+```
+sudo portsnap fetch extract update
+```
+
+```
+# 搜尋 port
+cd /usr/ports
+sudo make fetchindex
+make search name=<program-name>
+make search key=<string>
+
+---
+
+psearch vim # 比上面簡單好用
+```
+
+```
+# 安裝軟體
+sudo make install clean
+```
+
+
+
+
+
+如果剛安裝完應用程式，但是找不到時（現在好像都不會遇到了）：
+```
+rehash
+```
+
+在 FreeBSD 系统安装以后的默认设置中，`/etc/make.conf` 这个文件并不存在，你可以自己建立一个。
+```
+# 本地 mirror site
+# /etc/make.conf
+MASTER_SITE_BACKUP?= \
+	http://FreeBSD.cs.nctu.edu.tw/distfiles/${DIST_SUBDIR}/
+MASTER_SITE_OVERRIDE?= ${MASTER_SITE_BACKUP}
+```
+
+
+
+請不要 "curl pipe bash"，非常危險！
+
+
+
+# Shell
+
+- Bourne Shell *by S.R. Bourne*: `/bin/sh` 最早
+	- C Shell *by Bill Joy*: `/bin/csh`
+		- TENEX C Shell *by Ken Greer*: `/bin/tcsh`
+		- Z Shell
+	- Bourne-Again Shell
+	- Korn Shell
+
+> vi 也是 Bill Joy 寫的（Sun 公司也是她開的 牛B）
+
+## Startup Files
+- `/etc/profile`
+- `~/.profile`
+
+
+---
