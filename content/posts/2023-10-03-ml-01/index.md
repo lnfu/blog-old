@@ -1,5 +1,5 @@
 ---
-title: "[課程筆記] 機器學習概論（一） - 機器學習種類"
+title: "[課程筆記] 機器學習概論（一） - 機器學習簡介"
 date: 2023-10-03T13:29:39+08:00
 draft: false
 author: "Enfu Liao"
@@ -12,7 +12,7 @@ tags: ["課程筆記", "機器學習"]
 #     hidden: true # only hide on current single page
 ---
 
-[[課程筆記] 機器學習概論（一）](../2023-10-03-ml-01/)
+[[課程筆記] 機器學習概論（一） - 機器學習簡介](../2023-10-03-ml-01/)
 
 [[課程筆記] 機器學習概論（二）](../2023-10-03-ml-02/)
 
@@ -28,23 +28,25 @@ tags: ["課程筆記", "機器學習"]
 
 **機器學習（Machine Learning）**：an automatic process that extracts patterns from data (or past experiences)
 
-Why？補足人腦的缺陷
+為什麼我們需要機器學習呢？為了補足人腦的缺陷，我們在生活中常常會遇到許多問題是
 1. 專家不存在
 2. 專家無法解釋
 3. 解法一直在變
 4. 需要處理特定條件
 
-model 只是 approximation
+這時候可能就需要依靠機器學習來幫助我們在未來時做出決策。
+
+不過，機器學習得到的這些 model 只是 approximation（近似），不能百分之百代表真實世界。
 
 **Consistent Model**：訓練出來的模型在 dataset 的表現穩定一致。
 
-淺白理解：把dataset 的每一筆的 descriptive features 放進模型得到的結果和 target feature 相同。（好像不一定是完全相同，只要 MSE 之類的夠小就算？）
+淺白理解：把 dataset 的每一筆的 descriptive features 放進模型得到的結果和 target feature 相同。（好像不一定是完全相同，只要 MSE 之類的夠小就算？）
 
 > There is more than one candidate consistent model.
 
 另外，dataset 的資料會有 noise，模型應該盡可能不被這些 noise 影響。
 
-**Sample Bias**：根據缺乏代表性的樣本（沒有辦法代表整體），例如從一個班上都只有抽樣到男生。我們應該盡可能消除 sample bias。
+**Sample Bias**：因為缺乏代表性的樣本（沒有辦法代表整體）所產生的誤差，例如從一個班上都只有抽樣到男生。我們應該盡可能消除 sample bias。
 
 **Inductive Bias**：在機器學習演算法中所作的假設（的集合）。（例如假設模型是一個線性方程式）
 
@@ -54,10 +56,7 @@ model 只是 approximation
 
 ![underfitting & overfitting](./Screenshot%20from%202023-10-03%2014-45-24.png)
 
-# 有哪幾種學習？
-
-## Association Finding
-這邊的 association 好像都等同 correlation（相關性）
+# 機器學習的種類
 
 ## 監督式學習（Supervised Learning）
 資料會 label（也就是 target feature）。
