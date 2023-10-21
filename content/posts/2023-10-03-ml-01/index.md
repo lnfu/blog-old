@@ -14,7 +14,7 @@ tags: ["課程筆記", "機器學習"]
 
 [[課程筆記] 機器學習概論（一） - 機器學習簡介](../2023-10-03-ml-01/)
 
-[[課程筆記] 機器學習概論（二）](../2023-10-03-ml-02/)
+[[課程筆記] 機器學習概論（二） - 資料種類](../2023-10-03-ml-02/)
 
 [[課程筆記] 機器學習概論（三）](../2023-10-03-ml-03/)
 
@@ -63,12 +63,13 @@ tags: ["課程筆記", "機器學習"]
 
 根據過去的資料（input & output）建立 rule，如此就能透過之後的 input 預測出 output。
 
-input：a set of **descriptive features**
-output：**target feature**
+- input：a set of **descriptive features**
+- output：**target feature**
 
 > 注意這邊的用語（descriptive features & target feature）
 
 階段一：利用機器學習相關的演算法從 dataset 訓練出模型（model）
+
 階段二：根據 query instance 放到模型中得到預測結果
 
 像是告訴小孩這個東西的長寬高、形狀、色彩（descriptive features），然後跟小孩說這是桌子或是這是椅子（target feature）。

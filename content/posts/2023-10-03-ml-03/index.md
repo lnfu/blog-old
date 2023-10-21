@@ -42,7 +42,7 @@ anything unusual about the data in an ABT
 
 常見的有：
 1. missing values
-2. irregular carginality（是指像是名字應該要不同卻有人一樣這種？）
+2. irregular cardinality：不同值的數量異常。例如，對於連續型的資料，不同值的數量應該會趨近資料的筆數，如果太少就算是異常。又例如一個誇張的異常是某個 feature 的值全部相同。又例如關於生理性別，理論上只會有兩種值（男、女），如果有三種不同的值就是 irregular cardinality。
 3. 異常值（outliers）：例如某個值異常的大
 
 
@@ -55,14 +55,14 @@ anything unusual about the data in an ABT
 
 受試者缺失資料的產生與本身健康狀態與試驗藥物沒有任何關係。例如受試者因為搬家的原因無法繼續參與試驗，或問卷未翻譯成該國語言導致受試者看不懂而無法回答。
 
-#### MAR
+#### MAR = missing at random
 缺失的發生和缺失的資料無關。或者說是缺失資料的發生與觀察到的資料有關，但是與未觀察到的資料無關。
 
 消失的原因可以由其他 feature 推出來。
 
 例如糖尿病臨床試驗，受試者若試驗期間空腹血糖值超過 270 mg/dl， 則須要退出試驗。
 
-#### MNAR
+#### MNAR = missing not at random
 缺失資料的發生與缺失資料本身的觀察值有關。
 
 消失的原因無法由其他 feature 推出來。
