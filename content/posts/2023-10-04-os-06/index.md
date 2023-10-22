@@ -23,6 +23,7 @@ CPU 在**排程（scheduling）**時是以 kernel thread 為單位。（資源�
 
 同一個 process 的 thread 共用 code, data, files。但是會有自己的 registers ,stack。
 
+
 # Pthread = POSIX thread
 Pthread 指的是規格不是實做。（所以 Windows 也可以有）
 
@@ -74,3 +75,37 @@ At most how many CPU cores that the multithreaded process can fully utilize?
 
 3 個。
 因為兩個 IO-bound 用掉兩個 thread，剩下四個共用三個。
+
+
+
+
+
+
+
+
+# 如果一個 thread 呼叫 `fork()` 和 `exec()` 會發生什麼事？
+
+都是 undefined！
+
+要看作業系統如何實做，很多是會讓 `fork()` 直接把 process 完全複製（包含所有的 thread），而 `exec()` 也是直接把 process 取代掉（所以其他 thread 就不見了）。
+
+## **thread save**
+
+一個 function 可不可以被多個 thread 同時呼叫。
+
+有些 function 的會有一些狀態，如果有多個 thread 會去改到他們可能會壞掉，就不是 thread save（也就是 race condition）。
+
+
+
+
+# signal in multithread
+
+上一章有提到 signal 是 IPC 的手段之一。
+
+不過在 multithread 的時候是哪個 thread 會收到？
+
+首先，不管是 sync 還是 async 的 signal，process 中只會有一個 thread 收到。
+
+- sync：造成的人收到（e.g., access violation）
+- async：沒有明確定義，通常是第一個 thread 收到（e.g., process termination）
+

@@ -16,6 +16,36 @@ CPU scheduling
 
 waiting time：process 等待的時間（從到了～開始執行）
 
+- CPU burst：一段 CPU 在執行運算的時間。
+- I/O burst：一段在 I/O wait 的時間。
+
+# scheduler 在做什麼？
+從記憶體中狀態是 ready 的 process 選擇一個讓 CPU 執行。
+
+# 何時會 re-schedule？
+
+對於 cooperative aka non-preemptive scheduling，只會有以下兩種：
+1. running process -> waiting：例如呼叫 I/O
+2. running process 終止
+
+而對於 preemptive scheduling，除了上面兩種還多了另外兩種：
+3. running process -> ready：例如 time sharing 的 timer IRR
+4. waiting process -> ready：例如 I/O 完成
+
+cooperative 雖然在實做上較簡單（也不用考慮到 race condition），但可能因為一些糟糕的 process（e.g., 無窮迴圈）造成系統被 process 永遠佔用 e.g., Windows 3.1。
+
+# 衡量指表
+
+- CPU utilization：CPU 的忙碌程度
+- throughput：單位時間完成的 process 數量
+- queueing time aka waiting time：在 ready queue 中的 process 等待要被執行的時間
+- turnaround time：process 從開始到結束的時間（中間可能因為 I/O 之類的中斷又繼續執行）
+
+work-consecutive：只要 ready queue 不是空的就會拿出來給 CPU 執行（不會 idle）。
+
+把很多短的都先做，長時間的放到最後，這樣 throughput 很高，但是 waiting time 也很高。
+
+> good average performance vs. predictable worst-case performance   
 
 # 單處理器
 

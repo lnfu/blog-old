@@ -56,7 +56,10 @@ root          10  0.0  0.0      0     0 ?        I<   19:38   0:00 [mm_percpu_wq
 root          11  0.0  0.0      0     0 ?        I    19:38   0:00 [rcu_tasks_kthread]
 ```
 
+### 結論
+`fork()` 複製 process。
 
+`exec()` 用某個程式把整個 process 的記憶體取代掉。
 
 
 # 補充 `wait(NULL)` 去查引數！！！
@@ -104,6 +107,12 @@ root          11  0.0  0.0      0     0 ?        I    19:38   0:00 [rcu_tasks_kt
 ![](./Screenshot%20from%202023-10-04%2010-23-26.png)
 
 ## Shared Memory
+- `shmget()`：建立一塊 share memory
+- `shmat()`：attach 到目前 process 的記憶體地址空間
+- `shmdt()`：detach
+- `chmctl()`：控制 share memory（e.g., 刪除）
+
+## Message Passing
 producer 放東西到 buffer（write）
 
 consumer 從 buffer 拿東西出來（read）
@@ -143,7 +152,6 @@ while (true) {
 Why not to use a free-slot counter 用變數紀錄現在 buffer 有幾個元素？第六章會講到這會造成 race（錯誤）。
 
 
-## Message Passing
 
 **2 operations：**
 1. send(message) -> write

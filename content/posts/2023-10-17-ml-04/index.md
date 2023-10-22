@@ -75,7 +75,7 @@ IG(D_{p}, A) = Entropy(D_{p}) - \sum_{j=1}^{m} \frac{N_{j}}{N_{p}} Entropy(D_{j}
 
 - {{< math_inline >}}IG(D_{p}, A){{< /math_inline >}}：資訊增益
 - {{< math_inline >}}Entropy(D_{p}){{< /math_inline >}}：原本的資訊量（透過計算 Entropy（熵）表示）
-- {{< math_inline >}}\sum_{j=1}^{m} \frac{N_{j}}{N_{p}} Entropy(D_{j}){{< /math_inline >}}：切割後所有資訊量的加權總和
+- {{< math_inline >}}\sum_{j=1}^{m} \frac{N_{j}}{N_{p}} Entropy(D_{j}){{< /math_inline >}}：切割後所有資訊量的加權平均
 
 ## Entropy
 
@@ -107,14 +107,18 @@ Gini(D) = \sum_{i=1}^{c} p(i|t) (1 - p(i|t)) = 1 - \sum_{i=1}^{c} (p(i|t))^{2}
 
 {{< math_block >}}
 GR(D, A) = \frac{IG(D, A)}{SplitInfo(D, A)}
+{{< /math_block >}}
+
+{{< math_block >}}
 SplitInfo(D, A) = - \sigma_{i=1}^{c} \frac{|D_{i}|}{|D|} log_{2}{\frac{|D_{i}|}{|D|}}
 {{< /math_block >}}
+
 
 ## 缺點
 
 不太清楚...
 
-Prefers features that produce uneven splits, e.g.,{{< math_inline >}}\frac{|S_{1}|}{|S|} >> \frac{|S_{2}|}{|S|}{{< /math_inline >}}
+Prefers features that produce uneven splits, e.g.,{{< math_inline >}}\frac{|S_{1}|}{|S|} \gg \frac{|S_{2}|}{|S|}{{< /math_inline >}}
 
 
 # Continuous Descriptive Features

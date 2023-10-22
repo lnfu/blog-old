@@ -295,7 +295,8 @@ system call（interrupt）：
 # Mechanism vs. Policy
 
 Mechanism 不做決策
-Policy 有決策
+
+Policy 有決策（不會影響結果是否正確，主要影響效能問題）
 
 
 
