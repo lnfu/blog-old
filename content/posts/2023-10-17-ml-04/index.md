@@ -19,11 +19,11 @@ tags: ["課程筆記", "機器學習"]
 
 [[課程筆記] 機器學習概論（三） - 資料探索](../2023-10-03-ml-03/)
 
-[[課程筆記] 機器學習概論（四） - Decision Tree](../2023-10-17-ml-04/)
+[[課程筆記] 機器學習概論（四） - 決策樹](../2023-10-17-ml-04/)
 
 ---
 
-決策樹（DT；decision tree）或是叫做 classification tree 是一種處理分類問題的演算法。
+決策樹（decision tree；DT）或是叫做 classification tree 是一種處理分類問題的演算法。
 
 決策樹的概念十分簡單，假設我們有以下資料：
 ![](./Screenshot%20from%202023-10-17%2014-05-52.png)
@@ -126,13 +126,13 @@ SplitInfo(D, A) = - \sum_{i=1}^{c} \frac{|D_{i}|}{|D|} log_{2}{\frac{|D_{i}|}{|D
 Prefers features that produce uneven splits, e.g.,{{< math_inline >}}\frac{|S_{1}|}{|S|} \gg \frac{|S_{2}|}{|S|}{{< /math_inline >}}
 
 
-# Continuous Descriptive Features
+# 連續型 Descriptive Features
 
-上面討論的都是建立在我們的 descriptive feature 是離散的資料（e.g., 性別 - 男/女）如果是連續的資料，我們可以把它拆成不同的區間再用同樣的方法生成 DT（離散化）。  
+上面討論的都是建立在我們的 descriptive feature 是離散的資料（e.g., 性別 - 男/女）。如果是連續的資料，我們可以把它拆成不同的區間再用同樣的方法生成決策樹（離散化）。  
 
 不過要怎麼決定該如何拆？例如應該把體重拆成大於 50 和小於等於 50，還是大於 60 和小於等於 60？
 
-```
+```plaintext
 1   Sort the instances according to the continuous values.
 2   Identify the adjacent values that have different classifications.
 3   Find the best threshold by computing the IG for each of these class transition boundaries and selecting the boundary with the highest IG as the threshold
@@ -144,7 +144,7 @@ Prefers features that produce uneven splits, e.g.,{{< math_inline >}}\frac{|S_{1
 
 # Continuous Target Features - Regression Tree
 
-之後補
+之後補上...
 
 ![](./Screenshot%20from%202023-10-17%2015-18-22.png)
 
@@ -206,10 +206,4 @@ A1 中 C1 和 C2 的比例是 {{< math_inline >}}\frac{279}{420}:\frac{141}{420}
 # 參考
 - [資料分析系列-探討決策樹(1)](https://medium.com/%E4%BC%81%E9%B5%9D%E4%B9%9F%E6%87%82%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88/%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E7%B3%BB%E5%88%97-%E6%8E%A2%E8%A8%8E%E6%B1%BA%E7%AD%96%E6%A8%B9-1-1cc354484559)
 - [聯合大學 slide](http://debussy.im.nuu.edu.tw/sjchen/MachineLearning/final/CLS_DT.pdf)
-
-
-
-
-
----
 
