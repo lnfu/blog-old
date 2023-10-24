@@ -149,17 +149,17 @@ Prefers features that produce uneven splits, e.g.,{{< math_inline >}}\frac{|S_{1
 ![](./Screenshot%20from%202023-10-17%2015-18-22.png)
 
 
-# Overfitting
+# 過擬合
 
-指模型對於範例的過度訓練，導致模型記住的不是訓練資料的一般特性，反而是訓練資料的局部特性。
+過擬合（overfitting）指的是模型對於訓練資料集的過度訓練，導致模型記住的不是訓練資料的一般特性，而是訓練資料的局部特性。
 
 ![](./Screenshot%20from%202023-10-17%2015-33-18.png)
 
-原因：
+導致過擬合原因：
 1. 雜訊
 2. 資料太少
 
-解決方式：Pruning（剪枝）。
+解決方式：剪枝（pruning）。
 
 > pruning 是解決雜訊問題？
 
@@ -172,6 +172,8 @@ Prefers features that produce uneven splits, e.g.,{{< math_inline >}}\frac{|S_{1
 每次往下一層（生成樹）時，如果預先定義的臨界值（最簡單就是直接看 IG）低於某個數值就停止往下。  
 
 ### chi-square test（卡方檢定）
+
+除了直接看 IG，也可以使用卡方檢定來判斷是否要繼續往下做分割。
 
 {{< math_block >}}
 \chi^{2} = \sum_{i} \frac{(O_{i} - E_{i})^{2}}{E_{i}}
@@ -197,11 +199,11 @@ A1 中 C1 和 C2 的比例是 {{< math_inline >}}\frac{279}{420}:\frac{141}{420}
 
 ## Postpruning
 
-先生成好 DT 再去試著剪她（從下往上剪），如果 validation 結果是好的就確定剪下去。
+先產生好決策樹再去試著剪她（從下往上剪），如果驗證（validation）後結果是好的就確定剪下去。
 
-怎麼做 validation？traning 和 validation 都有一個 dataset，並且這兩個互相 exclusive。
+怎麼做驗證？我們需要訓練和驗證都有一個資料集，並且這兩個資料集互斥（exclusive）。
 
-每次去比較剪枝前和剪枝後用 validation dataset 跑過得 accuracy，如果 accuracy 變好就能確定這個剪枝合適。
+每次去比較剪枝前和剪枝後用驗證的訓練集跑，如果準確度有提昇就能確定這個剪枝是合適的。
 
 # 參考
 - [資料分析系列-探討決策樹(1)](https://medium.com/%E4%BC%81%E9%B5%9D%E4%B9%9F%E6%87%82%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88/%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E7%B3%BB%E5%88%97-%E6%8E%A2%E8%A8%8E%E6%B1%BA%E7%AD%96%E6%A8%B9-1-1cc354484559)
