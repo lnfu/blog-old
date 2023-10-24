@@ -241,6 +241,90 @@ signal(S) {
 ```
 
 
+
+# Semaphores 三大應用
+
+## MUTEX：前面講過
+```
+init = 1
+```
+
+## sequencing or event
+```
+init = 0
+```
+
+precedence constraint
+
+確保先做完 S1 才做 S2。
+
+```
+pi {
+    S1;
+    signal(sync);
+}
+
+pj {
+    wait(sync);
+    S2;
+}
+```
+
+## 容量控制（capacity control）
+```
+init > 1
+```
+
+e.g., 限制 server 同一時間可以服務多少人。
+
+
+# Semaphore 範例：DMA
+
+只有四個通道，每個通道一次只能有一個 process 在用。
+
+```
+S = 4;
+T = 1;
+c[4] = { F, F, F, F };
+
+proc()
+{
+    wait(S);
+    wait(T);
+
+    // pick one unused channel among c[0], c[1], c[2], c[3]
+    // setup DMA transfer
+
+    signal(T);
+
+    // start DMA
+    // wait for DMA completion
+
+    signal(S);
+}
+```
+
+# Semaphore 範例：Bounded-Buffer Problem
+前面講過的問題。
+
+解法（三個 semaphore）：
+1. semaphore `MUTEX = 1` 保護 buffer
+2. for consumer -> semaphore `FULL = 0` 確保空的時候不能再拿
+3. for producer -> semaphore `EMPTY = N` 確保滿的時候不能再給
+
+
+
+# Deadlock & Starvation
+
+Deadlock：如下圖
+
+![](./deadlock.png)
+
+
+
+
+Starvation：某個 process 要資源但是一直要不到
+
 # 問題
 
 The TAS/SWAP instruction as a solution of the critical section problem guarantees which one(s) of the

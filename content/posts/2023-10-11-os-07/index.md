@@ -80,14 +80,14 @@ issue：有些要花比較多時間的可能就要一直等待
 
 
 
-# Multiple Processor S
+# Multiple Processor 排程
 ![](./Screenshot%20from%202023-10-11%2011-58-58.png)
 
 ## SMP
 兩個 CPU 各自有 cache，透過 bus 共用一個 memory。
 
 
-## NUMA
+## NUMA = non uniform memory access
 ![](./Screenshot%20from%202023-10-11%2012-01-23.png)
 
 topology 有幾種選擇：ring、mesh、**hypercube**
@@ -99,9 +99,87 @@ topology 有幾種選擇：ring、mesh、**hypercube**
 
 
 
+# ???
+
+process affinity：process migration 需要時間，所以通常希望不要把這個 processor 的 process 移動到其他的 processor。
+
+load balancing：
+
+所以要再 process affinity 和 load balancing 之間作取捨。以 Linux 為例，每 200ms 做一次 push migration（把 heavy loading 的 processor 的 process 分到其他 processor），以及當有 processor 的 ready queue 是空的會把其他（heavy loading）的 processor 的 process 給她。
 
 
+# Multicore
 
+multicore processor：有多個實體的運算單元（core，可以想成就是一個 CPU），所有運算單元共用同一塊 Last Level Cache (LLC)。
+
+
+multithreading processor：多的 logical processor（實體只有一個）有不同的 registers。
+> 這邊的 thread 和前面說的不是同一個東西！
+
+![](./Screenshot%20from%202023-10-23%2015-28-12.png)
+![](./Screenshot%20from%202023-10-23%2015-33-35.png)
+
+在平衡上面，首先平衡 physical 才是平衡 logical。
+
+
+## 以我的電腦為例
+
+總 logical CPU 數量 = 總 physical CPU 數量 X 每個 physical CPU 的核数（core） X 超線程數（hyper thread）
+
+top 看到的 CPU（8 個）指的是 logical CPU 的個數。
+
+`cat /proc/cpuinfo`
+
+會有八段資訊（八個 logical）。
+
+一顆 physical CPU，四核心。（所以是 2 threads？）
+
+```
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 142
+model name	: Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz
+stepping	: 11
+microcode	: 0xf4
+cpu MHz		: 1800.000
+cache size	: 6144 KB
+physical id	: 0
+siblings	: 8
+core id		: 0
+cpu cores	: 4
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 22
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities
+vmx flags	: vnmi preemption_timer invvpid ept_x_only ept_ad ept_1gb flexpriority tsc_offset vtpr mtf vapic ept vpid unrestricted_guest ple pml ept_mode_based_exec
+bugs		: spectre_v1 spectre_v2 spec_store_bypass mds swapgs itlb_multihit srbds mmio_stale_data retbleed gds
+bogomips	: 3600.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+```
+
+
+# Linux 的排程演算法 - CFS
+
+completely fair scheduler
+
+virtual runtime（virtual clock 演算法）
+
+給予每個 process 不同的 rate。
+
+![](./Screenshot%20from%202023-10-23%2016-04-09.png)
+
+nice value = increasing rate of vruntime
+
+![](./Screenshot%20from%202023-10-23%2016-04-09.png)
+
+每次如何挑選最小的 vruntime？紅黑樹！
 
 # 問題
 FCFS 有什麼 performance issue？
