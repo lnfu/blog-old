@@ -1,5 +1,5 @@
 ---
-title: "[課程筆記] 機器學習概論（四） - Decision Tree"
+title: "[課程筆記] 機器學習概論（四） - 決策樹"
 date: 2023-10-17T13:28:00+08:00
 draft: false
 author: "Enfu Liao"
@@ -23,27 +23,30 @@ tags: ["課程筆記", "機器學習"]
 
 ---
 
-DT（decision tree；決策樹）或是叫做 classification tree。
+Decision Tree（DT；決策樹）或是叫做 classification tree 是一種處理分類問題的演算法。
 
-假設我們的資料如下：
+決策樹的概念十分簡單，假設我們有以下資料：
 ![](./Screenshot%20from%202023-10-17%2014-05-52.png)
 
-從 root 開始不斷根據 descriptive features 去分割（分類）就可以得到像是底下這樣的 DT。
+我們可以從根節點開始不斷根據 descriptive features 來做分割（分類），最後就會得到像是下面圖片所呈現的決策樹。
 
 ![](./Screenshot%20from%202023-10-17%2014-07-21.png)
 
-分割的方式（DT）可以用很多種（像是上圖就展示了 (a) 和 (b) 兩種），我們需要有一個方式來量化什麼樣的分割是比較好的。
+由於每次分割的方式可以不同（選擇不同的 descriptive feature），所以最後產生的決策樹也會有多種（像是上圖就展示了 (a) 和 (b) 兩種決策樹），因此我們需要有一個方式來量化什麼樣的分割是比較好的。
 
-所以根據不同的量化方式，我們會有不同生成 DT 的演算法。
+根據不同的量化方式，我們有各種生成決策樹的演算法。
 
-這邊會介紹三種演算法以及其使用來量化分割的 metric（度量指標）：
-- ID3：使用 IG（Information Gain；資訊增益、資訊獲利）with **Entropy**
+這邊會介紹三種演算法以及其使用來量化分割的度量指標（metric）：
+- ID3：使用 IG（Information Gain；資訊增益、資訊獲利）with **Entropy（熵）**
 - CART：使用 IG with **Gini Index**
 - C4.5：使用 IGR（Information Gain Ratio）
 
 # 演算法
 
-有了 metric 能夠量化什麼樣的分割（分類）會是最好的，就可以直接用 Greedy 的方式（遞迴）找出最佳的 DT。
+三種演算法的差異主要是在衡量分割方式使用的度量指標不同，整體上沒有太大差異。
+
+當我們有了度量指標能夠量化什麼樣的分割（分類）會是最好的，就可以直接用 Greedy 的方式（遞迴）找出（理論上）最佳的決策樹。
+
 ```
 Main loop:
 1   A <- the "best" decision attribute for next node
@@ -51,10 +54,9 @@ Main loop:
 3   For each value of A, create new descendant of node
 4   Sort training examples to leaf nodes
 5   If training examples perfectly classified, Then STOP, Else iterate over new leaf nodes
-
 ```
 
-白話一點說就是以下方法：
+上面的演算法用比較白話的方式就是：
 1. 選擇目前資料集所有分類最好的分類將資料集拆成多個子資料集
 2. 對每個子資料集重複 1
 3. 當滿足以下條件時停止遞迴
@@ -66,9 +68,10 @@ Main loop:
 
 > 注意，以下的 {{< math_inline >}}c{{< /math_inline >}} 都代表 classification 的數量
 
-# ID3
-IG 越大越好。
+## ID3
+每次選擇擁有最大 IG 的分割（IG 越大越好）。
 
+IG 的計算方式如下：
 {{< math_block >}}
 IG(D_{p}, A) = Entropy(D_{p}) - \sum_{j=1}^{m} \frac{N_{j}}{N_{p}} Entropy(D_{j}) 
 {{< /math_block >}}
