@@ -23,7 +23,7 @@ tags: ["課程筆記", "機器學習"]
 
 ---
 
-Decision Tree（DT；決策樹）或是叫做 classification tree 是一種處理分類問題的演算法。
+決策樹（DT；decision tree）或是叫做 classification tree 是一種處理分類問題的演算法。
 
 決策樹的概念十分簡單，假設我們有以下資料：
 ![](./Screenshot%20from%202023-10-17%2014-05-52.png)
@@ -43,11 +43,11 @@ Decision Tree（DT；決策樹）或是叫做 classification tree 是一種處�
 
 # 演算法
 
-三種演算法的差異主要是在衡量分割方式使用的度量指標不同，整體上沒有太大差異。
+上面提到的三種演算法主要差異是在衡量分割方式使用的度量指標不同。
 
-當我們有了度量指標能夠量化什麼樣的分割（分類）會是最好的，就可以直接用 Greedy 的方式（遞迴）找出（理論上）最佳的決策樹。
+當我們有了度量指標能夠量化當前選擇哪個 descriptive feature 會是最好的，就可以直接用 Greedy 的方式（遞迴）找出（理論上）最佳的決策樹。
 
-```
+```plaintext
 Main loop:
 1   A <- the "best" decision attribute for next node
 2   Assign A as decision attribute for node
@@ -57,8 +57,8 @@ Main loop:
 ```
 
 上面的演算法用比較白話的方式就是：
-1. 選擇目前資料集所有分類最好的分類將資料集拆成多個子資料集
-2. 對每個子資料集重複 1
+1. 選擇目前資料集中（分類上）最佳的 descriptive feature 將資料集拆成多個子資料集
+2. 對每個子資料集重複 1.
 3. 當滿足以下條件時停止遞迴
     1. 資料集的所有資料的 target value（target feature）都相同
     2. 已經沒有 descriptive features 可以用來分類了
@@ -66,7 +66,7 @@ Main loop:
 
 補充：在同一個 branch 上面使用同一個 descriptive features 多次是沒有意義的（可以做只是沒有任何幫助）。可以參考：https://stackoverflow.com/questions/19993139/can-splitting-attribute-appear-many-times-in-decision-tree
 
-> 注意，以下的 {{< math_inline >}}c{{< /math_inline >}} 都代表 classification 的數量
+> 注意，以下的 {{< math_inline >}}c{{< /math_inline >}} 都代表不同 target value 的數量
 
 ## ID3
 每次選擇擁有最大 IG 的分割（IG 越大越好）。
@@ -92,7 +92,7 @@ https://hackmd.io/@8dSak6oVTweMeAe9fXWCPA/ryoegPgw_
 
 ## 缺點
 
-這樣算出的 IG 會傾向使用有很多 value 的 descriptive features，例如使用者 ID，然而我們都知道用使用者 ID 去分類是毫無意義的。
+用這種方式計算出的 IG 會傾向使用擁有較多不同數值的 descriptive features（例如使用者 ID），然而我們都知道使用使用者 ID 去分類是毫無意義的。
 
 # CART
 
@@ -113,9 +113,11 @@ GR(D, A) = \frac{IG(D, A)}{SplitInfo(D, A)}
 {{< /math_block >}}
 
 {{< math_block >}}
-SplitInfo(D, A) = - \sigma_{i=1}^{c} \frac{|D_{i}|}{|D|} log_{2}{\frac{|D_{i}|}{|D|}}
+SplitInfo(D, A) = - \sum_{i=1}^{c} \frac{|D_{i}|}{|D|} log_{2}{\frac{|D_{i}|}{|D|}}
 {{< /math_block >}}
 
+- {{< math_inline >}}|D|{{< /math_inline >}}：分割前的元素數量
+- {{< math_inline >}}|D_{i}|{{< /math_inline >}}：分割後第 {{< math_inline >}}i{{< /math_inline >}} 子集的元素數量
 
 ## 缺點
 
