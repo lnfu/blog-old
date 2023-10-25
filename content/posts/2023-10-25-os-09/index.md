@@ -57,7 +57,7 @@ P \implies q_{1} \land q_{2} \land q_{3} \land q_{4}
 
 
 - {{< math_inline >}}P{{< /math_inline >}}: Deadlock
-- {{< math_inline >}}q_{1}{{< /math_inline >}}: Mutual Exclusion
+- {{< math_inline >}}q_{1}{{< /math_inline >}}: Mutual Exclusion（同一時間只能有一個人用）
 - {{< math_inline >}}q_{2}{{< /math_inline >}}: Hold and wait
 - {{< math_inline >}}q_{3}{{< /math_inline >}}: No preemption
 - {{< math_inline >}}q_{4}{{< /math_inline >}}: Circular wait
@@ -67,3 +67,34 @@ P \implies q_{1} \land q_{2} \land q_{3} \land q_{4}
 {{< math_block >}}
 \neg q_{1} \lor \neg q_{2} \lor \neg q_{3} \lor \neg q_{4} \implies P
 {{< /math_block >}}
+
+
+
+# 圖示
+
+![](./Screenshot%20from%202023-10-25%2011-44-45.png)
+
+
+有環不一定就是 deadlock。
+
+![](./Screenshot%20from%202023-10-25%2011-47-39.png)
+
+
+# ??
+
+- prevention = avoidance：不會有 deadlock
+- detection = recovery：可以有 deadlock，會 recovery
+
+
+## Prevention
+
+之後補（ch7 p19）
+
+從 no preemption 下手，使用 checkpoint mechanism。
+
+從 circular wait 下手，使用 total/partial ordering
+
+
+## Avoidance
+
+分配之前先試試看，如果偵測有環就拒絕。
