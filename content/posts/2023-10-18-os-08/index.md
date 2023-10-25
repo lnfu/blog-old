@@ -18,6 +18,12 @@ tags: ["課程筆記"]
 
 Sync 不能不做（程式正確性問題）。
 
+Sync 四大問題：
+1. Bounded-Buffer Problem
+2. Readers–Writers Problem
+3. Dining-Philosophers Problem
+4. Sleeping Barber Problem
+
 # Race Condition
 
 以 counter 為例子，我們前面用 counter 去計算 buffer 裡面有多少個，但是這其實會產生 race condition 的問題。
@@ -91,9 +97,9 @@ if (safe == TRUE)
 ```c
 do {
     // entry section
-        critical section
+        <CRITICAL SECTION>
     // exit section
-        remainder section // 之後我會用 ... 表示
+        <REMAINDER SECTION> // 之後我會用 ... 表示
 }
 ```
 
@@ -109,7 +115,7 @@ do {
 ```c
 do {
     disable interrupt; // entry section
-    // critical section
+    <CRITICAL SECTION>
     enable interrupt; // exit section
     
     ...
@@ -137,7 +143,7 @@ do {
     while (TestAndSet(&lock))
         ;
 
-    // critical section
+    <CRITICAL SECTION>
     lock = FALSE;
     
     ...
@@ -161,7 +167,7 @@ do {
     while(key == TRUE)
          Swap(&lock, &key);
 
-    // critical section
+    <CRITICAL SECTION>
     lock = FALSE;
     
     ...
@@ -325,6 +331,51 @@ Deadlock：如下圖
 
 Starvation：某個 process 要資源但是一直要不到
 
+
+
+
+# 哲學家就餐問題（Dining-Philosophers Problem）
+
+參考：https://en.wikipedia.org/wiki/Dining_philosophers_problem
+
+五個哲學家（思考、等待、吃飯）坐一圈，每個人左右都有一支筷子（總共五支）。
+
+每個人吃飯都要兩支筷子（先拿左邊再拿右邊），且只能用自己手邊的筷子。
+
+每個人遵守以下操作：
+```
+1. think unless the left chopstick is available; when it is, pick it up;
+2. think unless the right chopstick is available; when it is, pick it up;
+3. when both chopstick are held, eat for a fixed amount of time;
+4. put the left chopstick down;
+5. put the right chopstick down;
+6. repeat from the beginning.
+```
+
+死結：當所有哲學家都拿起自己左邊的筷子。
+
+
+
+
+# 讀寫問題（Readers–writers Problem）
+
+reader：只能讀
+
+writer：可以讀、寫
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 問題
 
 The TAS/SWAP instruction as a solution of the critical section problem guarantees which one(s) of the
@@ -345,7 +396,7 @@ do {
     
     waiting[i] = FALSE;
 
-    // critical section
+    <CRITICAL SECTION>
 
     j = (i + 1) % n;
     while ((j != i) && !waiting[j])
