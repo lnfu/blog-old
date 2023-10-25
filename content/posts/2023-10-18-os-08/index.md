@@ -320,40 +320,6 @@ proc()
 
 
 
-# Deadlock & Starvation
-
-Deadlock：如下圖
-
-![](./deadlock.png)
-
-
-
-
-Starvation：某個 process 要資源但是一直要不到
-
-
-
-
-# 哲學家就餐問題（Dining-Philosophers Problem）
-
-參考：https://en.wikipedia.org/wiki/Dining_philosophers_problem
-
-五個哲學家（思考、等待、吃飯）坐一圈，每個人左右都有一支筷子（總共五支）。
-
-每個人吃飯都要兩支筷子（先拿左邊再拿右邊），且只能用自己手邊的筷子。
-
-每個人遵守以下操作：
-```
-1. think unless the left chopstick is available; when it is, pick it up;
-2. think unless the right chopstick is available; when it is, pick it up;
-3. when both chopstick are held, eat for a fixed amount of time;
-4. put the left chopstick down;
-5. put the right chopstick down;
-6. repeat from the beginning.
-```
-
-死結：當所有哲學家都拿起自己左邊的筷子。
-
 
 
 
@@ -363,18 +329,101 @@ reader：只能讀
 
 writer：可以讀、寫
 
+# 第一種（reader preference）
+```c
+// 對於 write 很簡單，就是去搶 resource 就好
+writer() {
+    wait(resource);
+
+    <WRITE>
+
+    signal(resource);
+}
+
+// 對於 reader 稍微複雜一點
+// 要 read 之前先判斷是不是第一個 reader，如果是就要搶 resource
+// read 完後也要判斷是不是最後一個，如果是要把 resource 還回去
+reader() {
+    wait(mutex); // 先鎖住 readcount
+
+    readcount++; 
+    if (readcount == 1)
+        wait(resource);
+
+    signal(mutex);
+
+    <READ>
+
+    wait(mutex); // 先鎖住 readcount
+
+    readcount--;    
+    if (readcount == 0)
+        signal(resource);
+
+    signal(mutex);
+}
+```
+
+不過這樣會讓 writer 很容易 starvation（都被 reader 搶走了），所以有第二、第三種（老師不講）。
 
 
+# 理髮師睡覺問題（Sleeping Barber Problem）
+
+有一個理髮師，n 個座位（可以有 n 個客人）。
+
+理髮師等客人，客人等理髮師（睡覺）。
+
+```c
+customer() {
+    while (true) {
+        wait(AccessSeats);                  // lock NumberOffFreeSeats
+
+        if (NumberOffFreeSeats > 0) {
+            NumberOffFreeSeats--;           // 坐下
+            signal(Customers);              // 客人準備好了
+            signal(AccessSeats);
+            wait(Barber);                   // 等待理髮師
+            // 客人等待剪髮
+        }
+        else {
+            signal(AccessSeats);
+            // 客人沒有剪到頭髮
+        }
+    }
+}
+
+barber() {
+    while (true) {
+        wait(Customers);                    // 等待客人
+        wait(AccessSeats);
+
+        NumberOffFreeSeats++;               // 客人的椅子空下
+        signal(Barber);                     // 幫客人服務
+
+        signal(AccessSeats);
+
+        // 理髮師幫客人剪髮
+    }
+}
+```
+
+# UNIX - Mutex Locks
+
+Mutex = MUTually EXclusive
+
+```
+// 只能在同一個 thread 使用（lock/unlock）
+#include <• pthread.h>
+pthread_mutex_lock()
+pthread_mutex_unlock()
+```
+
+> 第三次作業 mutex 和 semaphore 都會使用到
 
 
+# Monitor（Java）
 
-
-
-
-
-
-
-
+物件導向
 
 # 問題
 
