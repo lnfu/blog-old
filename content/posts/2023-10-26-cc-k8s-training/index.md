@@ -164,9 +164,9 @@ backend kube-apiserver-backend
     balance roundrobin
     stick-table type ip size 200k expire 30m
     stick on src
-    server apiserver1 10.2.2.90:6443 check
-    server apiserver2 10.2.2.91:6443 check
-    server apiserver3 10.2.2.92:6443 check
+    server apiserver1 10.2.2.131:6443 check
+    server apiserver2 10.2.2.132:6443 check
+    server apiserver3 10.2.2.133:6443 check
 ```
 
 # 建立集群
