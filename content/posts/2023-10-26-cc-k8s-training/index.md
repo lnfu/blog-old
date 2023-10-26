@@ -280,14 +280,57 @@ https://wiki.cs.nctu.edu.tw/index.php/Flannel
 
 Flannel 支援至少兩種模式： VXLAN 和 host-gw 。前者將各節點以 VXLAN 的方式連結成一個虛擬 LAN ，因此各節點可以在不同的網段中；後者透過修改路由的方式促成各節點之間的網路連通，因此其先備條件是所有機器必須在同一個 LAN 當中。
 
-
+在 efliao-k8s-c1 執行：
 ```
 kubeadm init --control-plane-endpoint=10.2.2.137:8443 --pod-network-cidr=10.244.0.0/16 --upload-certs
 ```
 
 > 10.244.0.0/16 是 Flannel 預設分配 IP 的範圍。
 
+輸出結果：
+
+```
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+You can now join any number of the control-plane node running the following command on each as root:
+
+  kubeadm join 10.2.2.137:8443 --token aksrrq.5lx1h32ffved6ezp \
+	--discovery-token-ca-cert-hash sha256:62daa58135e22888376988582ebc0bc43c911e0b7ccf5f60f14c2c98ec8f4df5 \
+	--control-plane --certificate-key d6efaae506d1d4fc4629aed84d15e8b6906f12eaaa98ca243b6afd8b9ca3550b
+
+Please note that the certificate-key gives access to cluster sensitive data, keep it secret!
+As a safeguard, uploaded-certs will be deleted in two hours; If necessary, you can use
+"kubeadm init phase upload-certs --upload-certs" to reload certs afterward.
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 10.2.2.137:8443 --token aksrrq.5lx1h32ffved6ezp \
+	--discovery-token-ca-cert-hash sha256:62daa58135e22888376988582ebc0bc43c911e0b7ccf5f60f14c2c98ec8f4df5
+```
+
 集群建立後，config 檔案會被放在 /etc/kubernetes/admin.conf，你需要這個檔案來操作 kubectl 。
+
+
+
+
+
+
+
+
 
 
 
@@ -348,40 +391,3 @@ Server Version: v1.26.9
 
 
 ---
-
-
-```
-global
-  log 127.0.0.1 local0
-  log 127.0.0.1 local1 notice
-  tune.ssl.default-dh-param 2048
-
-defaults
-  log global
-  mode http
-  option dontlognull
-  timeout connect 5000ms
-  timeout client 600000ms
-  timeout server 600000ms
-
-listen stats
-    bind :9090
-    mode http
-    balance
-    stats uri /
-
-frontend kube-apiserver-https
-   mode tcp
-   bind :8443
-   default_backend kube-apiserver-backend
-
-backend kube-apiserver-backend
-    mode tcp
-    balance roundrobin
-    stick-table type ip size 200k expire 30m
-    stick on src
-    server apiserver1 10.2.2.131:6443 check
-    server apiserver2 10.2.2.132:6443 check
-    server apiserver3 10.2.2.133:6443 check
-
-```
