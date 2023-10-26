@@ -272,7 +272,7 @@ firewall-cmd --reload # 加完記得要 reload
 
 
 
-# 建立集群
+# 建立集群並且執行 Flannel
 
 規格上面寫說 CNI 選擇 Flannel，模式為 host-gw。
 
@@ -333,19 +333,46 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
 
-
-
-
-
-
-
-
 等所有節點都加入集群後，先運行 Flannel：
 ```
 wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml -O- \
   | sed 's/vxlan/host-gw/' \
   | kubectl create -f-
 ```
+
+# OIDC 設定
+
+修改 `/etc/kubernetes/manifests/kube-apiserver.yaml`，kube-apiserver 會自動載入設定（不過升級集群時會丟失所以要特別處理）。
+```
+sudo vim /etc/kubernetes/manifests/kube-apiserver.yaml
+```
+
+```
+spec:
+  containers:
+  - command:
+    - --oidc-issuer-url=https://oauth.cs.nctu.edu.tw
+    - --oidc-client-id=987
+    - --oidc-username-claim=uid
+    - "--oidc-username-prefix=oidc:"
+    - --oidc-groups-claim=groups
+    - "--oidc-groups-prefix=oidc-group:"
+    - "--oidc-required-claim=is-cs-ta=true"
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ---
