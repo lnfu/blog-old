@@ -1,8 +1,10 @@
 ---
-title: "2023 10 26 Cc K8s Training"
+title: "CC 新訓 - K8S"
 date: 2023-10-26T11:24:41+08:00
-draft: true
+draft: false
 author: "Enfu Liao"
+tags: ["CC"]
+
 # cover:
 #     image: "<image path/url>" # image path/url
 #     alt: "<alt text>" # alt text
