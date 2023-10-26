@@ -45,6 +45,8 @@ grep -E '(vmx|svm)' /proc/cpuinfo
 
 想一想乾脆也先裝一裝 kata container，之後就不用在用了。
 
+只需要在 worker 上面安裝就好。
+
 ```
 dnf install -y centos-release-advanced-virtualization
 dnf module disable -y virt:rhel
