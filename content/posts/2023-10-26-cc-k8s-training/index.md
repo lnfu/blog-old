@@ -340,7 +340,9 @@ wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-
   | kubectl create -f-
 ```
 
-# OIDC 設定
+# OIDC 設定（選用）
+
+![](./Screenshot%20from%202023-10-26%2019-02-40.png)
 
 修改 `/etc/kubernetes/manifests/kube-apiserver.yaml`，kube-apiserver 會自動載入設定（不過升級集群時會丟失所以要特別處理）。
 ```
