@@ -362,6 +362,33 @@ spec:
     - "--oidc-required-claim=is-cs-ta=true"
 ```
 
+# 部署應用：containous/whoami
+
+- 使用 DaemonSet 佈署網頁服務所需要的 Pod
+- 使用 Service type NodePort Expose 出來
+
+```
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: whoami-daemonset
+spec:
+  selector:
+    matchLabels:
+      name: whoami            # 要和 spec.template.labels 一樣
+  template:
+    metadata:
+      labels:
+        name: whoami
+    spec:
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
+      containers:
+      - name: whoami-container
+        image: containous/whoami
+```
 
 
 # 部署 LoadBalancer：OpenELB
@@ -415,16 +442,20 @@ spec:
 status:
     occupied: false
     poolSize: 1
-    used: 
-      "192.168.0.91": "default/test-svc"
     firstIP: 10.2.2.138
     lastIP: 10.2.2.138
     ready: true
     v4: true
 ```
 
+設定成 default 之後就不用在每次建立 service 時打以下內容了：
+```
+lb.kubesphere.io/v1alpha1: openelb
+protocol.openelb.kubesphere.io/v1alpha1: vip
+eip.openelb.kubesphere.io/v1alpha2: eip-vip-pool
+```
 
-
+> When creating a Service, generally you need to add the lb.kubesphere.io/v1alpha1: openelb, protocol.openelb.kubesphere.io/v1alpha1: <mode>, and eip.openelb.kubesphere.io/v1alpha2: <Eip name> annotations to the Service to specify that OpenELB is used as the load balancer plugin, either the BGP, Layer 2, or VIP mode is used, and an Eip object is used as the IP address pool. However, if a default Eip object exists, you do not need to add the preceding annotations to the Service and the system automatically assigns an IP address from the default Eip object to the Service. Detailed rules about IP address assignment are as follows:
 
 
 
@@ -448,13 +479,6 @@ status:
 
 <!-- - <這是有難度的坑，需注意> 底下實際上為 Keepalived 實作，因此請不要設定到重複的 “Virtual Router ID”
 需要 tcpdump 查看 vrid 與為某個元件的 args 添加 --vrid=?? -->
-
-
-
-<!-- # 部署應用：containous/whoami
-
-- 使用 DaemonSet 佈署網頁服務所需要的 Pod
-- 使用 Service type NodePort Expose 出來 -->
 
 
 
