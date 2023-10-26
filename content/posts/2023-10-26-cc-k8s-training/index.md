@@ -479,8 +479,58 @@ eip.openelb.kubesphere.io/v1alpha2: eip-vip-pool
 > When creating a Service, generally you need to add the lb.kubesphere.io/v1alpha1: openelb, protocol.openelb.kubesphere.io/v1alpha1: <mode>, and eip.openelb.kubesphere.io/v1alpha2: <Eip name> annotations to the Service to specify that OpenELB is used as the load balancer plugin, either the BGP, Layer 2, or VIP mode is used, and an Eip object is used as the IP address pool. However, if a default Eip object exists, you do not need to add the preceding annotations to the Service and the system automatically assigns an IP address from the default Eip object to the Service. Detailed rules about IP address assignment are as follows:
 
 
+# 部署 Ingress Controller：Traefik
+
+https://doc.traefik.io/traefik/
 
 
+`traefik-rbac.yaml`：
+
+- 使用 Traefik v2.7 以上
+- 使用 CRD IngressRoute 將 Træfik 自己的 Dashboard Expose 出來
+- 使用 LoadBalancer OpenELB 導入流量到 Traefik Ingress Controller（應該是不用特別做什麼，因為我已經設定 default eip）
+- 外部使用者可以透過 LoadBalancer 的 Port 80 訪問網頁服務(proto http)。
+- 自簽一張憑證並掛在 Traefik Ingress Controller 上，且讓外部使用者能透過 LoadBalancer 的 Port 443 訪問網頁服務 (proto https)。
+
+
+
+
+
+```
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: traefik-role
+
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - services
+      - endpoints
+      - secrets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+      - networking.k8s.io
+    resources:
+      - ingresses
+      - ingressclasses
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+      - networking.k8s.io
+    resources:
+      - ingresses/status
+    verbs:
+      - update
+```
 
 
 
