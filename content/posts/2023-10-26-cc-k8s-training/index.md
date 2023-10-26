@@ -85,11 +85,39 @@ systemctl restart crio
 ```
 
 
+# 安裝 kubeadm、kubelet、kubectl（v1.26）
+所有機器都要安裝。
 
+```
+cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+exclude=kubelet kubeadm kubectl
+EOF
+```
 
+```
+dnf install -y kubeadm-1.26.0 kubelet-1.26.0 kubectl-1.26.0 --disableexcludes=kubernetes
+```
 
+然後因為是 CentOS 系統，所以還要開啟這兩個東西：
+```
+cat << 'EOF' > /usr/lib/systemd/system/kubelet.service.d/20-accounting.conf
+[Service]
+CPUAccounting=true
+MemoryAccounting=true
+EOF
+```
 
-
+```
+systemctl daemon-reload
+systemctl restart kubelet
+```
 
 # k8s & crio version
 
