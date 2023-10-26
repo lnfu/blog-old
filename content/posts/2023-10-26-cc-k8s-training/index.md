@@ -70,7 +70,7 @@ dnf install -y qemu-kvm
 kata-runtime kata-check     # 確認是否有正確安裝
 ```
 
-然後要編輯 `/etc/crio/crio.conf`：
+然後要編輯 `/etc/crio/crio.conf`（第 98 行開始）：
 ```
 [crio.runtime]
 manage_ns_lifecycle = true
