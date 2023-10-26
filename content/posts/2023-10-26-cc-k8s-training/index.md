@@ -322,6 +322,8 @@ kubeadm join 10.2.2.137:8443 --token aksrrq.5lx1h32ffved6ezp \
 	--discovery-token-ca-cert-hash sha256:62daa58135e22888376988582ebc0bc43c911e0b7ccf5f60f14c2c98ec8f4df5
 ```
 
+然後根據提示訊息在其他節點執行 `kubeadm join` 指令來加入集群。
+
 集群建立後，config 檔案會被放在 /etc/kubernetes/admin.conf，你需要這個檔案來操作 kubectl 。
 
 
