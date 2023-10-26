@@ -493,9 +493,7 @@ https://doc.traefik.io/traefik/
 - 自簽一張憑證並掛在 Traefik Ingress Controller 上，且讓外部使用者能透過 LoadBalancer 的 Port 443 訪問網頁服務 (proto https)。
 
 
-
-
-
+`traefik-role.yaml`：
 ```
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
@@ -530,6 +528,30 @@ rules:
       - ingresses/status
     verbs:
       - update
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: traefik-account
+
+---
+
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: traefik-role-binding
+
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: traefik-role
+subjects:
+  - kind: ServiceAccount
+    name: traefik-account
+    namespace: default # Using "default" because we did not specify a namespace when creating the ClusterAccount.
+
 ```
 
 
