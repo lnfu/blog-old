@@ -121,9 +121,9 @@ systemctl daemon-reload
 systemctl restart kubelet
 ```
 
-# Control Plane HA（使用 HAProxy）
+# Control Plane HA（使用 HAProxy、keepalived）
 
-根據 CC 的 Wiki，我們可以以 static pod 和 keepalived 來建立 control plane HA。
+根據 CC 的 Wiki，我們可以透過產生 haproxy 和 keepalived 的 static pod 來達到 control plane HA。
 
 我會將 HA 入口架在 10.2.2.137:8443，並導向三個 control-planes 10.2.2.[131-133]:6443。
 
@@ -168,6 +168,80 @@ backend kube-apiserver-backend
     server apiserver2 10.2.2.132:6443 check
     server apiserver3 10.2.2.133:6443 check
 ```
+
+然後寫兩個 static pod 的配置檔案（yaml），我都先在第一個 control plane node 上面做（efliao-k8s-c1）。
+
+haproxy：
+```
+# /etc/kubernetes/manifests/haproxy.yaml
+kind: Pod
+apiVersion: v1
+metadata:
+  annotations:
+    scheduler.alpha.kubernetes.io/critical-pod: ""
+  name: kube-haproxy
+  namespace: kube-system
+spec:
+  hostNetwork: true
+  priorityClassName: system-cluster-critical
+  containers:
+  - name: kube-haproxy
+    image: docker.io/haproxy:1.7-alpine
+    resources:
+      requests:
+        cpu: 100m
+    volumeMounts:
+    - name: haproxy-cfg
+      readOnly: true
+      mountPath: /usr/local/etc/haproxy
+  volumes:
+  - name: haproxy-cfg
+    hostPath:
+      path: /etc/haproxy
+```
+
+keepalived：
+```
+# /etc/kubernetes/manifests/keepalived.yaml
+kind: Pod
+apiVersion: v1
+metadata:
+  annotations:
+    scheduler.alpha.kubernetes.io/critical-pod: ""
+  name: kube-keepalived
+  namespace: kube-system
+spec:
+  hostNetwork: true
+  priorityClassName: system-cluster-critical
+  containers:
+  - name: kube-keepalived
+    image: docker.io/osixia/keepalived:2.0.17
+    env:
+    - name: KEEPALIVED_VIRTUAL_IPS
+      value: 10.2.2.137
+    - name: KEEPALIVED_INTERFACE
+      value: ens192
+    - name: KEEPALIVED_UNICAST_PEERS
+      value: "#PYTHON2BASH:['10.2.2.131', '10.2.2.132', '10.2.2.133']"
+    resources:
+      requests:
+        cpu: 100m
+    securityContext:
+      privileged: true
+      capabilities:
+        add:
+        - NET_ADMIN
+```
+
+
+
+
+
+
+
+
+
+
 
 # 建立集群
 
