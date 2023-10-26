@@ -364,6 +364,73 @@ spec:
 
 
 
+# 部署 LoadBalancer：OpenELB
+
+- 用最簡單的 VIP Mode 來實作
+
+> 另一個有名的 LB 是 MetalLB。
+
+> 使用 LoadBalancer 的好處：网络流量在云服务端就会被分流，就能够避免 NodePort 方式的单点故障和性能瓶颈（NodePort 是将集群中的一个主机作为跳板访问后端服务，所有的流量都会经过跳板机，很容易造成性能瓶颈和单点故障，而且经过了一层snat，pod无法看到真正的IP。）[參考](https://wghdr.top/archives/1634)
+
+> OpenELB 主要有 Layer2 Mode 和 BGP Mode
+
+> VIP Mode（還在 beta，has not been fully tested yet and may have unknown issues） 和 Layer2 Mode 相似，只是更簡單。
+
+https://openelb.io/docs/concepts/vip-mode/
+
+https://openelb.io/docs/getting-started/installation/install-openelb-on-kubernetes/
+
+```
+https://raw.githubusercontent.com/openelb/openelb/master/deploy/openelb.yaml
+
+kubectl apply -f openelb.yaml
+
+kubectl get pod -n openelb-system
+```
+
+```
+openelb-admission-create-fr7lg    0/1     Completed   0          64s
+openelb-admission-patch-flwvq     0/1     Completed   2          64s
+openelb-keepalive-vip-42pxp       1/1     Running     0          18s
+openelb-keepalive-vip-dfh8d       1/1     Running     0          18s
+openelb-keepalive-vip-sspn6       1/1     Running     0          18s
+openelb-manager-d6df4dfc4-rbpmn   1/1     Running     0          64s
+```
+
+## 建立 Eip object
+
+https://openelb.io/docs/getting-started/configuration/configure-ip-address-pools-using-eip/
+
+```
+apiVersion: network.kubesphere.io/v1alpha2
+kind: Eip
+metadata:
+    name: eip-vip-pool
+    annotations:
+      eip.openelb.kubesphere.io/is-default-eip: "true"
+spec:
+    address: 10.2.2.138
+    protocol: vip
+    disable: false
+status:
+    occupied: false
+    poolSize: 1
+    used: 
+      "192.168.0.91": "default/test-svc"
+    firstIP: 10.2.2.138
+    lastIP: 10.2.2.138
+    ready: true
+    v4: true
+```
+
+
+
+
+
+
+
+
+
 
 
 
@@ -379,6 +446,15 @@ spec:
 
 ---
 
+<!-- - <這是有難度的坑，需注意> 底下實際上為 Keepalived 實作，因此請不要設定到重複的 “Virtual Router ID”
+需要 tcpdump 查看 vrid 與為某個元件的 args 添加 --vrid=?? -->
+
+
+
+<!-- # 部署應用：containous/whoami
+
+- 使用 DaemonSet 佈署網頁服務所需要的 Pod
+- 使用 Service type NodePort Expose 出來 -->
 
 
 
@@ -389,40 +465,3 @@ spec:
 
 
 
-
-
-
-
----
-
-# k8s & crio version
-
-集群已經建立好了，不過先確認一些東西。
-
-```sh
-kubectl version --short                                     # k8s 版本
-tr \\0 ' ' < /proc/"$(pgrep kubelet)"/cmdline | grep crio   # 確認是用 crio（不太確定這樣對不對）
-cat /var/run/crio/version                                   # crio 版本
-```
-
-```plaintext
-Client Version: v1.26.0
-Kustomize Version: v4.5.7
-Server Version: v1.26.9
-```
-
-```plaintext
-/usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --container-runtime-endpoint=unix:///var/run/crio/crio.sock --pod-infra-container-image=registry.k8s.io/pause:3.9
-```
-
-```plaintext
-"1.26.4+unknown"
-```
-
-看起來沒什麼問題，繼續。
-
-
-
-
-
----

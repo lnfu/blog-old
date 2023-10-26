@@ -288,3 +288,10 @@ MASTER_SITE_OVERRIDE?= ${MASTER_SITE_BACKUP}
 
 
 ---
+
+
+```
+efliao@UX480FD:~$ ps -p $$
+    PID TTY          TIME CMD
+   8411 pts/4    00:00:00 bash
+```
