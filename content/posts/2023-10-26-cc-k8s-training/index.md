@@ -121,17 +121,19 @@ systemctl daemon-reload
 systemctl restart kubelet
 ```
 
-# Control Plane HA
+# Control Plane HA（使用 HAProxy）
 
-將 HA 入口架在 10.2.2.137:8443，並導向三個 control-planes 10.2.2.[131-133]:6443。
+根據 CC 的 Wiki，我們可以以 static pod 和 keepalived 來建立 control plane HA。
 
+我會將 HA 入口架在 10.2.2.137:8443，並導向三個 control-planes 10.2.2.[131-133]:6443。
 
-所有 control plane（10.2.2.[131-133]）新增 `/etc/haproxy/haproxy.cfg`
+首先，先在所有 control plane（10.2.2.[131-133]）新增 `/etc/haproxy/haproxy.cfg`。
 ```
 mkdir -p /etc/haproxy/
 vim /etc/haproxy/haproxy.cfg
 ```
 
+寫入以下內容：
 ```
 global
   log 127.0.0.1 local0
@@ -167,6 +169,7 @@ backend kube-apiserver-backend
     server apiserver3 10.2.2.92:6443 check
 ```
 
+# 建立集群
 
 
 
