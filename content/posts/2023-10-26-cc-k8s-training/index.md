@@ -127,6 +127,8 @@ systemctl restart kubelet
 
 我會將 HA 入口架在 10.2.2.137:8443，並導向三個 control-planes 10.2.2.[131-133]:6443。
 
+> 6443 是 Kubernetes API server 的 port
+
 首先，先在所有 control plane（10.2.2.[131-133]）新增 `/etc/haproxy/haproxy.cfg`。
 ```
 mkdir -p /etc/haproxy/
@@ -270,15 +272,37 @@ firewall-cmd --reload # 加完記得要 reload
 
 
 
----
-
-
----
-
-
-
-
 # 建立集群
+
+規格上面寫說 CNI 選擇 Flannel，模式為 host-gw。
+
+https://wiki.cs.nctu.edu.tw/index.php/Flannel
+
+Flannel 支援至少兩種模式： VXLAN 和 host-gw 。前者將各節點以 VXLAN 的方式連結成一個虛擬 LAN ，因此各節點可以在不同的網段中；後者透過修改路由的方式促成各節點之間的網路連通，因此其先備條件是所有機器必須在同一個 LAN 當中。
+
+
+```
+kubeadm init --control-plane-endpoint=10.2.2.137:8443 --pod-network-cidr=10.244.0.0/16 --upload-certs
+```
+
+> 10.244.0.0/16 是 Flannel 預設分配 IP 的範圍。
+
+集群建立後，config 檔案會被放在 /etc/kubernetes/admin.conf，你需要這個檔案來操作 kubectl 。
+
+
+
+等所有節點都加入集群後，先運行 Flannel：
+```
+wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml -O- \
+  | sed 's/vxlan/host-gw/' \
+  | kubectl create -f-
+```
+
+
+---
+
+
+
 
 
 
