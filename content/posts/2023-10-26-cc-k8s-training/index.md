@@ -235,10 +235,45 @@ spec:
 
 
 
+# 開啟需要的 port（防火牆設定）
+
+## control plane
+
+```
+firewall-cmd --add-port={6443,2379,2380,8443,10248,10250,10255,10257,10259}/tcp --permanent
+firewall-cmd --reload # 加完記得要 reload
+```
+
+> 8443 是要給 control plane HA 使用的。
+
+| Protocol | Direction | Port Range | Purpose                 | Used By              |
+|----------|-----------|------------|-------------------------|----------------------|
+| TCP      | Inbound   | 6443       | Kubernetes API server   | All                  |
+| TCP      | Inbound   | 2379-2380  | etcd server client API  | kube-apiserver, etcd |
+| TCP      | Inbound   | 10250      | Kubelet API             | Self, Control plane  |
+| TCP      | Inbound   | 10259      | kube-scheduler          | Self                 |
+| TCP      | Inbound   | 10257      | kube-controller-manager | Self                 |
+
+
+## worker
+
+```
+firewall-cmd --add-port={80,443,10248,10250,10255,30000-32767}/tcp --permanent
+firewall-cmd --reload # 加完記得要 reload
+```
+
+| Protocol | Direction | Port Range  | Purpose            | Used By             |
+|----------|-----------|-------------|--------------------|---------------------|
+| TCP      | Inbound   | 10250       | Kubelet API        | Self, Control plane |
+| TCP      | Inbound   | 30000-32767 | NodePort Services† | All                 |
 
 
 
 
+---
+
+
+---
 
 
 
@@ -285,46 +320,7 @@ Server Version: v1.26.9
 看起來沒什麼問題，繼續。
 
 
-# 開啟相關 port
 
-```
-# 先重設防火牆
-rm -f /etc/firewalld/zones/public.xml
-rm -f /etc/firewalld/zones/public.xml.old
-firewall-cmd --complete-reload
-```
-
-## control plane
-
-```
-firewall-cmd --add-port={6443,2379,2380,10248,10250,10255,10257,10259}/tcp --permanent
-```
-
-| Protocol | Direction | Port Range | Purpose                 | Used By              |
-|----------|-----------|------------|-------------------------|----------------------|
-| TCP      | Inbound   | 6443       | Kubernetes API server   | All                  |
-| TCP      | Inbound   | 2379-2380  | etcd server client API  | kube-apiserver, etcd |
-| TCP      | Inbound   | 10250      | Kubelet API             | Self, Control plane  |
-| TCP      | Inbound   | 10259      | kube-scheduler          | Self                 |
-| TCP      | Inbound   | 10257      | kube-controller-manager | Self                 |
-
-## worker
-
-```
-firewall-cmd --add-port={80,443,10248,10250,10255,30000-32767}/tcp --permanent
-```
-
-| Protocol | Direction | Port Range  | Purpose            | Used By             |
-|----------|-----------|-------------|--------------------|---------------------|
-| TCP      | Inbound   | 10250       | Kubelet API        | Self, Control plane |
-| TCP      | Inbound   | 30000-32767 | NodePort Services† | All                 |
-
-
-## reload firewall 設定
-
-```
-firewall-cmd --reload
-```
 
 
 ---
