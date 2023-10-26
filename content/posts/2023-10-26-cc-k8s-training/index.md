@@ -326,7 +326,11 @@ kubeadm join 10.2.2.137:8443 --token aksrrq.5lx1h32ffved6ezp \
 
 集群建立後，config 檔案會被放在 /etc/kubernetes/admin.conf，你需要這個檔案來操作 kubectl 。
 
-
+```
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
 
 
 
