@@ -367,6 +367,7 @@ spec:
 - 使用 DaemonSet 佈署網頁服務所需要的 Pod
 - 使用 Service type NodePort Expose 出來
 
+`whoami-daemonset.yaml`：
 ```
 apiVersion: apps/v1
 kind: DaemonSet
@@ -375,11 +376,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      name: whoami            # 要和 spec.template.labels 一樣
+      app: whoami               # 要和 spec.template.labels 一樣
   template:
     metadata:
       labels:
-        name: whoami
+        app: whoami
     spec:
       tolerations:
       - key: node-role.kubernetes.io/control-plane
@@ -390,6 +391,23 @@ spec:
         image: containous/whoami
 ```
 
+
+`whoami-svc`：
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: whoami-service
+spec:
+  type: NodePort
+  selector:
+    app: whoami
+  ports:
+  - name: http
+    targetPort: 80
+    port: 80
+    nodePort: 30080
+```
 
 # 部署 LoadBalancer：OpenELB
 
