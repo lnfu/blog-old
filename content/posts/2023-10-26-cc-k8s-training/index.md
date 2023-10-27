@@ -675,13 +675,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: traefik-web-service
+  name: traefik-websecure-service
 
 spec:
   type: LoadBalancer
   ports:
-    - targetPort: web
-      port: 80
+    - targetPort: websecure
+      port: 443
   selector:
     app: traefik
 ```
