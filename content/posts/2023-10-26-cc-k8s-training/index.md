@@ -608,6 +608,77 @@ spec:
 
 前面已經裝好 traefik 作為 Ingress Controller，接下來就可以試試看架設 Ingress 服務。
 
+因為要用 kata 作為 container runtime，所以先建立 RuntimeClass。
+
+`kata.yaml`：
+```yaml
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: kata  
+handler: kata-runtime
 ```
-helm install hello ./hello-kubernetes --set ingress.configured=true --set ingress.pathPrefix=hello --set service.type=ClusterIP --set message="一人做事一人當，小叮做事小叮噹！"
+
+然後就是 hello-kubernetes 的 Deployment、Service、Ingress 設定。
+
+`hello-deploy.yaml`：
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-kubernetes
+  template:
+    metadata:
+      labels:
+        app: hello-kubernetes
+    spec:
+      runtimeClassName: kata
+      containers:
+        - name: hello-kubernetes 
+          image: paulbouwer/hello-kubernetes:1.10.1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MESSAGE
+              value: 一人做事一人當，小叮做事小叮噹
+
+```
+
+`hello-svc.yaml`：
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-service
+spec:
+  selector:
+    app: hello-kubernetes
+  ports:
+    - port: 80
+      targetPort: 8080
+```
+
+`hello-ingress.yaml`：
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-ingress
+spec:
+  rules:
+    - host: efliao.test.cc.cs.nctu.edu.tw
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-service
+                port:
+                  number: 80
 ```
