@@ -682,3 +682,7 @@ spec:
                 port:
                   number: 80
 ```
+
+
+# 部屬 Monitoring：kube-prometheus-stack
+
