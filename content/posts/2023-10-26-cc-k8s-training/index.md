@@ -481,6 +481,46 @@ eip.openelb.kubesphere.io/v1alpha2: eip-vip-pool
 
 # 部署 Ingress Controller：Traefik
 
+https://doc.traefik.io/traefik/getting-started/install-traefik/
+
+快被氣死，每次自己寫 yaml 都有問題，有時候還被新舊版本寫法不同搞到，想想還是直接用 helm 安裝好了。
+
+BTW，k8s 和 helm 版本要求：
+- Kubernetes 1.16 以上
+- Helm version 3.9 以上
+
+
+## 安裝 helm  
+
+```
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+```
+
+
+
+
+
+
+
+
+--- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 https://doc.traefik.io/traefik/
 
 
