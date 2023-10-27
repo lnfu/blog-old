@@ -517,7 +517,7 @@ helm install traefik traefik/traefik
 
 這樣會以 deployment 來安裝 traefik，然後我看安裝完後的 service type 就是 LoadBalancer 所以也不用再改。
 
-安裝完後可以先用 port-forwarding 的方式查看 dashboard 服務是否可以正常使用。
+安裝完後可以先用 port-forwarding 的方式查看儀表板服務是否可以正常使用。
 
 因為我的 control plane 是在遠端，所以我要先建立 ssh tunnel。
 
@@ -537,7 +537,7 @@ kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traef
 
 注意！dashboard 後面的那個斜線也要打，不然會 404（這什麼爛東西...）。
 
-## 使用 IngressRoute 暴露儀表板服務
+## 使用 IngressRoute 暴露儀表板（dashboard）服務
 
 ```yaml
 # dashboard.yaml
@@ -574,7 +574,7 @@ cd tls
 kubectl create secret tls traefik-tls --key tls.key --cert tls.crt
 ```
 
-然後我們一樣用 dashboard IngressRoute 測試看看：
+然後我們一樣用 IngressRoute 暴露儀表板測試：
 ```yaml
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
@@ -597,5 +597,5 @@ spec:
 
 > 通常來說，沒有憑證瀏覽器（網址列）會顯示灰色的 Not secure，而像是憑證失效或是我們的自簽憑證就會是紅色的 Not secure。
 
-> 也可以從 dashboard 的 Routers 標籤頁看到是不是 TLS。
+> 也可以從儀表板的 Routers 標籤頁看到是不是 TLS。
 
