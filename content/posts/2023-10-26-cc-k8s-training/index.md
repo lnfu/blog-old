@@ -500,7 +500,14 @@ chmod 700 get_helm.sh
 
 我目前安裝的版本是 helm-v3.13.1-linux-amd64。
 
-## 安裝 traefik
+## 安裝 Traefik
+
+- Ingress Controller 使用 Traefik v2.7 以上。
+- 使用 CRD IngressRoute 將 Traefik 自己的 Dashboard Expose 出來。
+- 使用 LoadBalancer OpenELB 導入流量到 Traefik Ingress Controller。
+- 外部使用者可以透過 LoadBalancer 的 Port 80 訪問網頁服務(proto http)。
+- 自簽一張憑證並掛在 Traefik Ingress Controller 上，且讓外部使用者能透過 LoadBalancer 的 Port 443 訪問網頁服務 (proto https)。
+
 
 ```sh
 helm repo add traefik https://traefik.github.io/charts
@@ -549,4 +556,7 @@ spec:
           kind: TraefikService
 ```
 
+## 自簽憑證
 
+
+https://stackoverflow.com/questions/62781838/traefik-v2-0-self-signed-certificate-on-kubernetes
