@@ -559,4 +559,18 @@ spec:
 ## 自簽憑證
 
 
+先產生私鑰：
+```
+mkdir ssl
+openssl genrsa -out ssl/ca.key 4096 # 產生 4096 bits RSA 私鑰
+
+openssl req -new -x509 -days 365 -sha256 \ 
+    -subj "/C=TW/ST=Hsinchu/O=NCTU/OU=CSCC/CN=efliao.test.cc.cs.nctu.edu.tw" \ 
+    -key ssl/ca.key \ 
+    -out ssl/ca.crt
+```
+
+`x509` 選項就是自簽憑證（self-signed certificate）
+
 https://stackoverflow.com/questions/62781838/traefik-v2-0-self-signed-certificate-on-kubernetes
+
