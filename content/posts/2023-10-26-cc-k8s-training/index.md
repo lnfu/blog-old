@@ -539,7 +539,24 @@ rules:
       - ingresses/status
     verbs:
       - update
-
+  # 使用 IngressRoute
+  - apiGroups:
+      - traefik.io
+      - traefik.containo.us
+    resources:
+      - middlewares
+      - middlewaretcps
+      - ingressroutes
+      - traefikservices
+      - ingressroutetcps
+      - ingressrouteudps
+      - tlsoptions
+      - tlsstores
+      - serverstransports
+    verbs:
+      - get
+      - list
+      - watch
 ---
 
 apiVersion: v1
@@ -562,7 +579,6 @@ subjects:
   - kind: ServiceAccount
     name: traefik-account
     namespace: default # Using "default" because we did not specify a namespace when creating the ClusterAccount.
-
 ```
 
 
