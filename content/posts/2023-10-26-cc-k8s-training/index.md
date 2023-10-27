@@ -562,12 +562,17 @@ https://weirenxue.github.io/2021/06/15/ssl_digital_signed_verify/
 
 先產生私鑰：
 ```
-mkdir tls
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout ./tls/tls.key -out ./tls/tls.crt
-
+mkdir -p tls
+openssl req -x509 -nodes -days 365 -subj "/C=TW/ST=Hsinchu/O=NCTU/OU=CSCC/CN=efliao.test.cc.cs.nctu.edu.tw" -newkey rsa:4096 -keyout ./tls/tls.key -out ./tls/tls.crt
 ```
 
 `x509` 選項就是自簽憑證（self-signed certificate）
+
+
+```
+cd tls
+kubectl create secret tls traefik-tls --key tls.key --cert tls.crt
+```
 
 https://stackoverflow.com/questions/62781838/traefik-v2-0-self-signed-certificate-on-kubernetes
 
