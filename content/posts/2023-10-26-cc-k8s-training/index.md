@@ -492,6 +492,10 @@ https://doc.traefik.io/traefik/
 - 外部使用者可以透過 LoadBalancer 的 Port 80 訪問網頁服務(proto http)。
 - 自簽一張憑證並掛在 Traefik Ingress Controller 上，且讓外部使用者能透過 LoadBalancer 的 Port 443 訪問網頁服務 (proto https)。
 
+> DaemonSets can be run with the NET_BIND_SERVICE capability, which will allow it to bind to port 80/443/etc on each host. This will allow bypassing the kube-proxy, and reduce traffic hops. Note that this is against the Kubernetes Best Practices Guidelines , and raises the potential for scheduling/scaling issues. Despite potential issues, this remains the choice for most ingress controllers.
+
+
+
 https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/
 
 `traefik-crd.yaml`（因為要使用 IngressRoute 的功能）：
