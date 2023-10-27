@@ -492,11 +492,23 @@ BTW，k8s 和 helm 版本要求：
 
 ## 安裝 helm  
 
-```
+```sh
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
 ```
+
+我目前安裝的版本是 helm-v3.13.1-linux-amd64。
+
+## 安裝 traefik
+
+```sh
+helm repo add traefik https://traefik.github.io/charts
+helm repo update
+helm install traefik traefik/traefik
+```
+
+
 
 
 
