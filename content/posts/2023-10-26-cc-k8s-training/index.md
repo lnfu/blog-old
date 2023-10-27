@@ -561,7 +561,7 @@ spec:
 https://weirenxue.github.io/2021/06/15/ssl_digital_signed_verify/
 
 先產生私鑰：
-```
+```sh
 mkdir -p tls
 openssl req -x509 -nodes -days 365 -subj "/C=TW/ST=Hsinchu/O=NCTU/OU=CSCC/CN=efliao.test.cc.cs.nctu.edu.tw" -newkey rsa:4096 -keyout ./tls/tls.key -out ./tls/tls.crt
 ```
@@ -569,7 +569,7 @@ openssl req -x509 -nodes -days 365 -subj "/C=TW/ST=Hsinchu/O=NCTU/OU=CSCC/CN=efl
 `x509` 選項就是自簽憑證（self-signed certificate）
 
 
-```
+```sh
 cd tls
 kubectl create secret tls traefik-tls --key tls.key --cert tls.crt
 ```
