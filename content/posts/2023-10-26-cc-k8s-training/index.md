@@ -646,16 +646,29 @@ spec:
 
 `traefik-svc.yaml`：
 ```yaml
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: traefik-dashboard-service
+
+# spec:
+#   type: LoadBalancer # 用 LoadBalancer 暴露
+#   ports:
+#     - port: 8080
+#       targetPort: dashboard
+#   selector:
+#     app: traefik
+# ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: traefik-dashboard-service
+  name: traefik-web-service
 
 spec:
-  type: LoadBalancer # 用 LoadBalancer 暴露
+  type: LoadBalancer
   ports:
-    - port: 8080
-      targetPort: dashboard
+    - targetPort: web
+      port: 80
   selector:
     app: traefik
 ---
@@ -672,29 +685,6 @@ spec:
   selector:
     app: traefik
 ```
-
-
-
-```
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-    name: traefik-gui
-    namespace: traefik
-spec:
-    entryPoints:
-      - web
-    routes:
-      - match: Host(`localhost`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
-        kind: Rule
-        services:
-          - name: api@internal
-            kind: TraefikService
-```
-
-
-
-
 
 
 
