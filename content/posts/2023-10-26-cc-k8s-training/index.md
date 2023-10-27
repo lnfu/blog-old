@@ -574,5 +574,21 @@ cd tls
 kubectl create secret tls traefik-tls --key tls.key --cert tls.crt
 ```
 
-https://stackoverflow.com/questions/62781838/traefik-v2-0-self-signed-certificate-on-kubernetes
-
+然後我們一樣用 dashboard IngressRoute 測試看看：
+```yaml
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard-tls
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`efliao.test.cc.cs.nctu.edu.tw`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
+  tls:
+    secretName: traefik-tls
+```
