@@ -492,9 +492,20 @@ https://doc.traefik.io/traefik/
 - 外部使用者可以透過 LoadBalancer 的 Port 80 訪問網頁服務(proto http)。
 - 自簽一張憑證並掛在 Traefik Ingress Controller 上，且讓外部使用者能透過 LoadBalancer 的 Port 443 訪問網頁服務 (proto https)。
 
+https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/
+
+`traefik-crd.yaml`（因為要使用 IngressRoute 的功能）：
+
+因為內容有點多，所以我直接附上官方的檔案位置。
+
+```
+kubectl apply -f https://raw.githubusercontent.com/traefik/traefik/v2.10/docs/content/reference/dynamic-configuration/kubernetes-crd-definition-v1.yml
+```
+
+再來要讓 Traefik 有對應的權限才能作為 Ingress Controller，所以要新增 RBAC 和 service account（連接 RBAC）。
 
 `traefik-role.yaml`：
-```
+```yaml
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -556,7 +567,7 @@ subjects:
 
 
 `traefik-deployment.yaml`：
-```
+```yaml
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -589,7 +600,7 @@ spec:
 ```
 
 `traefik-svc.yaml`：
-```
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
