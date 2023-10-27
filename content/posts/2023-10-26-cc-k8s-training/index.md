@@ -530,8 +530,24 @@ kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traef
 
 注意！dashboard 後面的那個斜線也要打，不然會 404（這什麼爛東西...）。
 
-## 暴露儀表板服務
+## 使用 IngressRoute 暴露儀表板服務
 
+```yaml
+# dashboard.yaml
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`traefik.localhost`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
+```
 
 
 
