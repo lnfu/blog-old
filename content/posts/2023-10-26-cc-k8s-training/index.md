@@ -537,7 +537,7 @@ kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traef
 
 注意！dashboard 後面的那個斜線也要打，不然會 404（這什麼爛東西...）。
 
-## 使用 IngressRoute 暴露儀表板（dashboard）服務
+## 使用 IngressRoute 暴露（expose）儀表板（dashboard）服務
 
 ```yaml
 # dashboard.yaml
@@ -598,4 +598,13 @@ spec:
 > 通常來說，沒有憑證瀏覽器（網址列）會顯示灰色的 Not secure，而像是憑證失效或是我們的自簽憑證就會是紅色的 Not secure。
 
 > 也可以從儀表板的 Routers 標籤頁看到是不是 TLS。
+
+# 部署應用：paulbouwer/hello-kubernetes
+
+- 使用 deployment 的方式部署
+- replica = 2
+- 需要以 kata containers container runtime 運行
+- 使用 Ingress 將服務暴露出來
+
+前面已經裝好 traefik 作為 Ingress Controller，接下來就可以試試看架設 Ingress 服務。
 
