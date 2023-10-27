@@ -510,9 +510,7 @@ helm install traefik traefik/traefik
 
 這樣會以 deployment 來安裝 traefik。
 
-## 暴露儀表板服務
-
-可以先用 port-forwarding 的方式確認安裝沒有問題。
+安裝完後可以先用 port-forwarding 的方式查看 dashboard 服務是否可以正常使用。
 
 因為我的 control plane 是在遠端，所以我要先建立 ssh tunnel。
 
@@ -532,6 +530,7 @@ kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traef
 
 注意！dashboard 後面的那個斜線也要打，不然會 404（這什麼爛東西...）。
 
+## 暴露儀表板服務
 
 
 
