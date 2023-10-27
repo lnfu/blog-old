@@ -508,7 +508,13 @@ helm repo update
 helm install traefik traefik/traefik
 ```
 
+這樣會以 deployment 來安裝 traefik。
 
+## 暴露儀表板服務
+
+```
+kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
+```
 
 
 
