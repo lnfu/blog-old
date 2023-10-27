@@ -512,9 +512,25 @@ helm install traefik traefik/traefik
 
 ## 暴露儀表板服務
 
+可以先用 port-forwarding 的方式確認安裝沒有問題。
+
+因為我的 control plane 是在遠端，所以我要先建立 ssh tunnel。
+
+```
+ssh -L 9000:localhost:9000 <user>@<host>
+```
+
+- user: 遠端使用者
+- host: 遠端主機
+
+然後在遠端主機做 port-forwarding。
 ```
 kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
 ```
+
+如此一來，就可以在本機上連到 http://localhost:9000/dashboard/。
+
+注意！dashboard 後面的那個斜線也要打，不然會 404（這什麼爛東西...）。
 
 
 
