@@ -37,7 +37,7 @@ https://wiki.cs.nctu.edu.tw/index.php/Kubernetes_%E5%B9%B3%E5%8F%B0%E5%BB%BA%E7%
 
 然後開機並檢查是否有 vmx/smv 功能（有輸出內容就可以了）。
 
-```
+```sh
 grep -E '(vmx|svm)' /proc/cpuinfo
 ```
 
@@ -47,7 +47,7 @@ grep -E '(vmx|svm)' /proc/cpuinfo
 
 只需要在 worker 上面安裝就好。
 
-```
+```sh
 dnf install -y centos-release-advanced-virtualization
 dnf module disable -y virt:rhel
 source /etc/os-release
@@ -82,7 +82,7 @@ runtime_root = "/run/vc"
 ```
 
 重新啟動 CRI-O
-```
+```sh
 systemctl restart crio
 ```
 
@@ -90,7 +90,7 @@ systemctl restart crio
 # 安裝 kubeadm、kubelet、kubectl（v1.26）
 所有機器都要安裝。
 
-```
+```sh
 cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
@@ -103,12 +103,12 @@ exclude=kubelet kubeadm kubectl
 EOF
 ```
 
-```
+```sh
 dnf install -y kubeadm-1.26.0 kubelet-1.26.0 kubectl-1.26.0 --disableexcludes=kubernetes
 ```
 
 然後因為是 CentOS 系統，所以還要開啟這兩個東西：
-```
+```sh
 cat << 'EOF' > /usr/lib/systemd/system/kubelet.service.d/20-accounting.conf
 [Service]
 CPUAccounting=true
@@ -116,7 +116,7 @@ MemoryAccounting=true
 EOF
 ```
 
-```
+```sh
 systemctl daemon-reload
 systemctl restart kubelet
 ```
@@ -130,7 +130,7 @@ systemctl restart kubelet
 > 6443 是 Kubernetes API server 的 port
 
 首先，先在所有 control plane（10.2.2.[131-133]）新增 `/etc/haproxy/haproxy.cfg`。
-```
+```sh
 mkdir -p /etc/haproxy/
 vim /etc/haproxy/haproxy.cfg
 ```
@@ -174,7 +174,7 @@ backend kube-apiserver-backend
 然後寫兩個 static pod 的配置檔案（yaml），我都先在第一個 control plane node 上面做（efliao-k8s-c1）。
 
 haproxy：
-```
+```yaml
 # /etc/kubernetes/manifests/haproxy.yaml
 kind: Pod
 apiVersion: v1
@@ -203,7 +203,7 @@ spec:
 ```
 
 keepalived：
-```
+```yaml
 # /etc/kubernetes/manifests/keepalived.yaml
 kind: Pod
 apiVersion: v1
@@ -241,7 +241,7 @@ spec:
 
 ## control plane
 
-```
+```sh
 firewall-cmd --add-port={6443,2379,2380,8443,10248,10250,10255,10257,10259}/tcp --permanent
 firewall-cmd --reload # 加完記得要 reload
 ```
@@ -259,7 +259,7 @@ firewall-cmd --reload # 加完記得要 reload
 
 ## worker
 
-```
+```sh
 firewall-cmd --add-port={80,443,10248,10250,10255,30000-32767}/tcp --permanent
 firewall-cmd --reload # 加完記得要 reload
 ```
@@ -281,7 +281,7 @@ https://wiki.cs.nctu.edu.tw/index.php/Flannel
 Flannel 支援至少兩種模式： VXLAN 和 host-gw 。前者將各節點以 VXLAN 的方式連結成一個虛擬 LAN ，因此各節點可以在不同的網段中；後者透過修改路由的方式促成各節點之間的網路連通，因此其先備條件是所有機器必須在同一個 LAN 當中。
 
 在 efliao-k8s-c1 執行：
-```
+```sh
 kubeadm init --control-plane-endpoint=10.2.2.137:8443 --pod-network-cidr=10.244.0.0/16 --upload-certs
 ```
 
@@ -326,7 +326,7 @@ kubeadm join 10.2.2.137:8443 --token aksrrq.5lx1h32ffved6ezp \
 
 集群建立後，config 檔案會被放在 /etc/kubernetes/admin.conf，你需要這個檔案來操作 kubectl 。
 
-```
+```sh
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -334,7 +334,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 
 等所有節點都加入集群後，先運行 Flannel：
-```
+```sh
 wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml -O- \
   | sed 's/vxlan/host-gw/' \
   | kubectl create -f-
@@ -345,11 +345,11 @@ wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-
 ![](./Screenshot%20from%202023-10-26%2019-02-40.png)
 
 修改 `/etc/kubernetes/manifests/kube-apiserver.yaml`，kube-apiserver 會自動載入設定（不過升級集群時會丟失所以要特別處理）。
-```
+```sh
 sudo vim /etc/kubernetes/manifests/kube-apiserver.yaml
 ```
 
-```
+```yaml
 spec:
   containers:
   - command:
@@ -368,7 +368,7 @@ spec:
 - 使用 Service type NodePort Expose 出來
 
 `whoami-daemonset.yaml`：
-```
+```yaml
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -396,7 +396,7 @@ spec:
 
 
 `whoami-svc`：
-```
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -428,7 +428,7 @@ https://openelb.io/docs/concepts/vip-mode/
 
 https://openelb.io/docs/getting-started/installation/install-openelb-on-kubernetes/
 
-```
+```sh
 https://raw.githubusercontent.com/openelb/openelb/master/deploy/openelb.yaml
 
 kubectl apply -f openelb.yaml
@@ -449,7 +449,7 @@ openelb-manager-d6df4dfc4-rbpmn   1/1     Running     0          64s
 
 https://openelb.io/docs/getting-started/configuration/configure-ip-address-pools-using-eip/
 
-```
+```yaml
 apiVersion: network.kubesphere.io/v1alpha2
 kind: Eip
 metadata:
@@ -470,7 +470,7 @@ status:
 ```
 
 設定成 default 之後就不用在每次建立 service 時打以下內容了：
-```
+```yaml
 lb.kubesphere.io/v1alpha1: openelb
 protocol.openelb.kubesphere.io/v1alpha1: vip
 eip.openelb.kubesphere.io/v1alpha2: eip-vip-pool
@@ -521,7 +521,7 @@ helm install traefik traefik/traefik
 
 因為我的 control plane 是在遠端，所以我要先建立 ssh tunnel。
 
-```
+```sh
 ssh -L 9000:localhost:9000 <user>@<host>
 ```
 
@@ -529,7 +529,7 @@ ssh -L 9000:localhost:9000 <user>@<host>
 - host: 遠端主機
 
 然後在遠端主機做 port-forwarding。
-```
+```sh
 kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
 ```
 
@@ -635,7 +635,7 @@ spec:
 ```
 
 `hello-svc.yaml`：
-```
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -650,7 +650,7 @@ spec:
 ```
 
 `hello-ingress.yaml`：
-```
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
