@@ -597,3 +597,5 @@ spec:
 
 > 通常來說，沒有憑證瀏覽器（網址列）會顯示灰色的 Not secure，而像是憑證失效或是我們的自簽憑證就會是紅色的 Not secure。
 
+> 也可以從 dashboard 的 Routers 標籤頁看到是不是 TLS。
+
