@@ -686,7 +686,11 @@ spec:
 
 # 部屬 Monitoring：kube-prometheus-stack
 
-```
+- 使用 Helm Chart 佈署 kube-prometheus-stack
+- 使用 dashboard：https://grafana.com/grafana/dashboards/11074-node-exporter-for-prometheus-dashboard-en-v20201010/
+- 串接 CC 的 OIDC
+
+```sh
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
 helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack 
