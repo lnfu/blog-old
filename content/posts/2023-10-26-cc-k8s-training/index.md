@@ -502,11 +502,11 @@ chmod 700 get_helm.sh
 
 ## 安裝 Traefik
 
-- Ingress Controller 使用 Traefik v2.7 以上。
-- 使用 CRD IngressRoute 將 Traefik 自己的 Dashboard Expose 出來。
-- 使用 LoadBalancer OpenELB 導入流量到 Traefik Ingress Controller。
-- 外部使用者可以透過 LoadBalancer 的 Port 80 訪問網頁服務(proto http)。
-- 自簽一張憑證並掛在 Traefik Ingress Controller 上，且讓外部使用者能透過 LoadBalancer 的 Port 443 訪問網頁服務 (proto https)。
+- Ingress Controller 使用 Traefik v2.7 以上
+- 使用 CRD IngressRoute 將 Traefik 自己的 Dashboard Expose 出來
+- 使用 LoadBalancer OpenELB 導入流量到 Traefik Ingress Controller
+- 外部使用者可以透過 LoadBalancer 的 Port 80 訪問網頁服務(proto http)
+- 自簽一張憑證並掛在 Traefik Ingress Controller 上，且讓外部使用者能透過 LoadBalancer 的 Port 443 訪問網頁服務 (proto https)
 
 
 ```sh
@@ -515,7 +515,7 @@ helm repo update
 helm install traefik traefik/traefik
 ```
 
-這樣會以 deployment 來安裝 traefik。
+這樣會以 deployment 來安裝 traefik，然後我看安裝完後的 service type 就是 LoadBalancer 所以也不用再改。
 
 安裝完後可以先用 port-forwarding 的方式查看 dashboard 服務是否可以正常使用。
 
