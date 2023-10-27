@@ -487,7 +487,7 @@ https://doc.traefik.io/traefik/
 `traefik-rbac.yaml`：
 
 - 使用 Traefik v2.7 以上
-- 使用 CRD IngressRoute 將 Træfik 自己的 Dashboard Expose 出來
+- 使用 CRD（CustomResourceDefinition，用來建立自定義的資源） IngressRoute 將 Træfik 自己的 Dashboard Expose 出來
 - 使用 LoadBalancer OpenELB 導入流量到 Traefik Ingress Controller（應該是不用特別做什麼，因為我已經設定 default eip）
 - 外部使用者可以透過 LoadBalancer 的 Port 80 訪問網頁服務(proto http)。
 - 自簽一張憑證並掛在 Traefik Ingress Controller 上，且讓外部使用者能透過 LoadBalancer 的 Port 443 訪問網頁服務 (proto https)。
@@ -555,7 +555,7 @@ subjects:
 ```
 
 
-`traefik-deployment`：
+`traefik-deployment.yaml`：
 ```
 kind: Deployment
 apiVersion: apps/v1
@@ -588,7 +588,7 @@ spec:
               containerPort: 8080
 ```
 
-`traefik-svc`：
+`traefik-svc.yaml`：
 ```
 apiVersion: v1
 kind: Service
