@@ -690,8 +690,52 @@ spec:
 - 使用 dashboard：https://grafana.com/grafana/dashboards/11074-node-exporter-for-prometheus-dashboard-en-v20201010/
 - 串接 CC 的 OIDC
 
+```yaml
+grafana:
+  enabled: true
+  namespaceOverride: ""
+  rbac:
+    pspUseAppArmor: false
+  grafana.ini:
+    server:
+      domain: efliao.test.cc.cs.nctu.edu.tw
+      root_url: https://efliao.test.cc.cs.nctu.edu.tw/grafana/
+      serve_from_sub_path: true
+
+  defaultDashboardsEnabled: true
+
+  adminPassword: prom-operator
+
+  ingress:
+    ## If true, Grafana Ingress will be created
+    ##
+    enabled: true
+
+    ## Annotations for Grafana Ingress
+    ##
+    annotations: {}
+
+    ## Labels to be added to the Ingress
+    ##
+    labels: {}
+
+    ## Hostnames.
+    ## Must be provided if Ingress is enable.
+    ##
+    # hosts:
+    #   - grafana.domain.com
+    hosts:
+      - efliao.test.cc.cs.nctu.edu.tw
+
+    ## Path for grafana ingress
+    path: /grafana/
+```
+
+
 ```sh
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
 helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack 
 ```
+
+
