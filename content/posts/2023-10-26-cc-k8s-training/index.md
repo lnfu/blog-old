@@ -558,13 +558,13 @@ spec:
 
 ## 自簽憑證
 
+https://weirenxue.github.io/2021/06/15/ssl_digital_signed_verify/
 
 先產生私鑰：
 ```
-mkdir ssl
-openssl genrsa -out ssl/ca.key 4096 # 產生 4096 bits RSA 私鑰
+mkdir tls
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout ./tls/tls.key -out ./tls/tls.crt
 
-openssl req -new -x509 -days 365 -sha256 -subj "/C=TW/ST=Hsinchu/O=NCTU/OU=CSCC/CN=efliao.test.cc.cs.nctu.edu.tw" -key ssl/ca.key -out ssl/ca.crt
 ```
 
 `x509` 選項就是自簽憑證（self-signed certificate）
