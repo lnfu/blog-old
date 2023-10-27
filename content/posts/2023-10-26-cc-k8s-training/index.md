@@ -610,13 +610,38 @@ spec:
         - name: traefik
           image: traefik:v2.10
           args:
-            - --api.insecure
+            - --accesslog=true
+            - --entryPoints.web.address=:80
+            - --entryPoints.websecure.address=:443
             - --providers.kubernetesingress
+            - --api=true
+            - --api.dashboard=true
           ports:
             - name: web
               containerPort: 80
+            - name: websecure
+              containerPort: 443
             - name: dashboard
               containerPort: 8080
+```
+
+`traefik-dashboard-ingressroute.yaml`：
+
+```yaml
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+    name: traefik-gui
+
+spec:
+    entryPoints:
+      - web
+    routes:
+      - match: Host(`efliao.test.cc.cs.nctu.edu.tw`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
+        kind: Rule
+        services:
+          - name: api@internal
+            kind: TraefikService
 ```
 
 `traefik-svc.yaml`：
@@ -627,7 +652,7 @@ metadata:
   name: traefik-dashboard-service
 
 spec:
-  type: LoadBalancer
+  type: LoadBalancer # 用 LoadBalancer 暴露
   ports:
     - port: 8080
       targetPort: dashboard
@@ -650,7 +675,22 @@ spec:
 
 
 
-
+```
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+    name: traefik-gui
+    namespace: traefik
+spec:
+    entryPoints:
+      - web
+    routes:
+      - match: Host(`localhost`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
+        kind: Rule
+        services:
+          - name: api@internal
+            kind: TraefikService
+```
 
 
 
