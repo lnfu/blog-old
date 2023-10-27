@@ -542,7 +542,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`traefik.localhost`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
+    - match: Host(`efliao.test.cc.cs.nctu.edu.tw`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
       kind: Rule
       services:
         - name: api@internal
