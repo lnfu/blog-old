@@ -45,12 +45,10 @@ work-consecutive：只要 ready queue 不是空的就會拿出來給 CPU 執行�
 
 > good average performance vs. predictable worst-case performance   
 
-# 單處理器
+# 單處理器（軟體排程）
 
 ## 先到先服務（First Come First Served；FCFS）
-誰先來誰先做。
-
-用一個先進先出（FIFO）的佇列（queue），
+用一個先進先出（FIFO）的佇列（queue），誰先來誰先做。
 
 缺點：
 - 平均等待時間（average wait time）很常且變化很大
@@ -58,33 +56,43 @@ work-consecutive：只要 ready queue 不是空的就會拿出來給 CPU 執行�
 
 雖然以上缺點，不過因為**可預測**所以還是有用。
 
+## 輪流（Round Robin；RR）
+和 FCFS 基本相同，差別是會設定一個固定的 time quantum，如果目前行程的 time quantum 就放到佇列的後面重新排隊。
+
+如果 time quantum 設定超大，就等同是 FCFS。
+
+如果 time quantum 設定超小，就會讓 context switch 太頻繁。
+
 ## SJF = Shortest Job First
 簡單（花的時間少）的 process 先做。
 
 證明 SJF 是 optimal（最短的 average waiting time）。每次交換相鄰且順序是「長短」的兩個 process 成「短長」，如此就會讓 average waiting time 變小。
 
-issue：有些要花比較多時間的可能就要一直等待
+優點：
+1. 最短的平均等待時間
 
+缺點：
+有些要花比較多時間的可能就要一直等待，甚至永遠無法執行（starvation）
 
 ### SRJF = Shortest Remaining Job First
 考慮到目前執行的 process 還**剩下**多少時間，如果有新的 process 比她還要少就 preempt。
 
 
-
-
-
-## Round Robin
-
-
 ## Multi Queue
+多條 ready queue，並採用不同的演算法。
+
+根據行程的類型和重要程度放到不同的 ready queue。
+
+作業系統會隨機（每條 ready queue 的機率由設計者決定）挑選 queue 中的行程執行。
 
 ## Multi Feedback Queue
+和 multi queue 基本相同，差別是在不是隨機挑選，而是從上而下（如果上面的 queue 不為空就必須要選，直到空才往下執行）。
+
+大部分系統採用此方式。
 
 
 
-
-
-# Multiple Processor 排程
+# Multiple Processor 排程（硬體排程）
 ![](./Screenshot%20from%202023-10-11%2011-58-58.png)
 
 ## SMP
@@ -92,22 +100,21 @@ issue：有些要花比較多時間的可能就要一直等待
 
 
 ## NUMA = non uniform memory access
+
+對於靠近自己的記憶體存取速度比較快（可以看鳥哥那篇）。
+
 ![](./Screenshot%20from%202023-10-11%2012-01-23.png)
 
 topology 有幾種選擇：ring、mesh、**hypercube**
 
-
-補充：hypercube
-
+補充：hypercube 是什麼？
 
 
+# Load Balancing
 
+process affinity：如果都綁在同一個 core 上面，cache 可以重複使用，提高執行效率。相反的 process migration 需要時間，所以通常希望不要把這個 processor 的 process 移動到其他的 processor。
 
-# ???
-
-process affinity：process migration 需要時間，所以通常希望不要把這個 processor 的 process 移動到其他的 processor。
-
-load balancing：
+load balancing：因為通常會傾向將
 
 所以要再 process affinity 和 load balancing 之間作取捨。以 Linux 為例，每 200ms 做一次 push migration（把 heavy loading 的 processor 的 process 分到其他 processor），以及當有 processor 的 ready queue 是空的會把其他（heavy loading）的 processor 的 process 給她。
 
@@ -119,6 +126,8 @@ multicore processor：有多個實體的運算單元（core，可以想成就是
 
 multithreading processor：多的 logical processor（實體只有一個）有不同的 registers。
 > 這邊的 thread 和前面說的不是同一個東西！
+
+> hyperthreaded
 
 ![](./Screenshot%20from%202023-10-23%2015-28-12.png)
 ![](./Screenshot%20from%202023-10-23%2015-33-35.png)
@@ -194,3 +203,7 @@ FCFS 有什麼 performance issue？
 
 
 
+
+# 參考
+
+- http://old.linux.vbird.org/linux_enterprise/cputune.php

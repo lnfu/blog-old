@@ -33,8 +33,8 @@ CPU scheduler 有 mechanism（也就是 context switch）也有 policy（該選�
 決定哪些 process 要載入到記憶體。
 
 process 可以分成 I/O-bound 和 CPU-bound
-- I/O-bound：e.g., 文字編輯器（運算量不大，主要都是在做 I/O 處理）
-- CPU-bound：e.g., 遊戲、影片轉檔、圖像程式
+- IO 密集型（I/O-bound）：e.g., 文字編輯器（運算量不大，主要都是在做 I/O 處理）
+- CPU 密集型（CPU-bound）：e.g., 遊戲、影片轉檔、圖像程式
 
 理論上，除了遊戲以外，大部分 interactive 的程式都是 I/O-bound process。
 
