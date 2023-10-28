@@ -690,46 +690,15 @@ spec:
 - 使用 dashboard：https://grafana.com/grafana/dashboards/11074-node-exporter-for-prometheus-dashboard-en-v20201010/
 - 串接 CC 的 OIDC
 
-```yaml
-grafana:
-  enabled: true
-  namespaceOverride: ""
-  rbac:
-    pspUseAppArmor: false
-  grafana.ini:
-    server:
-      domain: efliao.test.cc.cs.nctu.edu.tw
-      root_url: https://efliao.test.cc.cs.nctu.edu.tw/grafana/
-      serve_from_sub_path: true
-
-  defaultDashboardsEnabled: true
-
-  adminPassword: prom-operator
-
-  ingress:
-    ## If true, Grafana Ingress will be created
-    ##
-    enabled: true
-
-    ## Annotations for Grafana Ingress
-    ##
-    annotations: {}
-
-    ## Labels to be added to the Ingress
-    ##
-    labels: {}
-
-    ## Hostnames.
-    ## Must be provided if Ingress is enable.
-    ##
-    # hosts:
-    #   - grafana.domain.com
-    hosts:
-      - efliao.test.cc.cs.nctu.edu.tw
-
-    ## Path for grafana ingress
-    path: /grafana/
+```sh
+helm show values prometheus-community/kube-prometheus-stack > custom-values.yaml
 ```
+
+改寫 grafana 的部份，除了 Ingress 的設定，`grafana.ini` 的部份不要忘記加。
+
+https://raw.githubusercontent.com/lnfu/blog/main/content/posts/2023-10-26-cc-k8s-training/custom-values.yaml
+
+
 
 
 ```sh
@@ -738,4 +707,14 @@ helm repo update
 helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack 
 ```
 
+```sh
+helm install -f ./custom-values.yaml prom prometheus-community/kube-prometheus-stack
+```
 
+
+```
+http://<my_grafana_server_name_or_ip>:<grafana_server_port>/login/generic_oauth
+
+
+http://efliao.test.cc.cs.nctu.edu.tw/login/generic_oauth
+```

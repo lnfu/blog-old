@@ -19,7 +19,7 @@ tags: ["課程筆記", "作業系統"]
 2. interface（shell）
 3. system calls
 
-shell 可以再兩種：
+shell 可以再分成兩種：
 1. CLI：命令行
 2. GUI：圖形
 
@@ -139,6 +139,8 @@ microkernel：Zircon
 虛擬機跑在 user mode（就是一個 process）
 ![](./virtual-machine.jpg)
 
+實際上有很多類型的虛擬化技術...
+
 system call（interrupt）：
 ![interrupt](./virtual-machine-interrupt.jpg)
 
@@ -151,24 +153,4 @@ system call（interrupt）：
 
 > https://en.wikipedia.org/wiki/Acquisition_of_Sun_Microsystems_by_Oracle_Corporation
 
-
-# Mechanism vs. Policy
-
-Mechanism 不做決策
-
-Policy 有決策（不會影響結果是否正確，主要影響效能問題）
-
-
-# Process（行程）
-process = job = task = a program **in execution**
-- text
-- stack：local variable
-- heap：全域變數
-- data
-- program counter, CPU registers
-
-![](./Screenshot%20from%202023-09-27%2011-57-56.png)
-
-
---> 2023-09.27
 

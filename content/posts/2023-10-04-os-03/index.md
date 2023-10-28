@@ -14,6 +14,17 @@ tags: ["課程筆記"]
 
 這章講 process。
 
+# Process（行程）
+process = job = task = a program **in execution**
+- text
+- stack：local variable
+- heap：全域變數
+- data
+- program counter, CPU registers
+
+![process in memory](./Screenshot%20from%202023-09-27%2011-57-56.png)
+
+
 # Process 的狀態（State）：ready、running、waiting
 ![](./Screenshot%20from%202023-10-05%2015-11-16.png)
 
@@ -53,9 +64,22 @@ context switch 不只有 time sharing，一般 running process 結束也會要 c
 除了 overhead 以外，還有 cache pollution 的問題。
 
 ## 以 uC/OS-2 為例
-![uC/OS-2 圖片]()
 
-待補流程...
+![uC/OS-2 context switch push](./Screenshot%20from%202023-10-29%2002-12-29.png)
+![uC/OS-2 context switch pop](./Screenshot%20from%202023-10-29%2002-13-34.png)
 
+步驟：
+1. push (current) status register 
+2. push (current) general purpose register
+3. save (current) stack pointer
+4. load (next) stack pointer
+5. pop (next) general purpose register
+6. pop (next) status register
 
+- PSW: Processor Status Word
+- OSTCBCur: TCB of the current task
+- OSTCBHighRdy: TCB of the new task
 
+# 參考
+
+- https://www.csie.ntu.edu.tw/~ktw/rts/uCOSII-prn.pdf
