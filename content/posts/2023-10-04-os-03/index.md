@@ -13,8 +13,6 @@ tags: ["課程筆記", "作業系統"]
 #     hidden: true # only hide on current single page
 ---
 
-這章講 process。
-
 # Process（行程）
 process = job = task = a program **in execution**
 - text
