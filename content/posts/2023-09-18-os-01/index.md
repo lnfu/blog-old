@@ -30,9 +30,6 @@ tags: ["課程筆記", "作業系統"]
 2. 執行位於磁碟最開頭（首個磁區） 512 Byte 的 MBR（Master Boot Record），她會尋找並引導啟動作業系統（e.g., Windows）的核心部份。
 3. 作業系統被載入到記憶體中啟動。
 
-
-
-
 # Interrupt（中斷）
 
 CPU 一次只能做一件事，如果有一個事情需要等待（e.g., I/O 讀寫操作），就可以利用中斷來先去做其他的事情。
@@ -49,7 +46,7 @@ CPU 一次只能做一件事，如果有一個事情需要等待（e.g., I/O 讀
 
 1. IO device 發出中斷訊號給 PIC
 2. PIC 發中斷給 CPU
-3. CPU 把目前在處理的東西（當前狀態 e.g., program counter, ...）先存起來
+3. CPU 把目前在處理的東西（當前狀態 e.g., program counter, ...）先存到 PCB（之後詳細講解 PCB）。
 4. CPU 查詢 IVT（interrupt vector table） 後跳到對應的 ISR（interrupt service routine） 執行
 5. ISR 最後一個指令會是 IRET（return 回原本 CPU 處理的東西）
 

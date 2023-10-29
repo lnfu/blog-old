@@ -44,7 +44,11 @@ running process 有兩種結果：
 ![待補圖片]()
 
 
-# PCB = Process(or Task) Control Block
+# PCB
+
+Process(or Task) Control Block
+
+位在記憶體 OS 中。
 
 儲存：
 - process state
