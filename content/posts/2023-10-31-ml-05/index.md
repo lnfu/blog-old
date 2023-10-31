@@ -17,6 +17,8 @@ tags: ["課程筆記", "機器學習"]
 
 就像是一次詢問多個專家去解決問題。
 
+[Bagging vs. Boosting](https://kwassistfile.cupoy.com/0000017B7375CEAC0000000B6375706F795F72656C65617365414E53/1629431130868/large)
+
 # Bagging
 
 Bootstrap 抽樣：抽完後會放回去
@@ -26,7 +28,7 @@ Bootstrap 抽樣：抽完後會放回去
 我們從資料集抽出 n 個給第一個分類器再放回去，然後再抽 n 個給第二個分類器放回去，一直作到第 m 個分類器。
 
 
-## Random Forest
+## Random Forest（RF）
 
 Bagging + Decision Tree
 
@@ -42,3 +44,17 @@ Dataset --> Training Set 1 --> Tree 1
         \
          -> Training Set m --> Tree m
 ```
+
+可以平行化處理（parallel）
+
+
+# Boosting
+
+對於 weak classifier（學習成效很弱）
+
+https://www.cs.princeton.edu/courses/archive/spr07/cos424/papers/boosting-survey.pdf
+
+
+## AdaBoost
+
+![](./Screenshot%20from%202023-10-31%2014-19-39.png)
