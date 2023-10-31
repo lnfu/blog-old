@@ -34,3 +34,5 @@ BST = Binary Search Tree
 
 因此，對於需要頻繁插入、刪除的情況，我們需要引入新的東西：BST。
 
+不過這章不會講什麼是 BST（說這麼多結果不講哈哈），而是 OBST（optimal binary search tree）。
+
