@@ -1,5 +1,5 @@
 ---
-title: "[課程筆記] 演算法概論（七） - 二分搜尋樹（BST）"
+title: "[課程筆記] 演算法概論（七） - 最佳二分搜尋樹（OBST）"
 date: 2023-10-31T10:29:48+08:00
 draft: false
 author: "Enfu Liao"
