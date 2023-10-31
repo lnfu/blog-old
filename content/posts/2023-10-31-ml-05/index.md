@@ -3,6 +3,8 @@ title: "[課程筆記] 機器學習概論（五） - 集成學習（Ensemble Lea
 date: 2023-10-31T13:25:14+08:00
 draft: false
 author: "Enfu Liao"
+tags: ["課程筆記", "機器學習"]
+
 # cover:
 #     image: "<image path/url>" # image path/url
 #     alt: "<alt text>" # alt text
