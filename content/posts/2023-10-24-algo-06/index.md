@@ -1,5 +1,5 @@
 ---
-title: "[課程筆記] 演算法概論（六） - 動態規劃（Dynamic Programming）"
+title: "[課程筆記] 演算法概論（六） - 動態規劃（DP）"
 date: 2023-10-24T10:14:03+08:00
 draft: false
 author: "Enfu Liao"
@@ -11,6 +11,8 @@ tags: ["課程筆記", "演算法"]
 #     relative: false # when using page bundles set this to true
 #     hidden: true # only hide on current single page
 ---
+
+DP = Dynamic Programming
 
 # Rod Cutting Problem
 
