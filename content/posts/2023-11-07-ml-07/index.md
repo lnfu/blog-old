@@ -53,3 +53,36 @@ x_{0} = 1
 {{< /math_block >}}
 
 第一層（input layer）的神經元數量會等同於 feature 的數量。
+
+
+
+
+## Sigmoid Function
+
+1. 連續
+2. 可微
+3. nonlinear
+
+
+
+### Error
+
+{{< math_block >}}
+E = \frac{1}{2} \sum_{i}^{100} (t_{i} - o_{i})^{2}
+{{< /math_block >}}
+
+
+- {{< math_inline >}}t_{i}{{< /math_inline >}}: true value
+- {{< math_inline >}}o_{i}{{< /math_inline >}}: prediction
+- {{< math_inline >}}\frac{1}{2}{{< /math_inline >}} 只是為了計算梯度偏微分時可以跟 2 冪次方消掉（計算上方便）
+
+
+何時會讓 Error 最小？計算 Partial Derrivative。
+
+![](./Screenshot%20from%202023-11-07%2015-54-17.png)
+
+計算微分太困難了。
+
+![](./Screenshot%20from%202023-11-07%2016-15-03.png)
+
+![](./sgd.png)
