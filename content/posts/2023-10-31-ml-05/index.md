@@ -58,3 +58,10 @@ https://www.cs.princeton.edu/courses/archive/spr07/cos424/papers/boosting-survey
 ## AdaBoost
 
 ![](./Screenshot%20from%202023-10-31%2014-19-39.png)
+
+一開始所有樣本（每列資料）權重都相同，每次訓練提高沒有被成功分類的樣本的權重（不過所有權重都要 normalization 確保權重總和還是 1）。
+
+優點：
+1. 準確率高
+2. 速度快，而且因為調整權重都是自動進行所以不太需要調什麼參數
+3. 幾乎不會 overfitting（原因未知）

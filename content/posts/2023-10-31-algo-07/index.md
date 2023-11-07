@@ -36,3 +36,7 @@ BST = Binary Search Tree
 
 不過這章不會講什麼是 BST（說這麼多結果不講哈哈），而是 OBST（optimal binary search tree）。
 
+# Complete vs Full
+
+Complete: leaf 都要在最底部
+Full: 所有 internal node 都要有 2 個 children

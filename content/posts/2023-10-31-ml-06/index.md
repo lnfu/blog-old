@@ -1,5 +1,5 @@
 ---
-title: "[課程筆記] 機器學習概論（六） - NN"
+title: "[課程筆記] 機器學習概論（六） - kNN"
 date: 2023-10-31T15:31:22+08:00
 draft: true
 author: "Enfu Liao"
