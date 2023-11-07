@@ -22,12 +22,14 @@ math: true
 ![](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsebastianraschka.com%2Fimages%2Ffaq%2Factivation-functions%2Factivation-functions.png&f=1&nofb=1&ipt=d5549b611038e0bccaabffd5cecee8674c0251bf81c50b8c12eb9df610be836c&ipo=images)
 
 
-# ANN
+# Perceptron
+
+對單一神經元來說，輸入多個 Binary，輸出一個 Binary。
 
 假設是 2D feature space（只有 2 個 feature）。
 
 ```
-    | f1 | f2 | target
+    | x1 | x2 | target
 ------------------------
  #1 | ?  | ?  |  +
  #2 | ?  | ?  |  +
@@ -47,3 +49,4 @@ math: true
 \sum_{i=0}^{n} w_{i}x_{i} \ge 0
 x_{0} = 1
 {{< /math_block >}}
+
