@@ -45,8 +45,11 @@ math: true
 
 引入 w0 的表示可以讓原本要分開處理的 bias 更為簡潔。
 
+怎麼理解 b？其實就是 threshold，當超過 threshold 時輸出 1，否則輸出 0。
+
 {{< math_block >}}
 \sum_{i=0}^{n} w_{i}x_{i} \ge 0
 x_{0} = 1
 {{< /math_block >}}
 
+第一層（input layer）的神經元數量會等同於 feature 的數量。
