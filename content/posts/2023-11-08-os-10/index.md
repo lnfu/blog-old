@@ -40,7 +40,7 @@ memory management unit
 
 
 
-# ???
+# 記憶體分配
 
 process 放到記憶體時，一定要找到夠大的連續記憶體放大（不能把 process 拆成兩半之類的），不過當 process 執行完後就會留下一個空隙。
 
@@ -52,5 +52,17 @@ process 放到記憶體時，一定要找到夠大的連續記憶體放大（不
 
 ![](./continuous%20allocation.png)
 
+Dynamic 記憶體分配是 NP-Complete 問題。
+
 選擇要放哪個空格有三種 policy（藍色是 process，白色是空隙）：
 ![](./Screenshot%20from%202023-11-08%2010-59-14.png)
+
+以上圖來說：
+1. Best fit 會剩下 1 KB
+2. Worst fit 會剩下 7 KB
+3. First fit 會剩下 2 KB
+
+如果只看速度 first fit 會比較快。
+
+「一般來說」，best fit 效果會比較好。
+
