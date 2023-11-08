@@ -88,7 +88,10 @@ process 結束後要 free 並且如果 buddy（旁邊的老哥）也是 free 就
 3. 會有很多切塊後的空隙（明明應該可以是一整塊）
 
 結論：
-浪費蠻多記憶體，但是因為快速所以 Linux 是使用這個（記憶體便宜麻，快比較重要）。
+浪費蠻多記憶體，但是因為快速所以 Linux 有使用到這個（記憶體便宜麻，快比較重要）。
+
+## Slab
+
 
 ## 總結
 
@@ -96,4 +99,10 @@ process 結束後要 free 並且如果 buddy（旁邊的老哥）也是 free 就
 
 如果要分配好（平均來說） -> best fit
 
+## 實際
 
+GNU C malloc() of glibc 2.28: A variation of Best Fit
+
+Linux kernel:
+1. slab cache: frequent allocation/deallocation of objects of the same size
+2. buddy system: Allocation/deallocation of objects of various sizes
