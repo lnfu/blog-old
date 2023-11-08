@@ -77,7 +77,7 @@ process 結束後要 free 並且如果 buddy（旁邊的老哥）也是 free 就
 
 ![](./Screenshot%20from%202023-11-08%2011-29-31.png)
 
-實際的在儲存的資料結構就用一個 linked list，每個元素指向每種 size 的 linked list。
+實際的在儲存的資料結構就用一個 linked list，每個元素指向每種 size 的 linked list（藍色是已經分配，灰色是無法使用，白色是可以使用）。
 
 ![](./buddy%20system.png)
 
