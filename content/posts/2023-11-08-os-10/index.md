@@ -37,3 +37,20 @@ memory management unit
 3. segmentation
 
 ![](./Screenshot%20from%202023-11-08%2010-49-56.png)
+
+
+
+# ???
+
+process 放到記憶體時，一定要找到夠大的連續記憶體放大（不能把 process 拆成兩半之類的），不過當 process 執行完後就會留下一個空隙。
+
+難點：
+1. 所有 process 需要的記憶體大小不同
+1. proess 要求的記憶體必須連續
+
+這樣會造成可能明明記憶體空的所有區間加起來是足夠的，但是這些空隙單一個都太小放不下 process。
+
+![](./continuous%20allocation.png)
+
+選擇要放哪個空格有三種 policy（藍色是 process，白色是空隙）：
+![](./Screenshot%20from%202023-11-08%2010-59-14.png)
