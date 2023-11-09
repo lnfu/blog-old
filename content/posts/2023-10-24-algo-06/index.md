@@ -16,6 +16,10 @@ DP = Dynamic Programming
 
 # Rod Cutting Problem
 
+給一個長度對照價格的表。
+
+今天有一個總長度是 n 的，請問最佳收益是多少？
+
 # Crazy Eight Problem
 
 # 一系列矩陣相乘
