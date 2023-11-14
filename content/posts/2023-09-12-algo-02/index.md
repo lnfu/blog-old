@@ -1,8 +1,9 @@
 ---
-title: "[課程筆記] 演算法概論（二） - Divide & Conquer"
+title: "[課程筆記] 演算法概論（二） - 分治法"
 date: 2023-10-17T10:43:18+08:00
 draft: false
 author: "Enfu Liao"
+math: true
 # cover:
 #     image: "<image path/url>" # image path/url
 #     alt: "<alt text>" # alt text
@@ -11,25 +12,11 @@ author: "Enfu Liao"
 #     hidden: true # only hide on current single page
 ---
 
-[[課程筆記] 演算法概論（一） - Introduction](../2023-08-25-algo-01/)
-
-[[課程筆記] 演算法概論（二） - Divide & Conquer](../2023-09-12-algo-02/)
-
-[[課程筆記] 演算法概論（三） - Sorting](../2023-09-19-algo-03/)
-
-[[課程筆記] 演算法概論（四） - Median Finding](../2023-10-12-algo-04/)
-
-[[課程筆記] 演算法概論（五） - Hash Table](../2023-10-17-algo-05/)
 
 ---
 
-這個章節講 Divide & Conquer，內容有點多...
 
-
-## Complexity of Recurrence Relation
-可以參考：
-* https://mycollegenotebook.medium.com/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-%E9%81%9E%E8%BF%B4-%E4%B8%8A-f6d51a462394
-* https://mycollegenotebook.medium.com/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-%E9%81%9E%E8%BF%B4-%E4%B8%8B-master-th-307ad4608ab6
+# 求解遞迴式的時間複雜度
 
 ![](https://slideplayer.com/7351407/24/images/slide_1.jpg)
 
@@ -39,20 +26,75 @@ author: "Enfu Liao"
 1. backward substitution
 2. Master Theorem
 
-### substitution method
+## substitution method
 用數學歸納法（strong induction）證明。
 
 > 可以先用 recursion-tree 去分析
 
 
--> 2023.08.25
 
-### Master Theorem
+## Master Theorem
+
+這個方法只能用來求解以下形式的遞迴問題，不過因為算起來很簡單所以很好用。
+{{< math_block >}}
+T(n) = a * T(n / b) + f(n)
+a > 0
+b > 1
+n \in \mathbb{N}
+{{< /math_block >}}
+
+其中，{{< math_inline >}}f(n){{< /math_inline >}} 是每一次分割和合併所花的時間，{{< math_inline >}}a{{< /math_inline >}} 是分割的子問題數量，且每個自問題大小是原本問題的 {{< math_inline >}}1/b{{< /math_inline >}}。
+
+Master Theorem 分成三種 case:
+### 由分割後的子問題決定（{{< math_inline >}}T(n / b){{< /math_inline >}}）
+
+也就是 {{< math_inline >}}f(n){{< /math_inline >}} 比 {{< math_inline >}}T(n / b){{< /math_inline >}} 小一點。
+
+{{< math_block >}}
+
+\epsilon \gt 0,
+f(n) = O(n^{log_b{a - \epsilon}})
+
+\implies T(n) = \Theta (n^{log_{b}a})
+
+{{< /math_block >}}
+
+
+### 由當次分割合併決定（{{< math_inline >}}f(n){{< /math_inline >}}）
+
+也就是 {{< math_inline >}}f(n){{< /math_inline >}} 比 {{< math_inline >}}T(n / b){{< /math_inline >}} 大一點。
+
+{{< math_block >}}
+
+\epsilon \gt 0,
+f(n) = \Omega(n^{log_b{a + \epsilon}})
+
+\implies T(n) = \Theta (f(n))
+
+{{< /math_block >}}
+
+### 共同決定
+
+{{< math_inline >}}f(n){{< /math_inline >}} 比 {{< math_inline >}}T(n){{< /math_inline >}} 幾乎一樣（可以稍微多一點）。
+
+{{< math_block >}}
+
+k \ge 0,
+f(n) = \Theta(n^{log_b{a} lg^{k}n})
+
+\implies T(n) = \Theta (n^{log_{b}a} lg^{k+1}n)
+
+{{< /math_block >}}
+
+第三種常見的情況是 {{< math_inline >}}k = 0{{< /math_inline >}}，此時 {{< math_inline >}}T(n) = \Theta (n^{log_{b}a lg n}{{< /math_inline >}}
+
+### 補充
+以下是 {{< math_inline >}}f(n) = cn{{< /math_inline >}} 的版本：
 ![](https://cdn-images-1.medium.com/max/1200/0*SMhJVzBPbBuiGOws.png)
 
 
-## Divide and Conquer
-### Merge Sort
+# 分治法例子
+## Merge Sort
 1. 分成一半來 sort（recursive）
 2. 用 T(n) = n 跑過一次比較誰先誰後
 
@@ -60,14 +102,14 @@ author: "Enfu Liao"
 T(n) = 2 T(n/2) + O(n)
 ```
 
-### Binary Search
+## Binary Search
 Find an element in a **sorted** array.
 
 ```
 T(n) = T(n/2) + Theta(1)
 ```
 
-### Power（次方）
+## Power（次方）
 分成奇偶 case。
 
 ```
@@ -75,7 +117,7 @@ T(n) = T(n/2) + Theta(1)
 T(n) = Theta(lg(n))
 ```
 
-### Fibonacci
+## Fibonacci
 可以參考 https://zh.wikipedia.org/zh-tw/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0
 
 最慢的解法（一般式）：
@@ -97,7 +139,7 @@ Theta(lg(n))
 ```
 
 
-### * Maximum Subarray
+## * Maximum Subarray
 > 首先可以觀察到答案的左右兩側一定是負數
 
 ![](./Screenshot%20from%202023-09-21%2000-30-53.png)
@@ -154,7 +196,7 @@ Initial call: FIND-MAXIMUM-SUBARRAY(A, 1, n)
 ![](./Screenshot%20from%202023-09-21%2000-40-17.png)
 
 
-### 矩陣乘法
+## 矩陣乘法
 
 基本：
 ![](./Screenshot%20from%202023-09-21%2000-41-07.png)
@@ -175,7 +217,7 @@ T(n) = 7 T(n/2) + Theta(n^2)
 
 
 
-### H Tree
+## H Tree
 ![](./Screenshot%20from%202023-09-21%2000-51-47.png)
 ![](./Screenshot%20from%202023-09-21%2000-54-51.png)
 
@@ -184,16 +226,21 @@ H Tree 是一種碎形。
 
 
 
-### FFT
+## FFT
 請移駕[快速傅立葉變換](/blog/posts/2023-09-25-fft/)
 
 -> 2023.09.21
 
 
 
-## Segment Tree（線段樹）
+# Segment Tree（線段樹）
 
 課本沒教，之後單獨寫一篇
 
 Array representation
 
+
+
+# 參考
+* [時間複雜度 —遞迴（上）](https://mycollegenotebook.medium.com/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-%E9%81%9E%E8%BF%B4-%E4%B8%8A-f6d51a462394)
+* [時間複雜度 —遞迴（下）](https://mycollegenotebook.medium.com/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-%E9%81%9E%E8%BF%B4-%E4%B8%8B-master-th-307ad4608ab6)
