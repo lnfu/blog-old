@@ -4,6 +4,7 @@ date: 2023-10-17T10:43:18+08:00
 draft: false
 author: "Enfu Liao"
 math: true
+tags: ["課程筆記", "演算法"]
 # cover:
 #     image: "<image path/url>" # image path/url
 #     alt: "<alt text>" # alt text
@@ -14,6 +15,9 @@ math: true
 
 
 ---
+
+
+分治法（divide and conquer）
 
 
 # 求解遞迴式的時間複雜度
@@ -89,111 +93,78 @@ f(n) = \Theta(n^{log_b{a} lg^{k}n})
 第三種常見的情況是 {{< math_inline >}}k = 0{{< /math_inline >}}，此時 {{< math_inline >}}T(n) = \Theta (n^{log_{b}a lg n}{{< /math_inline >}}
 
 ### 補充
-以下是 {{< math_inline >}}f(n) = cn{{< /math_inline >}} 的版本：
+以下是 {{< math_inline >}}f(n) = cn{{< /math_inline >}} 的情況：
 ![](https://cdn-images-1.medium.com/max/1200/0*SMhJVzBPbBuiGOws.png)
 
 
 # 分治法例子
-## Merge Sort
-1. 分成一半來 sort（recursive）
-2. 用 T(n) = n 跑過一次比較誰先誰後
+## 合併排序（merge sort）
+1. 每次對左右兩半繼續跑合併排序（遞迴）
+2. 排序完左右後再用 {{< math_inline >}}T(n) = n{{< /math_inline >}} 跑過一次（每次比較兩邊的元素誰先誰後）
 
-```
-T(n) = 2 T(n/2) + O(n)
-```
+遞迴式：{{< math_inline >}}T(n) = 2T(n/2) + \Theta(n){{< /math_inline >}}
 
-## Binary Search
-Find an element in a **sorted** array.
+合併排序是穩定排序
 
-```
-T(n) = T(n/2) + Theta(1)
-```
+平均、最好、最壞都是 {{< math_inline >}}O(n lg(n)){{< /math_inline >}}
 
-## Power（次方）
-分成奇偶 case。
-
+最壞的情況（兩邊比較時每次都是一左一右）：
 ```
-T(n) = T(n/2) + Theta(1)
-T(n) = Theta(lg(n))
-```
-
-## Fibonacci
-可以參考 https://zh.wikipedia.org/zh-tw/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0
-
-最慢的解法（一般式）：
-![](./Screenshot%20from%202023-09-21%2000-22-30.png)
-```
-Omega(phi^n)
-```
-
-Bottom-up：
-```
-Theta(n)
-```
-
-矩陣（線性代數）：
-![](./Screenshot%20from%202023-09-21%2000-27-08.png)
-然後用前面提到的 divide and conquer 算次方。
-```
-Theta(lg(n))
+Input array arr[] = [4,0,6,2,5,1,7,3]
+                           /  \
+                          /    \
+                  [4,0,6,2] and [5,1,7,3]
+                     / \           / \
+                    /   \         /   \
+                 [4,0] [6,2]    [5,1] [7,3]       Every pair of 2 will be compared atleast once therefore maximum comparison here
+                   |     |        |     |
+                   |     |        |     |
+                 [0,4] [2,6]    [1,5] [3,7]      Maximum Comparison:Every pair of set is used in comparison     
+                   \     /        \     /                        
+                    \   /          \   /
+                 [0,2,4,6]      [1,3,5,7]        Maximum comparison again: Every pair of set compared
+                      \             /
+                       \           / 
+                     [0,1,2,3,4,5,6,7]          
 ```
 
 
-## * Maximum Subarray
-> 首先可以觀察到答案的左右兩側一定是負數
+
+
+## * Maximum Sum Subarray
+
+給一個陣列，找出連續的區間和要最大。
+
+最笨的方法就是窮舉起點和終點，加上要計算起點到終點的和所以複雜度是 {{< math_inline >}}O(n^{3}){{< /math_inline >}}。
+
+用分治法可以達到 {{< math_inline >}}O(n lg(n)){{< /math_inline >}}。
+
+我們首先可以觀察到答案的左右兩側一定是負數（因為如果是正的那就可以再大一點）。
 
 ![](./Screenshot%20from%202023-09-21%2000-30-53.png)
 
-答案一定要麼在
+每一次的答案一定要麼在
 1. 左邊子序列
 2. 右邊子序列
 3. 橫跨左右（可以從中間往左右兩邊去找）
 
-```
-FIND-MAX-CROSSING-SUBARRAY(A, low, mid, high)
+不過這個問題可以用貪心的演算法達到 {{< math_inline >}}O(n){{< /math_inline >}} 的複雜度！
 
-    // Find a maximum subarray of the form A[i ... mid].
-    leftsum = -
-    sum = 0
-    for i = mid downto low
-        sum = sum + A[i]
-        if sum > leftsum
-            leftsum = sum
-            maxleft = i
-
-    // Find a maximum subarray of the form A[mid + 1.. j].
-    rightsum = -
-    sum = 0
-    for j = mid + 1 to high
-        sum = sum + A[j]
-        if sum > rightsum
-            rightsum = sum
-            maxright = j
-
-    // Return the indices and the sum of the two subarrays.
-    return (maxleft, maxright, leftsum + rightsum)
+具體來說，每次累積從起點到目前的總和，如果總和是負的就放棄（總和、起點重置），如果累積總和比目前為止最大就更新最大。
 
 
-FIND-MAXIMUM-SUBARRAY(A, low, high)
-    if high == low
-        return (low, high, A[low]) // base case: only one element
-    else mid = (low +high)/2
-    
-    (leftlow, lefthigh, leftsum) = FIND-MAXIMUM-SUBARRAY(A, low, mid)
-    (rightlow, righthigh, rightsum) = FIND-MAXIMUM-SUBARRAY(A, mid + 1, high)
-    (crosslow, crosshigh, crosssum) = FIND-MAX-CROSSING-SUBARRAY(A, low, mid, high)
-
-    if leftsum >= rightsum and leftsum >= crosssum
-        return (leftlow, lefthigh, leftsum)
-    else if rightsum >= leftsum and rightsum >= crosssum
-        return (rightlow, righthigh, rightsum)
-    else 
-        return (crosslow, crosshigh, crosssum)
 
 
-Initial call: FIND-MAXIMUM-SUBARRAY(A, 1, n)
-```
-![](./Screenshot%20from%202023-09-21%2000-40-17.png)
+## FFT
+
+請移駕[快速傅立葉變換](/blog/posts/2023-09-25-fft/)
+
+
+# Segment Tree（線段樹）
+
+課本沒教，之後單獨寫一篇
+
+Array representation
 
 
 ## 矩陣乘法
@@ -216,6 +187,26 @@ T(n) = 7 T(n/2) + Theta(n^2)
 目前最快解法（2.376）：https://people.csail.mit.edu/virgi/matrixmult-f.pdf
 
 
+## Fibonacci
+可以參考 https://zh.wikipedia.org/zh-tw/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0
+
+最慢的解法（一般式）：
+![](./Screenshot%20from%202023-09-21%2000-22-30.png)
+```
+Omega(phi^n)
+```
+
+Bottom-up：
+```
+Theta(n)
+```
+
+矩陣（線性代數）：
+![](./Screenshot%20from%202023-09-21%2000-27-08.png)
+然後用前面提到的 divide and conquer 算次方。
+```
+Theta(lg(n))
+```
 
 ## H Tree
 ![](./Screenshot%20from%202023-09-21%2000-51-47.png)
@@ -226,18 +217,17 @@ H Tree 是一種碎形。
 
 
 
-## FFT
-請移駕[快速傅立葉變換](/blog/posts/2023-09-25-fft/)
-
--> 2023.09.21
 
 
+## Binary Search
+從排序好的陣列找元素。
 
-# Segment Tree（線段樹）
+## Power（次方）
+分成奇偶 case。
 
-課本沒教，之後單獨寫一篇
 
-Array representation
+
+
 
 
 
