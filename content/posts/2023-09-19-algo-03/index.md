@@ -1,8 +1,10 @@
 ---
-title: "[課程筆記] 演算法概論（三） - Sorting"
+title: "[課程筆記] 演算法概論（三） - 排序"
 date: 2023-10-17T10:43:24+08:00
 draft: false
 author: "Enfu Liao"
+math: true
+tags: ["課程筆記", "演算法"]
 # cover:
 #     image: "<image path/url>" # image path/url
 #     alt: "<alt text>" # alt text
@@ -11,34 +13,30 @@ author: "Enfu Liao"
 #     hidden: true # only hide on current single page
 ---
 
-[[課程筆記] 演算法概論（一） - Introduction](../2023-08-25-algo-01/)
-
-[[課程筆記] 演算法概論（二） - Divide & Conquer](../2023-09-12-algo-02/)
-
-[[課程筆記] 演算法概論（三） - Sorting](../2023-09-19-algo-03/)
-
-[[課程筆記] 演算法概論（四） - Median Finding](../2023-10-12-algo-04/)
-
-[[課程筆記] 演算法概論（五） - Hash Table](../2023-10-17-algo-05/)
-
 ---
 
-這個章節特別把 sorting 問題以及多種解法拿出來講。
-
+這裡介紹所有常見的排序。
 
 # Bubble Sort
 
-太簡單，略。
+- Stable
+- 平均：比較次數 {{< math_inline >}}O(n^{2}){{< /math_inline >}}
+- 最好：就是全部都排好序了，完全不用交換，比較次數 {{< math_inline >}}O(n){{< /math_inline >}}
+- 最壞：比較次數 {{< math_inline >}}O(n^{2}){{< /math_inline >}}
 
 # Insertion Sort
 
-太簡單，略。
+- Stable
+- 平均：比較次數 {{< math_inline >}}O(n^{2}){{< /math_inline >}}
+- 最好：就是全部都排好序了，完全不用交換，比較次數 {{< math_inline >}}O(n){{< /math_inline >}}
+- 最壞：比較次數 {{< math_inline >}}O(n^{2}){{< /math_inline >}}
 
 # Heapsort
 
-在進入 Heapsort 之前，先講一下 Heap 這個資料結構。
+- Unstable
+- 平均、最好、最壞都是 {{< math_inline >}}O(n lg(n)){{< /math_inline >}}
 
-## Heap & Priority Queue
+## Heap 演算法（TODO）
 
 Heapify 函數：
 ```
@@ -96,31 +94,24 @@ Priority Queue：
 
 # Quicksort
 
-之後補，這個會和 median finding 用的分堆方法很像。
+- Unstable
+- 平均：{{< math_inline >}}O(n lg(n)){{< /math_inline >}}
+- 最好：{{< math_inline >}}O(n lg(n)){{< /math_inline >}}
+- 最壞：每次選到的 pivot 很爛（選到最小或最大），{{< math_inline >}}O(n^{2}){{< /math_inline >}}
 
-Worse Case：選到的 pivot 很爛（e.g., 最大）
+選擇 pivot 的方法（TODO）
 
-機率證明 average case time complexity
-
+機率證明複雜度（TODO）
 
 # Couting Sort
 
+- Stable
+- 平均、最好、最壞都是 {{< math_inline >}}O(n + k){{< /math_inline >}}
+
 ```
-COUNTING-SORT(A, n, k)
-1   let B[1:n] and C[0:k] be new arrays
-2   for i = 0 to k
-3       C[i] = 0
-4   for j = 1 to n
-5       C[A[j]] = C[A[j]] + 1
-6   // C[i] now contains the number of elements equal to i.
-7   for i = 1 to k
-8   C[i] = C[i] + C[i-1]
-9   // C[i] now contains the number of elements less than or equal to i. (Prefix Sum)
-10  // Copy A to B, starting from the end of A.
-11  for j = n downto 1
-12      B[C[A[j]]] = A[j]
-13      C[A[j]] = C[A[j]] - 1 // to handle duplicate values
-14  return B
+n 個 element
+k 個 key
+element = (key, value)
 ```
 
 計算每個 key 的次數，然後根據 key 放到對應的位置。
@@ -146,6 +137,8 @@ B = [ 1,  2,  2,  3,  4,  4,  4,  5] # C = [0, 0, 1, 3, 4, 7]
 
 # Radix Sort
 
+和 Counting Sort 概念上類似。
+
 ```
 RADIX-SORT(A, n, d)
 1   for i = 1 to d
@@ -160,8 +153,3 @@ RADIX-SORT(A, n, d)
 
 ![](./Screenshot%20from%202023-10-17%2010-17-06.png)
 
-# Decision-Tree
-
-不太懂，之後再補。
-
-https://fcamel-fc.blogspot.com/2008/01/comparison-decision-tree.html
