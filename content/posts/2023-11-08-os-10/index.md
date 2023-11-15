@@ -164,10 +164,18 @@ page size = 4KB = 2^12 -> 12 bit
 ![](https://walkccc.me/CS/assets/os/8.18.png)
 
 
+##### 補充
+80386 是第一個實現 MMU 的處理器 -> 促成 UNIX 發展
 
-
-
+## 使用 TLB
+![](https://i.pinimg.com/originals/3f/e8/c7/3fe8c7d6ea416a16908fdc41eb86ebfe.jpg)
 
 
 ##### 補充
-80386 是第一個實現 MMU 的處理器 -> 促成 UNIX 發展
+UltraSparc 64 是 Sun 的 CPU
+
+Solaris 是 Sun 的作業系統
+
+
+
+
