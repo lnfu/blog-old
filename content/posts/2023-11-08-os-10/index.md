@@ -136,6 +136,8 @@ page size = 4KB = 2^12 -> 12 bit
 
 ## hierarchical
 
+![](https://www.technovelty.org/static/images/hierarchical-pt.png)
+
 ![](https://image2.slideserve.com/4749865/paging11-l.jpg)
 
 在第二層（page table）真的有用到的才真的實現出來
@@ -157,8 +159,9 @@ page size = 4KB = 2^12 -> 12 bit
 ```
 [   10   |   10   |    12    ]
 
-1. 先用最左邊的 10 bit 查 page directory，找到指向的 page table
-2. 用中間的 10 bit 查 page table 然後加上最後 12 bit 的 offset 找到 memory 位置
+今天我們拿到一個 logical address（虛擬位置），可以分成上面三個部份
+1. 先用最左邊的 10 bit 查 page directory 的 physical adderss（實體位置），找到指向的 page table
+2. 用中間的 10 bit 查 page table 然後加上最後 12 bit 的 offset 找到 memory 位置（實體位置）
 ```
 
 ![](https://walkccc.me/CS/assets/os/8.18.png)
@@ -177,5 +180,26 @@ UltraSparc 64 是 Sun 的 CPU
 Solaris 是 Sun 的作業系統
 
 
+## Hashed
+
+除了像是前面 hierarchical 用 radix tree 去存，我們也可以用 hash table 來做到
+
+好處是啥？如果 hierarchical 因為太大所以使用到多層（> 2），每次都要查好幾層有點慢
+
+但是！只要 hash function 做的好，查詢快速沒煩惱 :-D
+
+![](https://i.stack.imgur.com/Fbv32.png)
 
 
+##### 補充
+
+阿可不可以用 BST？當然可以，只是可能不太優:(
+
+
+## Inverted
+
+forward mapping: 每個 p 都要一個 page table => process 越來越多，總共 page table 所消耗的資源就越多，但是明明你的 physical 記憶體沒變
+
+inverted: 紀錄 physical address 是哪個 process 在使用（pid），找 pid 的時候要 search（實際上用 hash 實現，否則像是圖片一樣你 linear search 會慢死）
+
+![](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.stack.imgur.com%2Fz61lh.png&f=1&nofb=1&ipt=1c4b823dd8509df6c8d4c05ef43f99a79f9a385ee14ac039d6c68a14ca1c71f9&ipo=images)
