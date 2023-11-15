@@ -106,3 +106,68 @@ GNU C malloc() of glibc 2.28: A variation of Best Fit
 Linux kernel:
 1. slab cache: frequent allocation/deallocation of objects of the same size
 2. buddy system: Allocation/deallocation of objects of various sizes
+
+
+
+
+
+# 禮拜五影片還沒看
+
+page?
+
+
+
+# Page Table 架構
+
+```
+index                       [0, 1, 2, 3, 4, 5, 6]
+page table: (store frame #) [4, 5, 2, 6, 9, ...]
+```
+
+假設 32 bit 
+
+page size = 4KB = 2^12 -> 12 bit
+
+32 - 12 = 20
+
+所以 page table 有 2^20 個 entry
+
+這樣算下來 space overhead 超大，所以實際上不可能這樣做
+
+## hierarchical
+
+![](https://image2.slideserve.com/4749865/paging11-l.jpg)
+
+在第二層（page table）真的有用到的才真的實現出來
+
+
+### 例子：INTEL 80386
+
+拆成兩層，2^10 * 2^10 = 1024 * 1024
+
+第一層（aka page directory aka outer page table）一定會有，並且有 1024 個 entry
+
+第二層的每個 page table 也有 1024，不過不一定會有全部 1024 個 table（有用到才有）
+
+- 32 bit machine
+- page size = 4KB
+    - page number 占 20 bit
+    - page offset 占 12 bit
+
+```
+[   10   |   10   |    12    ]
+
+1. 先用最左邊的 10 bit 查 page directory，找到指向的 page table
+2. 用中間的 10 bit 查 page table 然後加上最後 12 bit 的 offset 找到 memory 位置
+```
+
+![](https://walkccc.me/CS/assets/os/8.18.png)
+
+
+
+
+
+
+
+##### 補充
+80386 是第一個實現 MMU 的處理器 -> 促成 UNIX 發展
